@@ -12,46 +12,16 @@ using ASCOM;
 using ASCOM.Utilities;
 using ASCOM.DeviceInterface;
 
-namespace IP9212_switch
+namespace ASCOM.IP9212_v2
 {
     /// <summary>
     /// Class for working with ip9212 device
     /// </summary>
-    public class IP9212_switch_class
+    public class IP9212_switch_hardware_class
     {
         internal bool debugFlag = true;
 
-        public static string IP9212_switch_id = "IP9212_switch";
-        public static string IP9212_switch_description = "Aviosys IP9212 observatory switch driver. Written by Boris Emchenko http://astromania.info";
-        public static string IP9212_switch_description_short = "Aviosys IP9212 switch";
-
-        //Settings
-        #region Settings variables
-        public static string ip_addr, ip_port, ip_login, ip_pass;
-        internal static string ip_addr_profilename = "IP address", ip_port_profilename = "Port number", ip_login_profilename = "login", ip_pass_profilename = "password";
-        internal static string ip_addr_default = "192.168.1.90", ip_port_default = "80", ip_login_default = "admin", ip_pass_default = "12345678";
-
-        internal static int switch_roof_port, opened_sensor_port, closed_sensor_port;
-        internal static string switch_port_profilename = "Roof switch", opened_port_profilename = "Roof opened state port", closed_port_profilename = "Roof closed state port";
-        internal static string switch_port_default = "5", opened_port_default = "6", closed_port_default = "5";
-
-        internal static bool switch_port_state_type, opened_port_state_type, closed_port_state_type;
-        internal static string switch_port_state_type_profilename = "Roof switch port state type", opened_port_state_type_profilename = "Roof opened state port state type", closed_port_state_type_profilename = "Roof closed state port state type";
-        internal static string switch_port_state_type_default = "true", opened_port_state_type_default = "false", closed_port_state_type_default = "false";
-
-        internal static int telescope_power_port, focuser_power_port, heating_port, roofpower_port;
-        internal static string telescope_power_port_profilename = "Telescope power port", focuser_power_port_profilename = "Focuser power port", heating_port_profilename = "Heating port state type", roof_power_port_profilename = "Roof power port";
-        internal static string telescope_power_port_default = "6", focuser_power_port_default = "8", heating_port_default = "7", roof_power_port_default = "3";
-
-        internal static bool telescope_power_port_state_type, focuser_power_port_state_type, heating_port_state_type, roofpower_port_state_type;
-        internal static string telescope_power_port_state_type_profilename = "Telescope power port state type", focuser_power_port_state_type_profilename = "Focuser power port state type", heating_port_state_type_profilename = "Heating port state type", roof_power_port_state_type_profilename = "Roof power port state type";
-        internal static string telescope_power_port_state_type_default = "true", focuser_power_port_state_type_default = "true", heating_port_state_type_default = "true", roof_power_port_state_type_default = "false";
-
-        internal static bool traceState;
-        internal static string traceStateProfileName = "Trace Level";
-        internal static string traceStateDefault = "true";
-        #endregion Settings variables
-
+        public string ip_addr, ip_port, ip_login, ip_pass;
 
         /// <summary>
         /// input sensors state
@@ -61,10 +31,16 @@ namespace IP9212_switch
         // [1..8] - status of # input
 
         /// <summary>
+        /// input sensors state
+        /// </summary>
+        private int[] output_state_arr = new int[1] { -1 };
+        // [0] - overall all output switch status
+        // [1..8] - status of # output
+
+        /// <summary>
         /// connected?
         /// </summary>
         public bool hardware_connected_flag = false;
-
 
         /// <summary>
         /// Private variable to hold the trace logger object (creates a diagnostic log file with information that you specify)
@@ -82,34 +58,18 @@ namespace IP9212_switch
         /// </summary>
         public string ASCOM_ERROR_MESSAGE = "";
 
-        public bool opened_shutter_flag;
-        public bool closed_shutter_flag;
-
         //Caching connection check
         public static DateTime EXPIRED_CACHE = new DateTime(2010, 05, 12, 13, 15, 00); //CONSTANT FOR MARKING AN OLD TIME
         private DateTime lastConnectedCheck = EXPIRED_CACHE; //when was the last hardware checking provided for connect state
         int CONNECTED_CHECK_INTERVAL = 10; //how often to held hardware checking (in seconds)
 
-        //Previos shutter states
-        private ShutterState prev_shutter_state;
-        bool last_OpenedState; // last measured value for opened sensor
-        bool last_ClosedState; // last measured value closed sensor
-
-        //Caching last shutter status
-        private DateTime lastShutterStatusCheck = EXPIRED_CACHE; //when was the last hardware checking provided for shutter state 
-        int SHUTTERSTATUS_CHECK_INTERVAL_NORMAL = 10; //how often to chech true shutter status (in seconds) for regular cases
-        int SHUTTERSTATUS_CHECK_INTERVAL_REDUCED = 2;//how often to chech true shutter status (in seconds) when shutter is moving
-
         /// <summary>
         /// Constructor of IP9212_switch_class
         /// </summary>
-        public IP9212_switch_class()
+        public IP9212_switch_hardware_class(bool traceState)
         {
-            tl = new TraceLogger("", "IP9212_Switch");
+            tl = new TraceLogger("", "IP9212_Switch_hardware_v2");
             tl.Enabled = true; //default value before reading settings
-
-            RegisterSettings();
-            readSettings();
 
             tl.Enabled = traceState; //now we can set trace state, specified by user
             tl.LogMessage("Switch_constructor", "Starting initialisation");
@@ -126,12 +86,8 @@ namespace IP9212_switch
         {
             tl.LogMessage("Switch_Connect", "Enter");
 
-            // Get the ip9212 settings from the profile and cache them in appropriate fields
-            readSettings();
-
             //reset cache
             lastConnectedCheck = EXPIRED_CACHE;
-            lastShutterStatusCheck = EXPIRED_CACHE;
 
             //if current state of connection coincidies with new state then do nothing
             if (hardware_connected_flag)
@@ -161,12 +117,8 @@ namespace IP9212_switch
         {
             tl.LogMessage("Switch_Disconnect", "Enter");
 
-            // Get the ip9212 settings from the profile and cache them in appropriate fields
-            readSettings();
-
             //reset cache
             lastConnectedCheck = EXPIRED_CACHE;
-            lastShutterStatusCheck = EXPIRED_CACHE;
 
             //if current state of connection coincidies with new state then do nothing
             if (!hardware_connected_flag)
@@ -186,7 +138,7 @@ namespace IP9212_switch
         /// <returns>true is available, false otherwise</returns>
         public bool IsConnected(bool forcedflag = false)
         {
-            tl.LogMessage("Switch_IsConnected", "Enter, forced flag=" + forcedflag.ToString());
+            tl.LogMessage("Switch_IsConnected", "Enter (forced flag=" + forcedflag.ToString()+")");
 
             //Check - if forced mode? (=no cache, no async)
             if (forcedflag)
@@ -202,10 +154,9 @@ namespace IP9212_switch
             if (passed.TotalSeconds > CONNECTED_CHECK_INTERVAL)
             {
                 // check that the driver hardware connection exists and is connected to the hardware
-                tl.LogMessage("Switch_IsConnected", "Starting read hardware values thread [in cache: " + passed.TotalSeconds + "s]...");
+                tl.LogMessage("Switch_IsConnected", String.Format("Using cached value but starting background read [in cache was: {0}s]...",passed.TotalSeconds));
                 // reset cache
                 lastConnectedCheck = DateTime.Now;
-
                 //read
                 checkLink_async();
             }
@@ -227,7 +178,7 @@ namespace IP9212_switch
         /// <returns>Nothing</returns> 
         public void checkLink_async()
         {
-            tl.LogMessage("CheckLink_async", "enter");
+            tl.LogMessage("CheckLink_async", "Enter");
 
             //Check - address was specified?
             if (string.IsNullOrEmpty(ip_addr))
@@ -344,8 +295,8 @@ namespace IP9212_switch
             tl.LogMessage("checkLink_forced", "Download url:" + siteipURL);
 
             // Send http query
-            tl.LogMessage("Semaphore", "waitone");
-            IP9212Semaphore.WaitOne(); // lock working with IP9212
+            ////tl.LogMessage("Semaphore", "waitone");
+            ////IP9212Semaphore.WaitOne(); // lock working with IP9212
 
             string s = "";
             WebClient client = new WebClient();
@@ -361,9 +312,9 @@ namespace IP9212_switch
                 //wait
                 //Thread.Sleep(1000);
 
-                tl.LogMessage("Semaphore", "Release");
-                int ns = IP9212Semaphore.Release();//unlock ip9212 device for others
-                tl.LogMessage("Semaphore", "left count " + ns);
+                ////tl.LogMessage("Semaphore", "Release");
+                ////int ns = IP9212Semaphore.Release();//unlock ip9212 device for others
+                ////tl.LogMessage("Semaphore", "left count " + ns);
 
                 if (s.IndexOf("P5") >= 0)
                 {
@@ -378,8 +329,8 @@ namespace IP9212_switch
             }
             catch (WebException e)
             {
-                tl.LogMessage("Semaphore", "Release");
-                IP9212Semaphore.Release();//unlock ip9212 device for others
+                ////tl.LogMessage("Semaphore", "Release");
+                ////IP9212Semaphore.Release();//unlock ip9212 device for others
                 hardware_connected_flag = false;
                 tl.LogMessage("checkLink_forced", "Error" + e.Message);
                 //throw new ASCOM.NotConnectedException("Couldn't reach network server");
@@ -387,6 +338,41 @@ namespace IP9212_switch
             }
             tl.LogMessage("checkLink_forced", "Exit, ret value " + hardware_connected_flag.ToString());
             return hardware_connected_flag;
+        }
+
+
+        /// <summary>
+        /// Get input sensor status
+        /// </summary>
+        /// <returns>Returns bool TRUE or FALSE</returns> 
+        public bool getInputSwitchStatus(int SwitchId)
+        {
+            tl.LogMessage("getSwitchInputStatus", "Enter");
+
+            input_state_arr = getInputStatus();
+            bool curSwitchState = (input_state_arr[SwitchId + 1] == 1);
+
+            tl.LogMessage("getSwitchInputStatus", "getSwitchInputStatus(" + SwitchId + "):" + curSwitchState);
+
+            tl.LogMessage("getSwitchInputStatus", "Exit");
+            return curSwitchState;
+        }
+
+        /// <summary>
+        /// Get output sensor status
+        /// </summary>
+        /// <returns>Returns bool TRUE or FALSE</returns> 
+        public bool getOutputSwitchStatus(int SwitchId)
+        {
+            tl.LogMessage("getOutputSwitchStatus", "Enter");
+
+            output_state_arr = getOutputStatus();
+            bool curSwitchState = (output_state_arr[SwitchId + 1] == 1);
+
+            tl.LogMessage("getOutputSwitchStatus", "getOutputSwitchStatus(" + SwitchId + "):" + curSwitchState);
+
+            tl.LogMessage("getOutputSwitchStatus", "Exit");
+            return curSwitchState;
         }
 
 
@@ -497,6 +483,7 @@ namespace IP9212_switch
             tl.LogMessage("getInputStatus", "Exit");
             return input_state_arr;
         }
+
 
         /// <summary>
         /// Get output relay status
@@ -618,17 +605,21 @@ namespace IP9212_switch
         /// Chage output relay state
         /// </summary>
         /// <param name="PortNumber">Relay port number, int [1..9]</param>
-        /// <param name="PortValue">Port value [0,1]</param>
+        /// <param name="bPortValue">Port value flase = 0, true = 1</param>
         /// <returns>Returns true in case of success</returns> 
-        public bool setOutputStatus(int PortNumber, int PortValue)
+        public bool setOutputStatus(int PortNumber, bool bPortValue)
         {
-            tl.LogMessage("setOutputStatus", "Enter (" + PortNumber + "," + PortValue + ")");
+            //convert port value to int
+            int intPortValue = (bPortValue ? 1 : 0);
+
+            tl.LogMessage("setOutputStatus", "Enter (" + PortNumber + "," + intPortValue + ")");
 
             // get the ip9212 settings from the profile
             //readSettings();
 
             //return data
             bool ret = false;
+
 
             if (string.IsNullOrEmpty(ip_addr))
             {
@@ -638,11 +629,11 @@ namespace IP9212_switch
                 throw new ASCOM.ValueNotSetException(ASCOM_ERROR_MESSAGE);
                 //return ret;
             }
-            string siteipURL = "http://" + ip_login + ":" + ip_pass + "@" + ip_addr + ":" + ip_port + "/set.cmd?cmd=setpower+P6" + PortNumber + "=" + PortValue;
+            string siteipURL = "http://" + ip_login + ":" + ip_pass + "@" + ip_addr + ":" + ip_port + "/set.cmd?cmd=setpower+P6" + PortNumber + "=" + intPortValue;
             //FOR DEBUGGING
             if (debugFlag)
             {
-                siteipURL = "http://localhost/ip9212/set.php?cmd=setpower+P6" + PortNumber + "=" + PortValue;
+                siteipURL = "http://localhost/ip9212/set.php?cmd=setpower+P6" + PortNumber + "=" + intPortValue;
             }
             tl.LogMessage("setOutputStatus", "Download url:" + siteipURL);
 
@@ -676,7 +667,7 @@ namespace IP9212_switch
                 ret = false;
 
                 tl.LogMessage("setOutputStatus", "Error:" + e.Message);
-                ASCOM_ERROR_MESSAGE = "setOutputStatus(" + PortNumber + "," + PortValue + "): Couldn't reach network server";
+                ASCOM_ERROR_MESSAGE = "setOutputStatus(" + PortNumber + "," + intPortValue + "): Couldn't reach network server";
                 //throw new ASCOM.NotConnectedException(ASCOM_ERROR_MESSAGE);
                 tl.LogMessage("setOutputStatus", "Exit by web error");
                 return ret;
@@ -688,412 +679,7 @@ namespace IP9212_switch
             return ret;
         }
 
-        /// <summary>
-        /// Press switch button to open/close roof
-        /// </summary>
-        /// <returns>Returns true in case of success</returns> 
-        //press switch
-        public bool pressRoofSwitch()
-        {
-            tl.LogMessage("pressRoofSwitch", "Enter");
-
-            //Get config data
-            int int_switch_port_state_type = (switch_port_state_type ? 0 : 1);
-            int int_inverted_switch_port_state_type = (switch_port_state_type ? 1 : 0);
-
-            //read output states
-            int[] outStates = getOutputStatus();
-            int curPortState = outStates[switch_roof_port];
-            tl.LogMessage("pressRoofSwitch", "Using port " + switch_roof_port.ToString() + ", type: " + switch_port_state_type.ToString());
-
-            //check - what is the state of switch port?
-            if (outStates[switch_roof_port] != int_switch_port_state_type)
-            {
-                //return to normal value
-                tl.LogMessage("pressRoofSwitch", "first need to return switch to normal state");
-                setOutputStatus(switch_roof_port, int_switch_port_state_type);
-            }
-
-            //press switch
-            tl.LogMessage("pressRoofSwitch", "Pressing");
-            setOutputStatus(switch_roof_port, int_inverted_switch_port_state_type);
-
-            //wait
-            Thread.Sleep(1000);
-
-            //release switch
-            tl.LogMessage("pressRoofSwitch", "Releasing");
-            setOutputStatus(switch_roof_port, int_switch_port_state_type);
-
-            tl.LogMessage("pressRoofSwitch", "Exit");
-            return true;
-        }
-
-        /// <summary>
-        /// return true if OPENNED STATE SENSOR signaling (using cache)
-        /// </summary>
-        /// <returns>Returns true in case of opened state signaling, false otherwise</returns> 
-        public bool OpenedSensorState()
-        {
-            tl.LogMessage("Switch_OpenedSensorState", "Enter");
-
-            //read OPENED_PORT STATE TYPE value
-            int int_opened_port_state_type;
-            int_opened_port_state_type = (opened_port_state_type ? 1 : 0);
-
-            // READ CURRENT INPUT STATE IF IT WASN'T READ YET
-            if (input_state_arr[0] <= 0)
-            {
-                tl.LogMessage("Switch_OpenedSensorState", "Unidentified input status array, re-reading states");
-                getInputStatus();
-            }
-
-            // READ CURRENT INPUT STATE IF IT WASN'T READ YET
-            //if shutter in moving state - reduce check interval
-            int checkInterval = 0;
-            if ((!opened_shutter_flag && !closed_shutter_flag))
-            {
-                checkInterval = SHUTTERSTATUS_CHECK_INTERVAL_REDUCED;
-            }
-            else
-            {
-                checkInterval = SHUTTERSTATUS_CHECK_INTERVAL_NORMAL;
-            }
-
-            //Measure how much time have passed since last HARDWARE measure
-            TimeSpan passed = DateTime.Now - lastShutterStatusCheck;
-
-            if (passed.TotalSeconds > checkInterval)
-            {
-                tl.LogMessage("Switch_OpenedSensorState", "Cache expired, re-reading states");
-                // Read input status
-                getInputStatus();
-
-                lastShutterStatusCheck = DateTime.Now;
-            }
-            else
-            {
-                tl.LogMessage("Switch_OpenedSensorState", "Using cached values");
-            }
-
-
-            //calculate state
-            bool boolState;
-            if (input_state_arr[opened_sensor_port] == int_opened_port_state_type)
-            {
-                boolState = true;
-            }
-            else
-            {
-                boolState = false;
-            }
-
-            tl.LogMessage("Switch_OpenedSensorState", "Exix. Status: " + boolState);
-            return boolState;
-        }
-
-        /// <summary>
-        /// return true if CLOSED STATE sensor signaling, cacheable
-        /// </summary>
-        /// <returns>Returns true in case of closed state signaling, false otherwise</returns> 
-        public bool ClosedSensorState()
-        {
-            tl.LogMessage("Switch_ClosedSensorState", "Enter");
-
-            //read closED_PORT STATE TYPE value
-            int int_closed_port_state_type = (closed_port_state_type ? 1 : 0);
-
-            // READ CURRENT INPUT STATE
-            if (input_state_arr[0] <= 0)
-            {
-                tl.LogMessage("Switch_ClosedSensorState", "Unidentified input status array, re-reading states");
-                getInputStatus();
-            }
-
-            //calculate state
-            bool boolState;
-            if (input_state_arr[closed_sensor_port] == int_closed_port_state_type)
-            {
-                boolState = true;
-            }
-            else
-            {
-                boolState = false;
-            }
-
-            tl.LogMessage("Switch_ClosedSensorState", "Exix. Status: " + boolState);
-            return boolState;
-        }
-
-        /// <summary>
-        /// return true if OPENNED STATE SENSOR signaling, forcing reading current input statused 
-        /// </summary>
-        /// <returns>Returns true in case of opened state signaling, false otherwise</returns> 
-        public bool OpenedSensorState_forced()
-        {
-            tl.LogMessage("Switch_OpenedSensorState_forced", "Enter");
-            getInputStatus();
-            bool retStatus = OpenedSensorState();
-
-            tl.LogMessage("Switch_OpenedSensorState_forced", "Exit, status: " + retStatus);
-
-            return retStatus;
-        }
-
-        /// <summary>
-        /// return true if CLOSED STATE sensor signaling, forcing reading current input statused
-        /// </summary>
-        /// <returns>Returns true in case of closed state signaling, false otherwise</returns> 
-        public bool ClosedSensorState_forced()
-        {
-            tl.LogMessage("Switch_ClosedSensorState_forced", "Enter");
-            getInputStatus();
-            bool retStatus = ClosedSensorState();
-
-            tl.LogMessage("Switch_ClosedSensorState_forced", "Exit, status: " + retStatus);
-
-            return retStatus;
-
-        }
-
-        /// <summary>
-        /// Read settings from ASCOM profile storage
-        /// </summary>
-        public void readSettings()
-        {
-            tl.LogMessage("Switch_readSettings", "Enter");
-            using (ASCOM.Utilities.Profile p = new Profile())
-            {
-                //System.Collections.ArrayList T = p.RegisteredDeviceTypes;
-                p.DeviceType = "Switch";
-
-                ip_addr = p.GetValue(IP9212_switch_id, ip_addr_profilename, string.Empty, ip_addr_default);
-                ip_port = p.GetValue(IP9212_switch_id, ip_port_profilename, string.Empty, ip_port_default);
-                ip_login = p.GetValue(IP9212_switch_id, ip_login_profilename, string.Empty, ip_login_default);
-                ip_pass = p.GetValue(IP9212_switch_id, ip_pass_profilename, string.Empty, ip_pass_default);
-
-                try
-                {
-                    switch_roof_port = Convert.ToInt16(p.GetValue(IP9212_switch_id, switch_port_profilename, string.Empty, switch_port_default));
-                }
-                catch (Exception e)
-                {
-                    switch_roof_port = Convert.ToInt16(switch_port_default);
-                    tl.LogMessage("Switch_readSettings", "Input string [switch_roof_port] is not a sequence of digits [" + e.Message + "]");
-                    //ASCOM_ERROR_MESSAGE = "Switch_readSettings(): [switch_roof_port] is not a numeric value";
-                    //throw new ASCOM.InvalidValueException(ASCOM_ERROR_MESSAGE);
-                }
-
-                try
-                {
-                    opened_sensor_port = Convert.ToInt16(p.GetValue(IP9212_switch_id, opened_port_profilename, string.Empty, opened_port_default));
-                }
-                catch (Exception e)
-                {
-                    opened_sensor_port = Convert.ToInt16(opened_port_default);
-                    tl.LogMessage("Switch_readSettings", "Input string [opened_sensor_port] is not a sequence of digits [" + e.Message + "]");
-                    //ASCOM_ERROR_MESSAGE = "Switch_readSettings(): [opened_sensor_port] is not a numeric value";
-                    //throw new ASCOM.InvalidValueException(ASCOM_ERROR_MESSAGE);
-                }
-                try
-                {
-                    closed_sensor_port = Convert.ToInt16(p.GetValue(IP9212_switch_id, closed_port_profilename, string.Empty, closed_port_default));
-                }
-                catch (Exception e)
-                {
-                    closed_sensor_port = Convert.ToInt16(closed_port_default); 
-                    tl.LogMessage("Switch_readSettings", "Input string [closed_sensor_port] is not a sequence of digits [" + e.Message + "]");
-                    //ASCOM_ERROR_MESSAGE = "Switch_readSettings(): [closed_sensor_port] is not a numeric value";
-                    //throw new ASCOM.InvalidValueException(ASCOM_ERROR_MESSAGE);
-                }
-
-                try
-                {
-                    switch_port_state_type = Convert.ToBoolean(p.GetValue(IP9212_switch_id, switch_port_state_type_profilename, string.Empty, switch_port_state_type_default));
-                }
-                catch (Exception e)
-                {
-                    switch_port_state_type = Convert.ToBoolean(switch_port_state_type_default); 
-                    tl.LogMessage("Switch_readSettings", "Input string [switch_port_state_type] is not a boolean value [" + e.Message + "]");
-                    //ASCOM_ERROR_MESSAGE = "Switch_readSettings(): [switch_port_state_type] is not a boolean value";
-                    //throw new ASCOM.InvalidValueException(ASCOM_ERROR_MESSAGE);
-                }
-                try
-                {
-                    opened_port_state_type = Convert.ToBoolean(p.GetValue(IP9212_switch_id, opened_port_state_type_profilename, string.Empty, opened_port_state_type_default));
-                }
-                catch (Exception e)
-                {
-                    opened_port_state_type = Convert.ToBoolean(opened_port_state_type_default);
-                    tl.LogMessage("Switch_readSettings", "Input string [opened_port_state_type] is not a boolean value [" + e.Message + "]");
-                    //ASCOM_ERROR_MESSAGE = "Switch_readSettings(): [opened_port_state_type] is not a boolean value";
-                    //throw new ASCOM.InvalidValueException(ASCOM_ERROR_MESSAGE);
-                }
-                try
-                {
-                    closed_port_state_type = Convert.ToBoolean(p.GetValue(IP9212_switch_id, closed_port_state_type_profilename, string.Empty, closed_port_state_type_default));
-                }
-                catch (Exception e)
-                {
-                    closed_port_state_type = Convert.ToBoolean(closed_port_state_type_default);
-                    tl.LogMessage("Switch_readSettings", "Input string [closed_port_state_type] is not a boolean value [" + e.Message + "]");
-                    //ASCOM_ERROR_MESSAGE = "Switch_readSettings(): [closed_port_state_type] is not a boolean value";
-                    //throw new ASCOM.InvalidValueException(ASCOM_ERROR_MESSAGE);
-                }
-
-                try
-                {
-                    telescope_power_port = Convert.ToInt16(p.GetValue(IP9212_switch_id, telescope_power_port_profilename, string.Empty, telescope_power_port_default));
-                }
-                catch (Exception e)
-                {
-                    telescope_power_port = Convert.ToInt16(telescope_power_port_default); 
-                    tl.LogMessage("Switch_readSettings", "Input string [telescope_power_port] is not a sequence of digits [" + e.Message + "]");
-                    //ASCOM_ERROR_MESSAGE = "Switch_readSettings(): [telescope_power_port] is not a numeric value";
-                    //throw new ASCOM.InvalidValueException(ASCOM_ERROR_MESSAGE);
-                }
-                try
-                {
-                    focuser_power_port = Convert.ToInt16(p.GetValue(IP9212_switch_id, focuser_power_port_profilename, string.Empty, focuser_power_port_default));
-                }
-                catch (Exception e)
-                {
-                    focuser_power_port = Convert.ToInt16(focuser_power_port_default); 
-                    tl.LogMessage("Switch_readSettings", "Input string [focuser_power_port] is not a sequence of digits [" + e.Message + "]");
-                    //ASCOM_ERROR_MESSAGE = "Switch_readSettings(): [focuser_power_port] is not a numeric value";
-                    //throw new ASCOM.InvalidValueException(ASCOM_ERROR_MESSAGE);
-                }
-                try
-                {
-                    heating_port = Convert.ToInt16(p.GetValue(IP9212_switch_id, heating_port_profilename, string.Empty, heating_port_default));
-                }
-                catch (Exception e)
-                {
-                    heating_port = Convert.ToInt16(heating_port_default); 
-                    tl.LogMessage("Switch_readSettings", "Input string [heating_port] is not a sequence of digits [" + e.Message + "]");
-                    //ASCOM_ERROR_MESSAGE = "Switch_readSettings(): [heating_port] is not a numeric value";
-                    //if (debugFlag) { new ASCOM.InvalidValueException(ASCOM_ERROR_MESSAGE); }
-                }
-                try
-                {
-                    roofpower_port = Convert.ToInt16(p.GetValue(IP9212_switch_id, roof_power_port_profilename, string.Empty, roof_power_port_default));
-                }
-                catch (Exception e)
-                {
-                    roofpower_port = Convert.ToInt16(roof_power_port_default); 
-                    tl.LogMessage("Switch_readSettings", "Input string [roofpower_port] is not a sequence of digits [" + e.Message + "]");
-                    //ASCOM_ERROR_MESSAGE = "Switch_readSettings(): [roofpower_port] is not a numeric value";
-                    //throw new ASCOM.InvalidValueException(ASCOM_ERROR_MESSAGE);
-                }
-
-                try
-                {
-                    telescope_power_port_state_type = Convert.ToBoolean(p.GetValue(IP9212_switch_id, telescope_power_port_state_type_profilename, string.Empty, telescope_power_port_state_type_default));
-                }
-                catch (Exception e)
-                {
-                    telescope_power_port_state_type = Convert.ToBoolean(telescope_power_port_state_type_default);
-                    tl.LogMessage("Switch_readSettings", "Input string [telescope_power_port_state_type] is not a boolean value [" + e.Message + "]");
-                    //ASCOM_ERROR_MESSAGE = "Switch_readSettings(): [telescope_power_port_state_type] is not a boolean value";
-                    //throw new ASCOM.InvalidValueException(ASCOM_ERROR_MESSAGE);
-                }
-                try
-                {
-                    focuser_power_port_state_type = Convert.ToBoolean(p.GetValue(IP9212_switch_id, focuser_power_port_state_type_profilename, string.Empty, focuser_power_port_state_type_default));
-                }
-                catch (Exception e)
-                {
-                    focuser_power_port_state_type = Convert.ToBoolean(focuser_power_port_state_type_default);
-                    tl.LogMessage("Switch_readSettings", "Input string [focuser_power_port_state_type] is not a boolean value [" + e.Message + "]");
-                    //ASCOM_ERROR_MESSAGE = "Switch_readSettings(): [focuser_power_port_state_type] is not a boolean value";
-                    //throw new ASCOM.InvalidValueException(ASCOM_ERROR_MESSAGE);
-                }
-                try
-                {
-                    heating_port_state_type = Convert.ToBoolean(p.GetValue(IP9212_switch_id, heating_port_state_type_profilename, string.Empty, heating_port_state_type_default));
-                }
-                catch (Exception e)
-                {
-                    heating_port_state_type = Convert.ToBoolean(heating_port_state_type_default);
-                    tl.LogMessage("Switch_readSettings", "Input string [heating_port_state_type] is not a boolean value [" + e.Message + "]");
-                    //ASCOM_ERROR_MESSAGE = "Switch_readSettings(): [heating_port_state_type] is not a boolean value";
-                    //throw new ASCOM.InvalidValueException(ASCOM_ERROR_MESSAGE);
-                }
-                try
-                {
-                    roofpower_port_state_type = Convert.ToBoolean(p.GetValue(IP9212_switch_id, roof_power_port_state_type_profilename, string.Empty, roof_power_port_state_type_default));
-                }
-                catch (Exception e)
-                {
-                    roofpower_port_state_type = Convert.ToBoolean(roof_power_port_state_type_default);
-                    tl.LogMessage("Switch_readSettings", "Input string [roofpower_port_state_type] is not a boolean value [" + e.Message + "]");
-                    //ASCOM_ERROR_MESSAGE = "Switch_readSettings(): [roofpower_port_state_type] is not a boolean value";
-                    //throw new ASCOM.InvalidValueException(ASCOM_ERROR_MESSAGE);
-                }
-
-                try
-                {
-                    traceState = Convert.ToBoolean(p.GetValue(IP9212_switch_id, traceStateProfileName, string.Empty, traceStateDefault));
-                }
-                catch (Exception e)
-                {
-                    traceState = Convert.ToBoolean(traceStateDefault);
-                    tl.LogMessage("Switch_readSettings", "Input string [traceState] is not a boolean value [" + e.Message + "]");
-                    //ASCOM_ERROR_MESSAGE = "Switch_readSettings(): [traceState] is not a boolean value";
-                    //throw new ASCOM.InvalidValueException(ASCOM_ERROR_MESSAGE);
-                }
-
-            }
-            tl.LogMessage("Switch_readSettings", "Exit");
-        }
-
-        /// <summary>
-        /// Write settings to ASCOM profile storage
-        /// </summary>
-        public void writeSettings()
-        {
-            tl.LogMessage("Switch_writeSettings", "Enter");
-            using (Profile p = new Profile())
-            {
-                p.DeviceType = "Switch";
-
-                p.WriteValue(IP9212_switch_id, ip_addr_profilename, ip_addr);
-                p.WriteValue(IP9212_switch_id, ip_port_profilename, ip_port);
-                p.WriteValue(IP9212_switch_id, ip_login_profilename, ip_login);
-                p.WriteValue(IP9212_switch_id, ip_pass_profilename, ip_pass);
-
-                p.WriteValue(IP9212_switch_id, switch_port_profilename, switch_roof_port.ToString());
-                p.WriteValue(IP9212_switch_id, opened_port_profilename, opened_sensor_port.ToString());
-                p.WriteValue(IP9212_switch_id, closed_port_profilename, closed_sensor_port.ToString());
-
-                p.WriteValue(IP9212_switch_id, telescope_power_port_profilename, telescope_power_port.ToString());
-                p.WriteValue(IP9212_switch_id, focuser_power_port_profilename, focuser_power_port.ToString());
-                p.WriteValue(IP9212_switch_id, heating_port_profilename, heating_port.ToString());
-                p.WriteValue(IP9212_switch_id, roof_power_port_profilename, roofpower_port.ToString());
-
-                p.WriteValue(IP9212_switch_id, telescope_power_port_state_type_profilename, telescope_power_port_state_type.ToString());
-                p.WriteValue(IP9212_switch_id, focuser_power_port_state_type_profilename, focuser_power_port_state_type.ToString());
-                p.WriteValue(IP9212_switch_id, heating_port_state_type_profilename, heating_port_state_type.ToString());
-                p.WriteValue(IP9212_switch_id, roof_power_port_state_type_profilename, roofpower_port_state_type.ToString());
-
-                p.WriteValue(IP9212_switch_id, traceStateProfileName, traceState.ToString());
-            }
-            tl.LogMessage("Switch_writeSettings", "Exit");
-        }
-
-        /// <summary>
-        /// Registering switch as ASCOM device
-        /// </summary>
-        public void RegisterSettings()
-        {
-            using (var P = new ASCOM.Utilities.Profile())
-            {
-                P.DeviceType = "Switch";
-                P.Register(IP9212_switch_id, IP9212_switch_description);
-            }
-        }
-
-
+   
         /// <summary>
         /// Tracing (logging) - 3 overloaded method
         /// </summary>
@@ -1154,53 +740,6 @@ namespace IP9212_switch
             IP9212Semaphore.Dispose();
             IP9212Semaphore = null;
         }
-
-        #region DriverInformation
-        /// <summary>
-        /// Some properties for displaying driver version
-        /// </summary>
-        public string Description
-        {
-            get
-            {
-                tl.LogMessage("Switch_Description Get", IP9212_switch_description);
-                return IP9212_switch_description;
-            }
-        }
-
-        public static string DriverInfo
-        {
-            get
-            {
-                Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-                string driverInfo = IP9212_switch_description + ". Version: " + DriverVersion;
-                tl.LogMessage("Switch_DriverInfo Get", driverInfo);
-                return driverInfo;
-            }
-        }
-
-        public static string DriverVersion
-        {
-            get
-            {
-                Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-                string driverVersion = String.Format(CultureInfo.InvariantCulture, "{0}.{1}", version.Major, version.Minor);
-                tl.LogMessage("Switch_DriverVersion Get", driverVersion);
-                return driverVersion;
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                tl.LogMessage("Switch_Name Get", IP9212_switch_description_short);
-                return IP9212_switch_description_short;
-            }
-        }
-        
-        #endregion DriverInformation
-
 
     }
 }

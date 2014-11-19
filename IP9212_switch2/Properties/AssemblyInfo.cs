@@ -8,11 +8,11 @@ using System.Runtime.InteropServices;
 //
 // TODO - Add your authorship information here
 [assembly: AssemblyTitle("ASCOM.IP9212.Switch")]
-[assembly: AssemblyDescription("ASCOM Switch driver for IP9212")]
+[assembly: AssemblyDescription("ASCOM Switch driver for IP9212 v2.0")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("The ASCOM Initiative")]
+[assembly: AssemblyCompany("Astromania.info")]
 [assembly: AssemblyProduct("ASCOM Switch driver for IP9212")]
-[assembly: AssemblyCopyright("Copyright © 2014 The ASCOM Initiative")]
+[assembly: AssemblyCopyright("Copyright © 2014 Astromania.info")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -36,4 +36,4 @@ using System.Runtime.InteropServices;
 //
 // TODO - Set your driver's version here
 [assembly: AssemblyVersion("6.0.*")]
-[assembly: AssemblyFileVersion("6.0.0.0")]
+[assembly: AssemblyFileVersion("2.0.0.0")]

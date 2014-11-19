@@ -1,29 +1,22 @@
 //tabs=4
 // --------------------------------------------------------------------------------
-// TODO fill in this information for your driver, then remove this line!
+// ASCOM Switch driver for IP9212 ver 2
 //
-// ASCOM Switch driver for IP9212
+// Description:	After ASCOM released ISwitchV2 specification, switch driver for Aviosys IP9212 was completely rewritten
+//              It going to be used in two major projects: 
+//              - WinForm application for switching power on/off (Observatory Control)
+//              - Universal Dome driver based on ISwitchV2 interface
 //
-// Description:	Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam 
-//				nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam 
-//				erat, sed diam voluptua. At vero eos et accusam et justo duo 
-//				dolores et ea rebum. Stet clita kasd gubergren, no sea takimata 
-//				sanctus est Lorem ipsum dolor sit amet.
-//
-// Implements:	ASCOM Switch interface version: <To be completed by driver developer>
-// Author:		(XXX) Your N. Here <your@email.here>
+// Implements:	ASCOM Switch interface version: ISwitchV2
+// Author:		(XXX) Boris Emchenko <support@astromania.info>
 //
 // Edit Log:
 //
 // Date			Who	Vers	Description
 // -----------	---	-----	-------------------------------------------------------
-// 24-10-2014	    2.0.0	Initial edit, created from ASCOM driver template
+// 25-10-2014	XXX 2.0.0a	Initial created from ASCOM driver template. Not working yet
 // --------------------------------------------------------------------------------
 //
-
-
-// This is used to define code in the template that is specific to one class implementation
-// unused code canbe deleted and this definition removed.
 #define Switch
 
 using System;
@@ -64,37 +57,55 @@ namespace ASCOM.IP9212_v2
         internal static string driverID = "ASCOM.IP9212_v2.Switch";
 
         /// <summary>
-        /// Driver description that displays in the ASCOM Chooser.
+        /// Hardware layer class for this Switch
         /// </summary>
-        private static string driverDescription = "Aviosys IP9212 Switch v2";
-
-        internal static string comPortProfileName = "COM Port"; // Constants used for Profile persistence
-        internal static string comPortDefault = "COM1";
-        internal static string traceStateProfileName = "Trace Level";
-        internal static string traceStateDefault = "false";
-
-        internal static string comPort; // Variables to hold the currrent device configuration
-        internal static bool traceState;
+        IP9212_switch_hardware_class Hardware;
 
         /// <summary>
         /// Private variable to hold the connected state
         /// </summary>
         private bool connectedState;
-
-        /// <summary>
-        /// Private variable to hold an ASCOM Utilities object
-        /// </summary>
-        private Util utilities;
-
-        /// <summary>
-        /// Private variable to hold an ASCOM AstroUtilities object to provide the Range method
-        /// </summary>
-        private AstroUtils astroUtilities;
+        private const bool CONNECTIONCHECK_FORCED = true; //Force to skip cache and get straight value
+        private const bool CONNECTIONCHECK_CACHED = false; //Use cached checking if possible
 
         /// <summary>
         /// Private variable to hold the trace logger object (creates a diagnostic log file with information that you specify)
         /// </summary>
-        private TraceLogger tl;
+        private static TraceLogger tl;
+
+        //Settings
+        #region Settings variables        
+        
+        internal static string traceStateProfileName = "Trace Level";
+        internal static string traceStateDefault = "true";
+        internal static bool traceState;
+
+        public static string ip_addr, ip_port, ip_login, ip_pass;
+        internal static string ip_addr_profilename = "IP address", ip_port_profilename = "Port number", ip_login_profilename = "login", ip_pass_profilename = "password";
+        internal static string ip_addr_default = "192.168.1.90", ip_port_default = "80", ip_login_default = "admin", ip_pass_default = "12345678";
+
+        internal static string switch_name_profilename = "switchname";
+        internal static string switch_description_profilename = "switchdescription";
+        // ARRAY WITH SWITCH NAMES AND DESCRIPTION
+        public class switchDataClass
+        {
+            public string Name = "";
+            public string Desc = "";
+            public bool? Val = null;
+        }
+        public static List<switchDataClass> SwitchData = new List<switchDataClass>();
+
+        #endregion Settings variables
+
+        /// <summary>
+        /// Driver description that displays in the ASCOM Chooser.
+        /// </summary>
+        private static string driverDescriptionShort = "Aviosys IP9212 Switch ver2";
+        private static string driverDescription = "ASCOM switch driver for Aviosys IP9212 power controller based on ISwitchV2 interface. Written by Boris Emchenko http://astromania.info";
+
+        // NUMBER OF SWITCHES
+        private static short numSwitch = 16;
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="IP9212"/> class.
@@ -102,16 +113,24 @@ namespace ASCOM.IP9212_v2
         /// </summary>
         public Switch()
         {
-            ReadProfile(); // Read device configuration from the ASCOM Profile store
-
-            tl = new TraceLogger("", "IP9212");
+            tl = new TraceLogger("", "IP9212_Switch_v2");
             tl.Enabled = traceState;
             tl.LogMessage("Switch", "Starting initialisation");
 
+            //init hardware class
+            Hardware = new IP9212_switch_hardware_class(traceState);
+
+            // init SwitchData array
+            for (int i = 0; i < numSwitch; i++)
+            {
+                SwitchData.Add(new switchDataClass { Name = "", Desc = "" });
+                SwitchData[i].Name = (i < 8 ? "Output " + i : "Input " + (i-7));
+                SwitchData[i].Desc = (i < 8 ? "Output switch " + i : "Input switch " + (i - 7));
+            }
+
+            readSettings(); // Read device configuration from the ASCOM Profile store
+
             connectedState = false; // Initialise connected to false
-            utilities = new Util(); //Initialise util object
-            astroUtilities = new AstroUtils(); // Initialise astro utilities object
-            //TODO: Implement your additional construction here
 
             tl.LogMessage("Switch", "Completed initialisation");
         }
@@ -133,7 +152,7 @@ namespace ASCOM.IP9212_v2
         {
             // consider only showing the setup dialog if not connected
             // or call a different dialog if connected
-            if (IsConnected)
+            if (IsConnected())
                 System.Windows.Forms.MessageBox.Show("Already connected, just press OK");
 
             using (SetupDialogForm F = new SetupDialogForm())
@@ -141,7 +160,7 @@ namespace ASCOM.IP9212_v2
                 var result = F.ShowDialog();
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
-                    WriteProfile(); // Persist device configuration values to the ASCOM Profile store
+                    writeSettings(); // Persist device configuration values to the ASCOM Profile store
                 }
             }
         }
@@ -164,7 +183,7 @@ namespace ASCOM.IP9212_v2
         {
             CheckConnected("CommandBlind");
             // Call CommandString and return as soon as it finishes
-            this.CommandString(command, raw);
+            //this.CommandString(command, raw);
             // or
             throw new ASCOM.MethodNotImplementedException("CommandBlind");
         }
@@ -172,7 +191,7 @@ namespace ASCOM.IP9212_v2
         public bool CommandBool(string command, bool raw)
         {
             CheckConnected("CommandBool");
-            string ret = CommandString(command, raw);
+            //string ret = CommandString(command, raw);
             // TODO decode the return string and return true or false
             // or
             throw new ASCOM.MethodNotImplementedException("CommandBool");
@@ -190,40 +209,55 @@ namespace ASCOM.IP9212_v2
 
         public void Dispose()
         {
-            // Clean up the tracelogger and util objects
+            // Clean up the objects
+            Hardware.Dispose();
+            Hardware = null;
+
             tl.Enabled = false;
             tl.Dispose();
             tl = null;
-            utilities.Dispose();
-            utilities = null;
-            astroUtilities.Dispose();
-            astroUtilities = null;
         }
 
         public bool Connected
         {
             get
             {
-                tl.LogMessage("Connected Get", IsConnected.ToString());
-                return IsConnected;
+                bool tempIsConnFlag=IsConnected();
+                tl.LogMessage("Connected Get", tempIsConnFlag.ToString());
+                return tempIsConnFlag;
             }
             set
             {
                 tl.LogMessage("Connected Set", value.ToString());
-                if (value == IsConnected)
+
+                if (value == IsConnected(CONNECTIONCHECK_FORCED))
                     return;
 
                 if (value)
                 {
-                    connectedState = true;
-                    tl.LogMessage("Connected Set", "Connecting to port " + comPort);
-                    // TODO connect to the device
+                    tl.LogMessage("Connected Set", "Connecting to IP9212...");
+
+                    Hardware.Connect();
+                    connectedState = Hardware.hardware_connected_flag;
+
+                    if (connectedState == false)
+                    {
+                        //if driver couldn't connect to ip9212 then raise an exception. 
+                        throw new ASCOM.DriverException("Couldn't connect to IP9212 control device on [" + ip_addr + "]");
+                    }
+
                 }
                 else
                 {
-                    connectedState = false;
-                    tl.LogMessage("Connected Set", "Disconnecting from port " + comPort);
-                    // TODO disconnect from the device
+                    tl.LogMessage("Connected Set", "Disconnecting from IP9212...");
+                    Hardware.Disconnect();
+                    connectedState = Hardware.hardware_connected_flag;
+
+                    if (connectedState == true)
+                    {
+                        //if driver couldn't disconnect to ip9212 then raise an exception. 
+                        throw new ASCOM.DriverException("Couldn't disconnect to IP9212 control device on [" + ip_addr + "]");
+                    }
                 }
             }
         }
@@ -243,8 +277,7 @@ namespace ASCOM.IP9212_v2
             get
             {
                 Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-                // TODO customise this driver description
-                string driverInfo = "Aviosys IP9212 switch driver based on ASCOM ISwitchV2 interface. Version: " + String.Format(CultureInfo.InvariantCulture, "{0}.{1}", version.Major, version.Minor);
+                string driverInfo = driverDescription + ". Version: " + String.Format(CultureInfo.InvariantCulture, "{0}.{1}", version.Major, version.Minor);
                 tl.LogMessage("DriverInfo Get", driverInfo);
                 return driverInfo;
             }
@@ -255,7 +288,8 @@ namespace ASCOM.IP9212_v2
             get
             {
                 Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-                string driverVersion = String.Format(CultureInfo.InvariantCulture, "{0}.{1}", version.Major, version.Minor);
+                string driverVersion = String.Format(CultureInfo.InvariantCulture, "{0}.{1} build {2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
+                //driverVersion=version.ToString();
                 tl.LogMessage("DriverVersion Get", driverVersion);
                 return driverVersion;
             }
@@ -263,7 +297,6 @@ namespace ASCOM.IP9212_v2
 
         public short InterfaceVersion
         {
-            // set by the driver wizard
             get
             {
                 tl.LogMessage("InterfaceVersion Get", "2");
@@ -275,17 +308,14 @@ namespace ASCOM.IP9212_v2
         {
             get
             {
-                string name = "IP9212 switch driver";
-                tl.LogMessage("Name Get", name);
-                return name;
+                tl.LogMessage("Name Get", driverDescriptionShort);
+                return driverDescriptionShort;
             }
         }
 
         #endregion
 
         #region ISwitchV2 Implementation
-
-        private short numSwitch = 16;
 
         /// <summary>
         /// The number of switches managed by this driver
@@ -294,8 +324,8 @@ namespace ASCOM.IP9212_v2
         {
             get
             {
-                tl.LogMessage("MaxSwitch Get", numSwitch.ToString());
-                return this.numSwitch;
+                tl.LogMessage("MaxSwitch Get", "MaxSwitch = " + numSwitch.ToString());
+                return numSwitch;
             }
         }
 
@@ -309,11 +339,10 @@ namespace ASCOM.IP9212_v2
         public string GetSwitchName(short id)
         {
             Validate("GetSwitchName", id);
-            tl.LogMessage("GetSwitchName", string.Format("GetSwitchName({0}) - not implemented", id));
-            throw new MethodNotImplementedException("GetSwitchName");
-            // or
-            //tl.LogMessage("GetSwitchName", string.Format("GetSwitchName({0}) - default Switch{0}", id));
-            //return "Switch" + id.ToString();
+
+            string tempStr = SwitchData[id].Name;
+            tl.LogMessage("GetSwitchName", string.Format("GetSwitchName({0}) = {1}", id,tempStr));
+            return tempStr;
         }
 
         /// <summary>
@@ -324,8 +353,8 @@ namespace ASCOM.IP9212_v2
         public void SetSwitchName(short id, string name)
         {
             Validate("SetSwitchName", id);
-            tl.LogMessage("SetSwitchName", string.Format("SetSwitchName({0}) = {1} - not implemented", id, name));
-            throw new MethodNotImplementedException("SetSwitchName");
+            tl.LogMessage("SetSwitchName", string.Format("SetSwitchName({0}): {1}", id, name));
+            SwitchData[id].Name = name;
         }
 
         /// <summary>
@@ -336,10 +365,23 @@ namespace ASCOM.IP9212_v2
         public string GetSwitchDescription(short id)
         {
             Validate("GetSwitchDescription", id);
-            tl.LogMessage("GetSwitchDescription", string.Format("GetSwitchDescription({0}) - not implemented", id));
-            throw new MethodNotImplementedException("GetSwitchDescription");
+
+            string tempStr = SwitchData[id].Desc;
+            tl.LogMessage("GetSwitchDescription", string.Format("GetSwitchDescription({0}) = {1}", id, tempStr));
+            return tempStr;
         }
 
+        /// <summary>
+        /// Sets a switch description to a specified value. UNSPECIFIED BY ASCOM ISwitchV2!!!!!
+        /// </summary>
+        /// <param name="id">The number of the switch whose name is to be set</param>
+        /// <param name="desc">The description of the switch</param>
+        public void SetSwitchDescription(short id, string desc)
+        {
+            Validate("SetSwitchDescription", id);
+            tl.LogMessage("SetSwitchDescription", string.Format("SetSwitchDescription({0}): {1}", id, desc));
+            SwitchData[id].Desc = desc;
+        }
         /// <summary>
         /// Reports if the specified switch can be written to.
         /// This is false if the switch cannot be written to, for example a limit switch or a sensor.
@@ -353,12 +395,15 @@ namespace ASCOM.IP9212_v2
         public bool CanWrite(short id)
         {
             Validate("CanWrite", id);
-            // default behavour is to report true
-            tl.LogMessage("CanWrite", string.Format("CanWrite({0}) - default true", id));
-            return true;
-            // implementation should report the correct behaviour
-            //tl.LogMessage("CanWrite", string.Format("CanWrite({0}) - not implemented", id));
-            //throw new MethodNotImplementedException("CanWrite");
+
+            bool retFlag = false;
+            if (id <= 7)
+            {
+                retFlag = true;
+            }
+
+            tl.LogMessage("CanWrite", string.Format("CanWrite({0}) = {1}", id, retFlag));
+            return retFlag;
         }
 
         #region boolean switch members
@@ -374,8 +419,17 @@ namespace ASCOM.IP9212_v2
         public bool GetSwitch(short id)
         {
             Validate("GetSwitch", id);
-            tl.LogMessage("GetSwitch", string.Format("GetSwitch({0}) - not implemented", id));
-            throw new MethodNotImplementedException("GetSwitch");
+
+            bool retVal = false;
+            if (id <= 7)
+            {
+                retVal = Hardware.getOutputSwitchStatus(id);
+            }else{
+                retVal = Hardware.getInputSwitchStatus(id - 8);
+            }
+
+            tl.LogMessage("GetSwitch", string.Format("GetSwitch({0}) = {1}", id, retVal));
+            return retVal;
         }
 
         /// <summary>
@@ -395,8 +449,9 @@ namespace ASCOM.IP9212_v2
                 tl.LogMessage("SetSwitch", str);
                 throw new MethodNotImplementedException(str);
             }
-            tl.LogMessage("SetSwitch", string.Format("SetSwitch({0}) = {1} - not implemented", id, state));
-            throw new MethodNotImplementedException("SetSwitch");
+
+            bool retVal = Hardware.setOutputStatus(id, state);
+            tl.LogMessage("SetSwitch", string.Format("SetSwitch({0}): {1}", id, retVal));
         }
 
         #endregion
@@ -413,10 +468,8 @@ namespace ASCOM.IP9212_v2
         {
             Validate("MaxSwitchValue", id);
             // boolean switch implementation:
+            tl.LogMessage("MaxSwitchValue", string.Format("MaxSwitchValue({0}): 1", id));
             return 1;
-            // or
-            //tl.LogMessage("MaxSwitchValue", string.Format("MaxSwitchValue({0}) - not implemented", id));
-            //throw new MethodNotImplementedException("MaxSwitchValue");
         }
 
         /// <summary>
@@ -429,10 +482,8 @@ namespace ASCOM.IP9212_v2
         {
             Validate("MinSwitchValue", id);
             // boolean switch implementation:
+            tl.LogMessage("MaxSwitchValue", string.Format("MaxSwitchValue({0}): 0", id));
             return 0;
-            // or
-            //tl.LogMessage("MinSwitchValue", string.Format("MinSwitchValue({0}) - not implemented", id));
-            //throw new MethodNotImplementedException("MinSwitchValue");
         }
 
         /// <summary>
@@ -447,12 +498,11 @@ namespace ASCOM.IP9212_v2
         {
             Validate("SwitchStep", id);
             // boolean switch implementation:
+            tl.LogMessage("SwitchStep", string.Format("SwitchStep({0}): 1", id));
             return 1;
-            // or
-            //tl.LogMessage("SwitchStep", string.Format("SwitchStep({0}) - not implemented", id));
-            //throw new MethodNotImplementedException("SwitchStep");
         }
 
+        #region Analogue switches (not used)
         /// <summary>
         /// returns the analogue switch value for switch id
         /// boolean switches must throw a not implemented exception
@@ -463,7 +513,7 @@ namespace ASCOM.IP9212_v2
         {
             Validate("GetSwitchValue", id);
             tl.LogMessage("GetSwitchValue", string.Format("GetSwitchValue({0}) - not implemented", id));
-            throw new MethodNotImplementedException("GetSwitchValue");
+            throw new ASCOM.MethodNotImplementedException(string.Format("GetSwitchValue({0}) - not implemented", id));
         }
 
         /// <summary>
@@ -477,14 +527,16 @@ namespace ASCOM.IP9212_v2
         public void SetSwitchValue(short id, double value)
         {
             Validate("SetSwitchValue", id, value);
+
             if (!CanWrite(id))
             {
                 tl.LogMessage("SetSwitchValue", string.Format("SetSwitchValue({0}) - Cannot write", id));
                 throw new ASCOM.MethodNotImplementedException(string.Format("SetSwitchValue({0}) - Cannot write", id));
             }
             tl.LogMessage("SetSwitchValue", string.Format("SetSwitchValue({0}) = {1} - not implemented", id, value));
-            throw new MethodNotImplementedException("SetSwitchValue");
+            throw new ASCOM.MethodNotImplementedException(string.Format("SetSwitchValue({0}) = {1} - not implemented", id, value));
         }
+        #endregion
 
         #endregion
         #endregion
@@ -501,7 +553,7 @@ namespace ASCOM.IP9212_v2
             if (id < 0 || id >= numSwitch)
             {
                 tl.LogMessage(message, string.Format("Switch {0} not available, range is 0 to {1}", id, numSwitch - 1));
-                throw new InvalidValueException(message, id.ToString(), string.Format("0 to {0}", numSwitch - 1));
+                throw new ASCOM.InvalidValueException(message, id.ToString(), string.Format("0 to {0}", numSwitch - 1));
             }
         }
 
@@ -514,13 +566,14 @@ namespace ASCOM.IP9212_v2
         /// <param name="value">The value.</param>
         private void Validate(string message, short id, double value)
         {
+            tl.LogMessage(message, string.Format("Using analogue override for validate switch {0}, value {1}", id, value));
             Validate(message, id);
             var min = MinSwitchValue(id);
             var max = MaxSwitchValue(id);
             if (value < min || value > max)
             {
                 tl.LogMessage(message, string.Format("Value {1} for Switch {0} is out of the allowed range {2} to {3}", id, value, min, max));
-                throw new InvalidValueException(message, value.ToString(), string.Format("Switch({0}) range {1} to {2}", id, min, max));
+                throw new ASCOM.InvalidValueException(message, value.ToString(), string.Format("Switch({0}) range {1} to {2}", id, min, max));
             }
         }
 
@@ -565,7 +618,7 @@ namespace ASCOM.IP9212_v2
                 P.DeviceType = "Switch";
                 if (bRegister)
                 {
-                    P.Register(driverID, driverDescription);
+                    P.Register(driverID, driverDescriptionShort);
                 }
                 else
                 {
@@ -625,13 +678,15 @@ namespace ASCOM.IP9212_v2
         /// <summary>
         /// Returns true if there is a valid connection to the driver hardware
         /// </summary>
-        private bool IsConnected
+        private bool IsConnected(bool forcedflag = CONNECTIONCHECK_CACHED)
         {
-            get
-            {
-                // TODO check that the driver hardware connection exists and is connected to the hardware
-                return connectedState;
-            }
+            tl.LogMessage("IsConnected", "Enter" + (forcedflag == CONNECTIONCHECK_FORCED?" (forced)":""));
+
+            // Check that the driver hardware connection exists and is connected to the hardware
+            connectedState = Hardware.IsConnected(forcedflag);
+
+            tl.LogMessage("IsConnected", "Exit. Return status = " + connectedState.ToString());
+            return connectedState;
         }
 
         /// <summary>
@@ -640,7 +695,8 @@ namespace ASCOM.IP9212_v2
         /// <param name="message"></param>
         private void CheckConnected(string message)
         {
-            if (!IsConnected)
+            tl.LogMessage("CheckConnected", "[" + message + "]");
+            if (!IsConnected())
             {
                 throw new ASCOM.NotConnectedException(message);
             }
@@ -649,28 +705,194 @@ namespace ASCOM.IP9212_v2
         /// <summary>
         /// Read the device configuration from the ASCOM Profile store
         /// </summary>
-        internal void ReadProfile()
+        internal void __ReadProfile()
         {
             using (Profile driverProfile = new Profile())
             {
                 driverProfile.DeviceType = "Switch";
                 traceState = Convert.ToBoolean(driverProfile.GetValue(driverID, traceStateProfileName, string.Empty, traceStateDefault));
-                comPort = driverProfile.GetValue(driverID, comPortProfileName, string.Empty, comPortDefault);
+                //comPort = driverProfile.GetValue(driverID, comPortProfileName, string.Empty, comPortDefault);
             }
         }
 
         /// <summary>
         /// Write the device configuration to the  ASCOM  Profile store
         /// </summary>
-        internal void WriteProfile()
+        internal void __WriteProfile()
         {
             using (Profile driverProfile = new Profile())
             {
                 driverProfile.DeviceType = "Switch";
+             
                 driverProfile.WriteValue(driverID, traceStateProfileName, traceState.ToString());
-                driverProfile.WriteValue(driverID, comPortProfileName, comPort.ToString());
+                //driverProfile.WriteValue(driverID, comPortProfileName, comPort.ToString());
             }
         }
+
+        
+        /// <summary>
+        /// Read settings from ASCOM profile storage
+        /// </summary>
+        internal void readSettings()
+        {
+            tl.LogMessage("readSettings", "Enter");
+            using (ASCOM.Utilities.Profile p = new Profile())
+            {
+                //System.Collections.ArrayList T = p.RegisteredDeviceTypes;
+                p.DeviceType = "Switch";
+
+                //General settings
+                try
+                {
+                    ip_addr = p.GetValue(driverID, ip_addr_profilename, string.Empty, ip_addr_default);
+                }
+                catch (Exception e)
+                {
+                    //p.WriteValue(driverID, ip_addr_profilename, ip_addr_default);
+                    ip_addr = ip_addr_default;
+                    tl.LogMessage("readSettings", "Wrong input string for [ip_addr]: [" + e.Message + "]");
+                }
+                try
+                {
+                    ip_port = p.GetValue(driverID, ip_port_profilename, string.Empty, ip_port_default);
+                }
+                catch (Exception e)
+                {
+                    //p.WriteValue(driverID, ip_port_profilename, ip_port_default);
+                    ip_port = ip_port_default;
+                    tl.LogMessage("readSettings", "Wrong input string for [ip_port]: [" + e.Message + "]");
+                }
+                try
+                {
+                    ip_login = p.GetValue(driverID, ip_login_profilename, string.Empty, ip_login_default);
+                }
+                catch (Exception e)
+                {
+                    //p.WriteValue(driverID, ip_login_profilename, ip_login_default);
+                    ip_login = ip_login_default;
+                    tl.LogMessage("readSettings", "Wrong input string for [ip_login]: [" + e.Message + "]");
+                }
+
+                try
+                {
+                    ip_pass = p.GetValue(driverID, ip_pass_profilename, string.Empty, ip_pass_default);
+                }
+                catch (Exception e)
+                {
+                    //p.WriteValue(driverID, ip_pass_profilename, ip_pass_default);
+                    ip_pass = ip_pass_default;
+                    tl.LogMessage("readSettings", "Wrong input string for [ip_pass]: [" + e.Message + "]");
+                }
+
+                //Set the same settings to hardware layer class
+                Hardware.ip_addr = ip_addr;
+                Hardware.ip_port = ip_port;
+                Hardware.ip_login = ip_login;
+                Hardware.ip_pass = ip_pass;
+
+                //Trace settings
+                try
+                {
+                    traceState = Convert.ToBoolean(p.GetValue(driverID, traceStateProfileName, string.Empty, traceStateDefault));
+                }
+                catch (Exception e)
+                {
+                    //p.WriteValue(driverID, traceStateProfileName, traceStateDefault.ToString());
+                    traceState = Convert.ToBoolean(traceStateDefault);
+                    tl.LogMessage("readSettings", "Input string [traceState] is not a boolean value [" + e.Message + "]");
+                }
+
+
+                //Switch data
+                for (int i = 0; i < numSwitch/2; i++)
+                {
+                    //Output port name
+                    try
+                    {
+                        SwitchData[i].Name = p.GetValue(driverID, switch_name_profilename, "Out_" + (i + 1), "Output " + i );
+                    }
+                    catch (Exception e)
+                    {
+                        //p.WriteValue(driverID, switch_name_profilename, SwitchData[i].Name, "Out_" + (i + 1));
+                        SwitchData[i].Name = "Output " + i;
+                        tl.LogMessage("readSettings", "Wrong input string for [Output name " + i + "]: [" + e.Message + "]");
+                    }
+
+                    //Output port description
+                    try
+                    {
+                        SwitchData[i].Desc = p.GetValue(driverID, switch_description_profilename, "Out_" + (i + 1), "Output switch " + i);
+                    }
+                    catch (Exception e)
+                    {
+                        //p.WriteValue(driverID, switch_description_profilename, SwitchData[i].Desc, "Out_" + (i + 1));
+                        SwitchData[i].Desc = "Output switch " + i;
+                        tl.LogMessage("readSettings", "Wrong input string for [Output description " + i + "]: [" + e.Message + "]");
+                    }
+
+                    //Input port name
+                    try
+                    {
+                        SwitchData[i+8].Name = p.GetValue(driverID, switch_name_profilename, "In_" + (i + 1), "Input " + i);
+                    }
+                    catch (Exception e)
+                    {
+                        //p.WriteValue(driverID, switch_name_profilename, SwitchData[i].Name, "In_" + (i + 1));
+                        SwitchData[i + 8].Name = "Input " + i;
+                        tl.LogMessage("readSettings", "Wrong input string for [Input name " + i + "]: [" + e.Message + "]");
+                    }
+                    //Input port description
+                    try
+                    {
+                        SwitchData[i+8].Desc = p.GetValue(driverID, switch_description_profilename, "In_" + (i + 1), "Input switch " + i);
+                    }
+                    catch (Exception e)
+                    {
+                        //p.WriteValue(driverID, switch_description_profilename, SwitchData[i].Desc, "In_" + (i + 1));
+                        SwitchData[i+8].Desc = "Input switch " + i;
+                        tl.LogMessage("readSettings", "Wrong input string for [Input description " + i + "]: [" + e.Message + "]");
+                    }
+                }
+            }
+            tl.LogMessage("readSettings", "Exit");
+        }
+
+        /// <summary>
+        /// Write settings to ASCOM profile storage
+        /// </summary>
+        internal static void writeSettings()
+        {
+            tl.LogMessage("writeSettings", "Enter");
+            using (Profile p = new Profile())
+            {
+                p.DeviceType = "Switch";
+
+                //General settings
+                p.WriteValue(driverID, ip_addr_profilename, ip_addr);
+                p.WriteValue(driverID, ip_port_profilename, ip_port);
+                p.WriteValue(driverID, ip_login_profilename, ip_login);
+                p.WriteValue(driverID, ip_pass_profilename, ip_pass);
+
+                //Trace value
+                p.WriteValue(driverID, traceStateProfileName, traceState.ToString());
+
+                //Switch data
+                for (int i = 0; i < numSwitch; i++)
+                {
+                    //Output port
+                    p.WriteValue(driverID, switch_name_profilename, SwitchData[i].Name, "Out_"+(i+1));
+                    p.WriteValue(driverID, switch_description_profilename, SwitchData[i].Desc, "Out_" + (i + 1));
+
+                    //Input port
+                    p.WriteValue(driverID, switch_name_profilename, SwitchData[i].Name, "In_" + (i + 1));
+                    p.WriteValue(driverID, switch_description_profilename, SwitchData[i].Desc, "In_" + (i + 1));
+                }
+
+            }
+            tl.LogMessage("writeSettings", "Exit");
+        }
+
+
 
         #endregion
 
