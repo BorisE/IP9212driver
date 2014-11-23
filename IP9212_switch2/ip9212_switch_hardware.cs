@@ -45,7 +45,7 @@ namespace ASCOM.IP9212_v2
         /// <summary>
         /// Private variable to hold the trace logger object (creates a diagnostic log file with information that you specify)
         /// </summary>
-        public static TraceLogger tl;
+        public static TraceLogger tl, tlsem;
 
         /// <summary>
         /// Semaphor for blocking concurrent requests
@@ -68,10 +68,13 @@ namespace ASCOM.IP9212_v2
         /// </summary>
         public IP9212_switch_hardware_class(bool traceState)
         {
-            tl = new TraceLogger("", "IP9212_Switch_hardware_v2");
-            tl.Enabled = true; //default value before reading settings
-
+            tl = new TraceLogger("", "IP9212_Switch_v2_Hardware");
             tl.Enabled = traceState; //now we can set trace state, specified by user
+
+            tlsem = new TraceLogger("", "IP9212_Switch_hardware_semaphore");
+            tlsem.Enabled = true;
+
+
             tl.LogMessage("Switch_constructor", "Starting initialisation");
 
             hardware_connected_flag = false;
@@ -151,7 +154,7 @@ namespace ASCOM.IP9212_v2
             //Usual mode
             //Measure how much time have passed since last HARDWARE measure
             TimeSpan passed = DateTime.Now - lastConnectedCheck;
-            if (passed.TotalSeconds > CONNECTED_CHECK_INTERVAL)
+            if (passed.TotalSeconds > CONNECTED_CHECK_INTERVAL || true)
             {
                 // check that the driver hardware connection exists and is connected to the hardware
                 tl.LogMessage("Switch_IsConnected", String.Format("Using cached value but starting background read [in cache was: {0}s]...",passed.TotalSeconds));
@@ -205,6 +208,7 @@ namespace ASCOM.IP9212_v2
             try
             {
                 tl.LogMessage("Semaphore", "WaitOne");
+                tlsem.LogMessage("checkLink_async", "WaitOne");
                 IP9212Semaphore.WaitOne(); // lock working with IP9212
 
                 client.DownloadDataCompleted += new DownloadDataCompletedEventHandler(checkLink_DownloadCompleted);
@@ -216,6 +220,7 @@ namespace ASCOM.IP9212_v2
             catch (WebException e)
             {
                 tl.LogMessage("Semaphore", "Release");
+                tlsem.LogMessage("checkLink_async", "Release on exception");
                 IP9212Semaphore.Release();//unlock ip9212 device for others
                 hardware_connected_flag = false;
                 tl.LogMessage("CheckLink_async", "error:" + e.Message);
@@ -229,6 +234,7 @@ namespace ASCOM.IP9212_v2
             try
             {
                 tl.LogMessage("Semaphore", "Release");
+                tlsem.LogMessage("checkLink_DownloadCompleted", "Release");
             }
             catch { 
             // Object was disposed before download complete, so we should release all and exit
@@ -405,6 +411,7 @@ namespace ASCOM.IP9212_v2
 
             // Send http query
             tl.LogMessage("Semaphore", "waitone");
+            tlsem.LogMessage("getInputStatus", "waitone");
             IP9212Semaphore.WaitOne(); // lock working with IP9212
             string s = "";
             WebClient client = new WebClient();
@@ -419,6 +426,7 @@ namespace ASCOM.IP9212_v2
                 tl.LogMessage("getInputStatus", "Download str:" + s);
 
                 tl.LogMessage("Semaphore", "Release");
+                tlsem.LogMessage("getInputStatus", "Release");
                 IP9212Semaphore.Release();//unlock ip9212 device for others
                 //wait
                 //Thread.Sleep(1000);
@@ -426,6 +434,7 @@ namespace ASCOM.IP9212_v2
             catch (WebException e)
             {
                 tl.LogMessage("Semaphore", "Release");
+                tlsem.LogMessage("getInputStatus", "Release on exception");
                 IP9212Semaphore.Release();//unlock ip9212 device for others
                 input_state_arr[0] = -1;
 
@@ -522,6 +531,7 @@ namespace ASCOM.IP9212_v2
 
             // Send http query
             tl.LogMessage("Semaphore", "waitone");
+            tlsem.LogMessage("getOutputStatus", "Waitone");
             IP9212Semaphore.WaitOne(); // lock working with IP9212
 
             string s = "";
@@ -537,6 +547,7 @@ namespace ASCOM.IP9212_v2
                 tl.LogMessage("getOutputStatus", "Download str:" + s);
 
                 tl.LogMessage("Semaphore", "Release");
+                tlsem.LogMessage("getOutputStatus", "Release");
                 IP9212Semaphore.Release();//unlock ip9212 device for others
                 //wait
                 //Thread.Sleep(1000);
@@ -545,6 +556,8 @@ namespace ASCOM.IP9212_v2
             catch (WebException e)
             {
                 tl.LogMessage("Semaphore", "Release");
+                tlsem.LogMessage("getOutputStatus", "Release");
+
                 IP9212Semaphore.Release();//unlock ip9212 device for others
                 ipdata[0] = -1;
                 tl.LogMessage("getOutputStatus", "Error:" + e.Message);
@@ -636,10 +649,9 @@ namespace ASCOM.IP9212_v2
                 siteipURL = "http://localhost/ip9212/set.php?cmd=setpower+P6" + PortNumber + "=" + intPortValue;
             }
             tl.LogMessage("setOutputStatus", "Download url:" + siteipURL);
-
-
             // Send http query
             tl.LogMessage("Semaphore", "waitone");
+            tlsem.LogMessage("setOutputStatus", "Waitone"); 
             IP9212Semaphore.WaitOne(); // lock working with IP9212
             string s = "";
             WebClient client = new WebClient();
@@ -656,6 +668,7 @@ namespace ASCOM.IP9212_v2
                 //wait
                 //Thread.Sleep(1000);
                 tl.LogMessage("Semaphore", "Release");
+                tlsem.LogMessage("setOutputStatus", "Release");
                 IP9212Semaphore.Release();//unlock ip9212 device for others
 
                 ret = true;
@@ -663,6 +676,7 @@ namespace ASCOM.IP9212_v2
             catch (WebException e)
             {
                 tl.LogMessage("Semaphore", "Release");
+                tlsem.LogMessage("setOutputStatus", "Release on exception");
                 IP9212Semaphore.Release();//unlock ip9212 device for others
                 ret = false;
 

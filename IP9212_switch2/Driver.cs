@@ -78,7 +78,7 @@ namespace ASCOM.IP9212_v2
         
         internal static string traceStateProfileName = "Trace Level";
         internal static string traceStateDefault = "true";
-        internal static bool traceState;
+        internal static bool traceState = Convert.ToBoolean(traceStateDefault);
 
         public static string ip_addr, ip_port, ip_login, ip_pass;
         internal static string ip_addr_profilename = "IP address", ip_port_profilename = "Port number", ip_login_profilename = "login", ip_pass_profilename = "password";
@@ -114,7 +114,7 @@ namespace ASCOM.IP9212_v2
         public Switch()
         {
             tl = new TraceLogger("", "IP9212_Switch_v2");
-            tl.Enabled = traceState;
+            tl.Enabled = traceState; //set the default value
             tl.LogMessage("Switch", "Starting initialisation");
 
             //init hardware class
@@ -129,6 +129,8 @@ namespace ASCOM.IP9212_v2
             }
 
             readSettings(); // Read device configuration from the ASCOM Profile store
+            tl.Enabled = traceState; //Now we can set the right setting
+
 
             connectedState = false; // Initialise connected to false
 

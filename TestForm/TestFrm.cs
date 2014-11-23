@@ -7,6 +7,7 @@ namespace ASCOM.TestForm
     {
 
         private ASCOM.DriverAccess.Switch driver;
+        bool connectStatus = false;
 
         public TestFrm()
         {
@@ -16,7 +17,7 @@ namespace ASCOM.TestForm
         
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            numericUpDown1.Value = timer1.Interval / 100;
         }
         
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -38,11 +39,13 @@ namespace ASCOM.TestForm
             if (IsConnected)
             {
                 driver.Connected = false;
+                connectStatus = false;
             }
             else
             {
                 driver = new ASCOM.DriverAccess.Switch(Properties.Settings.Default.DriverId);
                 driver.Connected = true;
+                connectStatus = true;
                 UpdateFields();
             }
             SetUIState();
@@ -51,8 +54,10 @@ namespace ASCOM.TestForm
         private void SetUIState()
         {
             buttonConnect.Enabled = !string.IsNullOrEmpty(Properties.Settings.Default.DriverId);
-            buttonChoose.Enabled = !IsConnected;
-            buttonConnect.Text = IsConnected ? "Disconnect" : "Connect";
+            buttonChoose.Enabled = !connectStatus;
+            buttonConnect.Text = connectStatus ? "Disconnect" : "Connect";
+
+            toolStripStatusLabel1.Text = connectStatus ? "Connected" : "Disconnected";
 
         }
 
@@ -118,6 +123,20 @@ namespace ASCOM.TestForm
 
             if (driver != null)
                 driver.SetSwitch(chkNum, ((CheckBox)sender).Checked);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (driver != null)
+            {
+                connectStatus = driver.Connected;
+                toolStripStatusLabel1.Text = (connectStatus ? "Connected" : "Disconnected") + " at " + DateTime.Now;
+            }
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            timer1.Interval = (int)numericUpDown1.Value*100;
         }        
     
     }
