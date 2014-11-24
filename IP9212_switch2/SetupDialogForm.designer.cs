@@ -34,7 +34,6 @@ namespace ASCOM.IP9212_v2
             this.cmdCancel = new System.Windows.Forms.Button();
             this.picASCOM = new System.Windows.Forms.PictureBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.chkTrace = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -45,16 +44,21 @@ namespace ASCOM.IP9212_v2
             this.SwitchName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SwitchDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.ipaddr = new System.Windows.Forms.TextBox();
-            this.login = new System.Windows.Forms.TextBox();
-            this.pass = new System.Windows.Forms.TextBox();
-            this.port = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.dataGridInputSwitch = new System.Windows.Forms.DataGridView();
             this.InputSwitchId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.InputSwitchName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.InputSwitchDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.myToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.chkTrace = new System.Windows.Forms.CheckBox();
+            this.ipaddr = new System.Windows.Forms.TextBox();
+            this.login = new System.Windows.Forms.TextBox();
+            this.pass = new System.Windows.Forms.TextBox();
+            this.port = new System.Windows.Forms.TextBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.picASCOM)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -68,9 +72,9 @@ namespace ASCOM.IP9212_v2
             // 
             this.cmdOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.cmdOK.Location = new System.Drawing.Point(464, 79);
+            this.cmdOK.Location = new System.Drawing.Point(464, 87);
             this.cmdOK.Name = "cmdOK";
-            this.cmdOK.Size = new System.Drawing.Size(59, 24);
+            this.cmdOK.Size = new System.Drawing.Size(69, 24);
             this.cmdOK.TabIndex = 0;
             this.cmdOK.Text = "OK";
             this.cmdOK.UseVisualStyleBackColor = true;
@@ -80,9 +84,9 @@ namespace ASCOM.IP9212_v2
             // 
             this.cmdCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cmdCancel.Location = new System.Drawing.Point(464, 109);
+            this.cmdCancel.Location = new System.Drawing.Point(464, 117);
             this.cmdCancel.Name = "cmdCancel";
-            this.cmdCancel.Size = new System.Drawing.Size(59, 25);
+            this.cmdCancel.Size = new System.Drawing.Size(69, 25);
             this.cmdCancel.TabIndex = 1;
             this.cmdCancel.Text = "Cancel";
             this.cmdCancel.UseVisualStyleBackColor = true;
@@ -93,7 +97,7 @@ namespace ASCOM.IP9212_v2
             this.picASCOM.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picASCOM.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picASCOM.Image = global::ASCOM.IP9212.Properties.Resources.ASCOM;
-            this.picASCOM.Location = new System.Drawing.Point(475, 9);
+            this.picASCOM.Location = new System.Drawing.Point(475, 25);
             this.picASCOM.Name = "picASCOM";
             this.picASCOM.Size = new System.Drawing.Size(48, 56);
             this.picASCOM.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -104,30 +108,21 @@ namespace ASCOM.IP9212_v2
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.textBox1);
             this.groupBox3.Controls.Add(this.chkTrace);
-            this.groupBox3.Location = new System.Drawing.Point(3, 90);
+            this.groupBox3.Location = new System.Drawing.Point(222, 9);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(300, 47);
+            this.groupBox3.Size = new System.Drawing.Size(236, 149);
             this.groupBox3.TabIndex = 33;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Debugging";
-            // 
-            // chkTrace
-            // 
-            this.chkTrace.AutoSize = true;
-            this.chkTrace.Checked = global::ASCOM.IP9212.Properties.Settings.Default.trace;
-            this.chkTrace.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkTrace.Location = new System.Drawing.Point(8, 19);
-            this.chkTrace.Name = "chkTrace";
-            this.chkTrace.Size = new System.Drawing.Size(69, 17);
-            this.chkTrace.TabIndex = 6;
-            this.chkTrace.Text = "Trace on";
-            this.chkTrace.UseVisualStyleBackColor = true;
+            this.groupBox3.Text = "Advanced";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(152, 22);
+            this.label3.Location = new System.Drawing.Point(149, 22);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(10, 13);
             this.label3.TabIndex = 27;
@@ -136,7 +131,7 @@ namespace ASCOM.IP9212_v2
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(165, 48);
+            this.label5.Location = new System.Drawing.Point(7, 73);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(30, 13);
             this.label5.TabIndex = 28;
@@ -163,7 +158,7 @@ namespace ASCOM.IP9212_v2
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dataGridOutputSwitch);
-            this.groupBox2.Location = new System.Drawing.Point(3, 143);
+            this.groupBox2.Location = new System.Drawing.Point(3, 164);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(530, 230);
             this.groupBox2.TabIndex = 31;
@@ -228,53 +223,15 @@ namespace ASCOM.IP9212_v2
             this.groupBox1.Controls.Add(this.port);
             this.groupBox1.Location = new System.Drawing.Point(3, 9);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(300, 75);
+            this.groupBox1.Size = new System.Drawing.Size(213, 149);
             this.groupBox1.TabIndex = 32;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "IP9212 address";
             // 
-            // ipaddr
-            // 
-            this.ipaddr.Location = new System.Drawing.Point(54, 19);
-            this.ipaddr.Name = "ipaddr";
-            this.ipaddr.Size = new System.Drawing.Size(92, 20);
-            this.ipaddr.TabIndex = 26;
-            this.ipaddr.Text = global::ASCOM.IP9212.Properties.Settings.Default.ipaddr;
-            this.myToolTip.SetToolTip(this.ipaddr, "IP addres of the device. \r\nUse \"ipEdit.exe\" to locate its IP addres");
-            // 
-            // login
-            // 
-            this.login.Location = new System.Drawing.Point(54, 45);
-            this.login.Name = "login";
-            this.login.Size = new System.Drawing.Size(92, 20);
-            this.login.TabIndex = 25;
-            this.login.Text = global::ASCOM.IP9212.Properties.Settings.Default.iplogin;
-            this.myToolTip.SetToolTip(this.login, "Login name. \r\nFactory default for the device is \"admin\"");
-            // 
-            // pass
-            // 
-            this.pass.Location = new System.Drawing.Point(202, 45);
-            this.pass.MaxLength = 14;
-            this.pass.Multiline = true;
-            this.pass.Name = "pass";
-            this.pass.PasswordChar = '*';
-            this.pass.Size = new System.Drawing.Size(92, 20);
-            this.pass.TabIndex = 24;
-            this.pass.Text = global::ASCOM.IP9212.Properties.Settings.Default.ippass;
-            this.myToolTip.SetToolTip(this.pass, "Device password. \r\nFactory default for the device is \"12345678\"\r\n");
-            // 
-            // port
-            // 
-            this.port.Location = new System.Drawing.Point(168, 19);
-            this.port.Name = "port";
-            this.port.Size = new System.Drawing.Size(38, 20);
-            this.port.TabIndex = 23;
-            this.port.Text = global::ASCOM.IP9212.Properties.Settings.Default.ipport;
-            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.dataGridInputSwitch);
-            this.groupBox4.Location = new System.Drawing.Point(3, 380);
+            this.groupBox4.Location = new System.Drawing.Point(3, 400);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(530, 230);
             this.groupBox4.TabIndex = 31;
@@ -322,11 +279,102 @@ namespace ASCOM.IP9212_v2
             this.InputSwitchDescription.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.InputSwitchDescription.Width = 280;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 48);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(127, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Caching check results for";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(206, 48);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(24, 13);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "sec";
+            // 
+            // textBox1
+            // 
+            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212.Properties.Settings.Default, "CheckCacheTimeout", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox1.Location = new System.Drawing.Point(139, 45);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(61, 20);
+            this.textBox1.TabIndex = 7;
+            this.textBox1.Text = global::ASCOM.IP9212.Properties.Settings.Default.CheckCacheTimeout;
+            this.myToolTip.SetToolTip(this.textBox1, resources.GetString("textBox1.ToolTip"));
+            // 
+            // chkTrace
+            // 
+            this.chkTrace.AutoSize = true;
+            this.chkTrace.Checked = global::ASCOM.IP9212.Properties.Settings.Default.trace;
+            this.chkTrace.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkTrace.Location = new System.Drawing.Point(8, 19);
+            this.chkTrace.Name = "chkTrace";
+            this.chkTrace.Size = new System.Drawing.Size(69, 17);
+            this.chkTrace.TabIndex = 6;
+            this.chkTrace.Text = "Trace on";
+            this.myToolTip.SetToolTip(this.chkTrace, "Driver will write ASCOM logs. Usefull for debugging problems");
+            this.chkTrace.UseVisualStyleBackColor = true;
+            // 
+            // ipaddr
+            // 
+            this.ipaddr.Location = new System.Drawing.Point(54, 19);
+            this.ipaddr.Name = "ipaddr";
+            this.ipaddr.Size = new System.Drawing.Size(92, 20);
+            this.ipaddr.TabIndex = 26;
+            this.ipaddr.Text = global::ASCOM.IP9212.Properties.Settings.Default.ipaddr;
+            this.myToolTip.SetToolTip(this.ipaddr, "IP addres of the device. \r\nUse \"ipEdit.exe\" to locate its IP addres");
+            // 
+            // login
+            // 
+            this.login.Location = new System.Drawing.Point(54, 45);
+            this.login.Name = "login";
+            this.login.Size = new System.Drawing.Size(92, 20);
+            this.login.TabIndex = 25;
+            this.login.Text = global::ASCOM.IP9212.Properties.Settings.Default.iplogin;
+            this.myToolTip.SetToolTip(this.login, "Login name. \r\nFactory default for the device is \"admin\"");
+            // 
+            // pass
+            // 
+            this.pass.Location = new System.Drawing.Point(54, 70);
+            this.pass.MaxLength = 14;
+            this.pass.Multiline = true;
+            this.pass.Name = "pass";
+            this.pass.PasswordChar = '*';
+            this.pass.Size = new System.Drawing.Size(92, 20);
+            this.pass.TabIndex = 24;
+            this.pass.Text = global::ASCOM.IP9212.Properties.Settings.Default.ippass;
+            this.myToolTip.SetToolTip(this.pass, "Device password. \r\nFactory default for the device is \"12345678\"\r\n");
+            // 
+            // port
+            // 
+            this.port.Location = new System.Drawing.Point(165, 19);
+            this.port.Name = "port";
+            this.port.Size = new System.Drawing.Size(38, 20);
+            this.port.TabIndex = 23;
+            this.port.Text = global::ASCOM.IP9212.Properties.Settings.Default.ipport;
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(472, 9);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(59, 13);
+            this.linkLabel1.TabIndex = 10;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Astromania";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // SetupDialogForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(535, 615);
+            this.ClientSize = new System.Drawing.Size(535, 631);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox2);
@@ -383,5 +431,9 @@ namespace ASCOM.IP9212_v2
         private System.Windows.Forms.DataGridViewTextBoxColumn SwitchName;
         private System.Windows.Forms.DataGridViewTextBoxColumn SwitchDescription;
         private System.Windows.Forms.ToolTip myToolTip;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }

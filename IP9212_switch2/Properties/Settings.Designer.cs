@@ -67,5 +67,17 @@ namespace ASCOM.IP9212.Properties {
                 return ((bool)(this["trace"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public string CheckCacheTimeout {
+            get {
+                return ((string)(this["CheckCacheTimeout"]));
+            }
+            set {
+                this["CheckCacheTimeout"] = value;
+            }
+        }
     }
 }

@@ -154,7 +154,7 @@ namespace ASCOM.IP9212_v2
         {
             // consider only showing the setup dialog if not connected
             // or call a different dialog if connected
-            if (IsConnected())
+            if (IsConnected(CONNECTIONCHECK_FORCED))
                 System.Windows.Forms.MessageBox.Show("Already connected, just press OK");
 
             using (SetupDialogForm F = new SetupDialogForm())
@@ -682,10 +682,19 @@ namespace ASCOM.IP9212_v2
         /// </summary>
         private bool IsConnected(bool forcedflag = CONNECTIONCHECK_CACHED)
         {
-            tl.LogMessage("IsConnected", "Enter" + (forcedflag == CONNECTIONCHECK_FORCED?" (forced)":""));
+            tl.LogMessage("IsConnected", "Enter" + (forcedflag == CONNECTIONCHECK_FORCED?" (forced)":" (cached)"));
 
             // Check that the driver hardware connection exists and is connected to the hardware
-            connectedState = Hardware.IsConnected(forcedflag);
+            if (!connectedState)
+            {
+                // if wasn't previously connected then return false
+                return connectedState;
+            }
+            else
+            {
+                // if was previously connected then check in background is it still alive
+                connectedState = Hardware.IsConnected(forcedflag);
+            }
 
             tl.LogMessage("IsConnected", "Exit. Return status = " + connectedState.ToString());
             return connectedState;
@@ -856,6 +865,7 @@ namespace ASCOM.IP9212_v2
                     }
                 }
             }
+
             tl.LogMessage("readSettings", "Exit");
         }
 
@@ -879,15 +889,15 @@ namespace ASCOM.IP9212_v2
                 p.WriteValue(driverID, traceStateProfileName, traceState.ToString());
 
                 //Switch data
-                for (int i = 0; i < numSwitch; i++)
+                for (int i = 0; i < numSwitch/2; i++)
                 {
                     //Output port
                     p.WriteValue(driverID, switch_name_profilename, SwitchData[i].Name, "Out_"+(i+1));
                     p.WriteValue(driverID, switch_description_profilename, SwitchData[i].Desc, "Out_" + (i + 1));
 
                     //Input port
-                    p.WriteValue(driverID, switch_name_profilename, SwitchData[i].Name, "In_" + (i + 1));
-                    p.WriteValue(driverID, switch_description_profilename, SwitchData[i].Desc, "In_" + (i + 1));
+                    p.WriteValue(driverID, switch_name_profilename, SwitchData[i+8].Name, "In_" + (i + 1));
+                    p.WriteValue(driverID, switch_description_profilename, SwitchData[i+8].Desc, "In_" + (i + 1));
                 }
 
             }

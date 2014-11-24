@@ -60,9 +60,6 @@ namespace ASCOM.IP9212_v2
             }
         }
 
-
-
-        
         /// <summary>
         /// Read data from settings vars and populate grid
         /// </summary>
@@ -116,6 +113,24 @@ namespace ASCOM.IP9212_v2
 
                 }
             }
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start("http://astromania.info/");
+            }
+            catch (System.ComponentModel.Win32Exception noBrowser)
+            {
+                if (noBrowser.ErrorCode == -2147467259)
+                    MessageBox.Show(noBrowser.Message);
+            }
+            catch (System.Exception other)
+            {
+                MessageBox.Show(other.Message);
+            }
+
         }
 
     }

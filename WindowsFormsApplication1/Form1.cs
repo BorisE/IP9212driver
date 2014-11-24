@@ -67,8 +67,8 @@ namespace WindowsFormsApplication1
             WebClient client = new WebClient();
             try
             {
-                //client.DownloadDataCompleted += new DownloadDataCompletedEventHandler(checkLink_DownloadCompleted_test);
-                Task t = client.DownloadDataTaskAsync(uri_siteipURL);
+                client.DownloadDataCompleted += new DownloadDataCompletedEventHandler(checkLink_DownloadCompleted_test);
+                Task<byte[]> t = client.DownloadDataTaskAsync(uri_siteipURL);
                 tl.LogMessage("CheckLink_async", "http request was sent");
                 
                 await t;
@@ -77,7 +77,7 @@ namespace WindowsFormsApplication1
             }
             catch (WebException e)
             {
-                tl.LogMessage("CheckLink_async", "error:" + e.Message);
+                tl.LogMessage("CheckLink_async", "error:" + e.Status.ToString());
             }
         }
 

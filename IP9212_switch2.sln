@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IP9212_switch2", "IP9212_switch2\IP9212_switch2.csproj", "{64308775-BD4A-469C-BCAB-3ED830B811AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestForm", "TestForm\TestForm.csproj", "{8E8D406C-1838-4914-867D-AB602D0EAF3E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_Form", "TestForm\Test_Form.csproj", "{8E8D406C-1838-4914-867D-AB602D0EAF3E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5CCEF081-5A4D-4CA8-B793-795DD86D8788}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication1", "WindowsFormsApplication1\WindowsFormsApplication1.csproj", "{749CE155-3D82-4875-9807-A55CA9839B79}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAsyncForm", "WindowsFormsApplication1\TestAsyncForm.csproj", "{749CE155-3D82-4875-9807-A55CA9839B79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{34E7B314-2142-4122-8FCD-E6063B720AAD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAsyncConsole", "ConsoleApplication1\TestAsyncConsole.csproj", "{34E7B314-2142-4122-8FCD-E6063B720AAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

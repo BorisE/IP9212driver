@@ -40,6 +40,7 @@ namespace ASCOM.TestForm
             {
                 driver.Connected = false;
                 connectStatus = false;
+                driver = null;
             }
             else
             {
