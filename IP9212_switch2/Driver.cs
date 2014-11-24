@@ -15,6 +15,7 @@
 // Date			Who	Vers	Description
 // -----------	---	-----	-------------------------------------------------------
 // 25-10-2014	XXX 2.0.0a	Initial created from ASCOM driver template. Not working yet
+// 24-11-2014	XXX 2.0.1	Beta 1. Working
 // --------------------------------------------------------------------------------
 //
 #define Switch

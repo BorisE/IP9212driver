@@ -34,6 +34,10 @@ namespace ASCOM.IP9212_v2
             this.cmdCancel = new System.Windows.Forms.Button();
             this.picASCOM = new System.Windows.Forms.PictureBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.chkTrace = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -44,21 +48,20 @@ namespace ASCOM.IP9212_v2
             this.SwitchName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SwitchDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ipaddr = new System.Windows.Forms.TextBox();
+            this.login = new System.Windows.Forms.TextBox();
+            this.pass = new System.Windows.Forms.TextBox();
+            this.port = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.dataGridInputSwitch = new System.Windows.Forms.DataGridView();
             this.InputSwitchId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.InputSwitchName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.InputSwitchDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.myToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.chkTrace = new System.Windows.Forms.CheckBox();
-            this.ipaddr = new System.Windows.Forms.TextBox();
-            this.login = new System.Windows.Forms.TextBox();
-            this.pass = new System.Windows.Forms.TextBox();
-            this.port = new System.Windows.Forms.TextBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.lblVersion = new System.Windows.Forms.Label();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.picASCOM)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -66,15 +69,16 @@ namespace ASCOM.IP9212_v2
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInputSwitch)).BeginInit();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmdOK
             // 
             this.cmdOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.cmdOK.Location = new System.Drawing.Point(464, 87);
+            this.cmdOK.Location = new System.Drawing.Point(346, 134);
             this.cmdOK.Name = "cmdOK";
-            this.cmdOK.Size = new System.Drawing.Size(69, 24);
+            this.cmdOK.Size = new System.Drawing.Size(82, 24);
             this.cmdOK.TabIndex = 0;
             this.cmdOK.Text = "OK";
             this.cmdOK.UseVisualStyleBackColor = true;
@@ -84,9 +88,9 @@ namespace ASCOM.IP9212_v2
             // 
             this.cmdCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cmdCancel.Location = new System.Drawing.Point(464, 117);
+            this.cmdCancel.Location = new System.Drawing.Point(437, 135);
             this.cmdCancel.Name = "cmdCancel";
-            this.cmdCancel.Size = new System.Drawing.Size(69, 25);
+            this.cmdCancel.Size = new System.Drawing.Size(82, 25);
             this.cmdCancel.TabIndex = 1;
             this.cmdCancel.Text = "Cancel";
             this.cmdCancel.UseVisualStyleBackColor = true;
@@ -97,7 +101,7 @@ namespace ASCOM.IP9212_v2
             this.picASCOM.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picASCOM.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picASCOM.Image = global::ASCOM.IP9212.Properties.Resources.ASCOM;
-            this.picASCOM.Location = new System.Drawing.Point(475, 25);
+            this.picASCOM.Location = new System.Drawing.Point(17, 13);
             this.picASCOM.Name = "picASCOM";
             this.picASCOM.Size = new System.Drawing.Size(48, 56);
             this.picASCOM.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -112,12 +116,53 @@ namespace ASCOM.IP9212_v2
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.textBox1);
             this.groupBox3.Controls.Add(this.chkTrace);
-            this.groupBox3.Location = new System.Drawing.Point(222, 9);
+            this.groupBox3.Location = new System.Drawing.Point(3, 87);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(236, 149);
+            this.groupBox3.Size = new System.Drawing.Size(314, 71);
             this.groupBox3.TabIndex = 33;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Advanced";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(178, 48);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(24, 13);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "sec";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 48);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(127, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Caching check results for";
+            // 
+            // textBox1
+            // 
+            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212.Properties.Settings.Default, "CheckCacheTimeout", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox1.Location = new System.Drawing.Point(139, 45);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(33, 20);
+            this.textBox1.TabIndex = 7;
+            this.textBox1.Text = global::ASCOM.IP9212.Properties.Settings.Default.CheckCacheTimeout;
+            this.myToolTip.SetToolTip(this.textBox1, resources.GetString("textBox1.ToolTip"));
+            // 
+            // chkTrace
+            // 
+            this.chkTrace.AutoSize = true;
+            this.chkTrace.Checked = global::ASCOM.IP9212.Properties.Settings.Default.trace;
+            this.chkTrace.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkTrace.Location = new System.Drawing.Point(8, 19);
+            this.chkTrace.Name = "chkTrace";
+            this.chkTrace.Size = new System.Drawing.Size(69, 17);
+            this.chkTrace.TabIndex = 6;
+            this.chkTrace.Text = "Trace on";
+            this.myToolTip.SetToolTip(this.chkTrace, "Driver will write ASCOM logs. Usefull for debugging problems");
+            this.chkTrace.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -131,7 +176,7 @@ namespace ASCOM.IP9212_v2
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 73);
+            this.label5.Location = new System.Drawing.Point(152, 48);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(30, 13);
             this.label5.TabIndex = 28;
@@ -223,10 +268,48 @@ namespace ASCOM.IP9212_v2
             this.groupBox1.Controls.Add(this.port);
             this.groupBox1.Location = new System.Drawing.Point(3, 9);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(213, 149);
+            this.groupBox1.Size = new System.Drawing.Size(314, 72);
             this.groupBox1.TabIndex = 32;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "IP9212 address";
+            this.groupBox1.Text = "IP9212 settings";
+            // 
+            // ipaddr
+            // 
+            this.ipaddr.Location = new System.Drawing.Point(54, 19);
+            this.ipaddr.Name = "ipaddr";
+            this.ipaddr.Size = new System.Drawing.Size(92, 20);
+            this.ipaddr.TabIndex = 26;
+            this.ipaddr.Text = global::ASCOM.IP9212.Properties.Settings.Default.ipaddr;
+            this.myToolTip.SetToolTip(this.ipaddr, "IP addres of the device. \r\nUse \"ipEdit.exe\" to locate its IP addres");
+            // 
+            // login
+            // 
+            this.login.Location = new System.Drawing.Point(54, 45);
+            this.login.Name = "login";
+            this.login.Size = new System.Drawing.Size(92, 20);
+            this.login.TabIndex = 25;
+            this.login.Text = global::ASCOM.IP9212.Properties.Settings.Default.iplogin;
+            this.myToolTip.SetToolTip(this.login, "Login name. \r\nFactory default for the device is \"admin\"");
+            // 
+            // pass
+            // 
+            this.pass.Location = new System.Drawing.Point(188, 45);
+            this.pass.MaxLength = 14;
+            this.pass.Multiline = true;
+            this.pass.Name = "pass";
+            this.pass.PasswordChar = '*';
+            this.pass.Size = new System.Drawing.Size(92, 20);
+            this.pass.TabIndex = 24;
+            this.pass.Text = global::ASCOM.IP9212.Properties.Settings.Default.ippass;
+            this.myToolTip.SetToolTip(this.pass, "Device password. \r\nFactory default for the device is \"12345678\"\r\n");
+            // 
+            // port
+            // 
+            this.port.Location = new System.Drawing.Point(165, 19);
+            this.port.Name = "port";
+            this.port.Size = new System.Drawing.Size(38, 20);
+            this.port.TabIndex = 23;
+            this.port.Text = global::ASCOM.IP9212.Properties.Settings.Default.ipport;
             // 
             // groupBox4
             // 
@@ -279,107 +362,60 @@ namespace ASCOM.IP9212_v2
             this.InputSwitchDescription.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.InputSwitchDescription.Width = 280;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 48);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(127, 13);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Caching check results for";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(206, 48);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(24, 13);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "sec";
-            // 
-            // textBox1
-            // 
-            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212.Properties.Settings.Default, "CheckCacheTimeout", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox1.Location = new System.Drawing.Point(139, 45);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(61, 20);
-            this.textBox1.TabIndex = 7;
-            this.textBox1.Text = global::ASCOM.IP9212.Properties.Settings.Default.CheckCacheTimeout;
-            this.myToolTip.SetToolTip(this.textBox1, resources.GetString("textBox1.ToolTip"));
-            // 
-            // chkTrace
-            // 
-            this.chkTrace.AutoSize = true;
-            this.chkTrace.Checked = global::ASCOM.IP9212.Properties.Settings.Default.trace;
-            this.chkTrace.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkTrace.Location = new System.Drawing.Point(8, 19);
-            this.chkTrace.Name = "chkTrace";
-            this.chkTrace.Size = new System.Drawing.Size(69, 17);
-            this.chkTrace.TabIndex = 6;
-            this.chkTrace.Text = "Trace on";
-            this.myToolTip.SetToolTip(this.chkTrace, "Driver will write ASCOM logs. Usefull for debugging problems");
-            this.chkTrace.UseVisualStyleBackColor = true;
-            // 
-            // ipaddr
-            // 
-            this.ipaddr.Location = new System.Drawing.Point(54, 19);
-            this.ipaddr.Name = "ipaddr";
-            this.ipaddr.Size = new System.Drawing.Size(92, 20);
-            this.ipaddr.TabIndex = 26;
-            this.ipaddr.Text = global::ASCOM.IP9212.Properties.Settings.Default.ipaddr;
-            this.myToolTip.SetToolTip(this.ipaddr, "IP addres of the device. \r\nUse \"ipEdit.exe\" to locate its IP addres");
-            // 
-            // login
-            // 
-            this.login.Location = new System.Drawing.Point(54, 45);
-            this.login.Name = "login";
-            this.login.Size = new System.Drawing.Size(92, 20);
-            this.login.TabIndex = 25;
-            this.login.Text = global::ASCOM.IP9212.Properties.Settings.Default.iplogin;
-            this.myToolTip.SetToolTip(this.login, "Login name. \r\nFactory default for the device is \"admin\"");
-            // 
-            // pass
-            // 
-            this.pass.Location = new System.Drawing.Point(54, 70);
-            this.pass.MaxLength = 14;
-            this.pass.Multiline = true;
-            this.pass.Name = "pass";
-            this.pass.PasswordChar = '*';
-            this.pass.Size = new System.Drawing.Size(92, 20);
-            this.pass.TabIndex = 24;
-            this.pass.Text = global::ASCOM.IP9212.Properties.Settings.Default.ippass;
-            this.myToolTip.SetToolTip(this.pass, "Device password. \r\nFactory default for the device is \"12345678\"\r\n");
-            // 
-            // port
-            // 
-            this.port.Location = new System.Drawing.Point(165, 19);
-            this.port.Name = "port";
-            this.port.Size = new System.Drawing.Size(38, 20);
-            this.port.TabIndex = 23;
-            this.port.Text = global::ASCOM.IP9212.Properties.Settings.Default.ipport;
-            // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(472, 9);
+            this.linkLabel1.Location = new System.Drawing.Point(71, 49);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(59, 13);
+            this.linkLabel1.Size = new System.Drawing.Size(104, 13);
             this.linkLabel1.TabIndex = 10;
             this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Astromania";
+            this.linkLabel1.Text = "Driver by Astromania";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // lblVersion
+            // 
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.Location = new System.Drawing.Point(14, 75);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(72, 13);
+            this.lblVersion.TabIndex = 34;
+            this.lblVersion.Text = "Driver version";
+            // 
+            // linkLabel2
+            // 
+            this.linkLabel2.AutoSize = true;
+            this.linkLabel2.Location = new System.Drawing.Point(71, 19);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Size = new System.Drawing.Size(94, 13);
+            this.linkLabel2.TabIndex = 10;
+            this.linkLabel2.TabStop = true;
+            this.linkLabel2.Text = "Device by Aviosys";
+            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.lblVersion);
+            this.groupBox5.Controls.Add(this.linkLabel2);
+            this.groupBox5.Controls.Add(this.linkLabel1);
+            this.groupBox5.Controls.Add(this.picASCOM);
+            this.groupBox5.Location = new System.Drawing.Point(329, 12);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(190, 115);
+            this.groupBox5.TabIndex = 35;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "About";
             // 
             // SetupDialogForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(535, 631);
-            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.picASCOM);
             this.Controls.Add(this.cmdCancel);
             this.Controls.Add(this.cmdOK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -399,8 +435,9 @@ namespace ASCOM.IP9212_v2
             this.groupBox1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInputSwitch)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -435,5 +472,8 @@ namespace ASCOM.IP9212_v2
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Label lblVersion;
+        private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.GroupBox groupBox5;
     }
 }
