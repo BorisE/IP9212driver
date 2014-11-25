@@ -16,6 +16,7 @@
 // -----------	---	-----	-------------------------------------------------------
 // 25-10-2014	XXX 2.0.0a	Initial created from ASCOM driver template. Not working yet
 // 24-11-2014	XXX 2.0.1	Beta 1. Working
+// 26-11-2014	XXX 2.0.2	Beta 2. Change behaviour for NC contacts (ports 1 - 4). Now true means CLOSED contact, false - OPENED contact (earlier for ports 1..4: true - OPENED, false - CLOSED)
 // --------------------------------------------------------------------------------
 //
 #define Switch
@@ -115,7 +116,7 @@ namespace ASCOM.IP9212_v2
         public Switch()
         {
             tl = new TraceLogger("", "IP9212_Switch_v2");
-            tl.Enabled = traceState; //set the default value
+            tl.Enabled = traceState; //set the default value for start (override further)
             tl.LogMessage("Switch", "Starting initialisation");
 
             //init hardware class
@@ -125,13 +126,12 @@ namespace ASCOM.IP9212_v2
             for (int i = 0; i < numSwitch; i++)
             {
                 SwitchData.Add(new switchDataClass { Name = "", Desc = "" });
-                SwitchData[i].Name = (i < 8 ? "Output " + i : "Input " + (i-7));
-                SwitchData[i].Desc = (i < 8 ? "Output switch " + i : "Input switch " + (i - 7));
+                SwitchData[i].Name = (i < 8 ? "Output " + (i+1) : "Input " + (i-7));
+                SwitchData[i].Desc = (i < 8 ? "Output switch " + (i+1) : "Input switch " + (i - 7));
             }
 
             readSettings(); // Read device configuration from the ASCOM Profile store
             tl.Enabled = traceState; //Now we can set the right setting
-
 
             connectedState = false; // Initialise connected to false
 
@@ -267,7 +267,6 @@ namespace ASCOM.IP9212_v2
 
         public string Description
         {
-            // TODO customise this device description
             get
             {
                 tl.LogMessage("Description Get", driverDescription);
@@ -426,7 +425,12 @@ namespace ASCOM.IP9212_v2
             bool retVal = false;
             if (id <= 7)
             {
+                //read value for output switch
                 retVal = Hardware.getOutputSwitchStatus(id);
+                //invert for NO ports (0-3)
+                if (id <= 3)
+                    retVal = ! retVal;
+
             }else{
                 retVal = Hardware.getInputSwitchStatus(id - 8);
             }
