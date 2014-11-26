@@ -161,7 +161,12 @@ namespace ASCOM.IP9212_v2
         {
             try
             {
-                System.Diagnostics.Process.Start("http://www.aviosys.com/9212delux.html");
+                if (Thread.CurrentThread.CurrentUICulture.Name == "ru-RU")
+                {
+                    System.Diagnostics.Process.Start("http://www.aviosys.ru/ipp9212d.htm");
+                }else{
+                    System.Diagnostics.Process.Start("http://www.aviosys.com/9212delux.html");
+                }
             }
             catch (System.ComponentModel.Win32Exception noBrowser)
             {

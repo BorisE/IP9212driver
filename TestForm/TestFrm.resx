@@ -145,7 +145,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonChoose.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="buttonConnect.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -172,7 +172,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonConnect.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="DriverName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -418,7 +418,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;txtInput8.Name" xml:space="preserve">
     <value>txtInput8</value>
@@ -1092,6 +1092,18 @@
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
     <value>55</value>
   </data>
+  <data name="&gt;&gt;label15.Name" xml:space="preserve">
+    <value>label15</value>
+  </data>
+  <data name="&gt;&gt;label15.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label15.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
+    <value>56</value>
+  </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
@@ -1102,7 +1114,19 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>56</value>
+    <value>57</value>
+  </data>
+  <data name="&gt;&gt;txtIPaddr.Name" xml:space="preserve">
+    <value>txtIPaddr</value>
+  </data>
+  <data name="&gt;&gt;txtIPaddr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtIPaddr.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;txtIPaddr.ZOrder" xml:space="preserve">
+    <value>58</value>
   </data>
   <data name="&gt;&gt;txtNumberOfSwitches.Name" xml:space="preserve">
     <value>txtNumberOfSwitches</value>
@@ -1114,7 +1138,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;txtNumberOfSwitches.ZOrder" xml:space="preserve">
-    <value>57</value>
+    <value>59</value>
   </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 236</value>
@@ -1138,7 +1162,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="txtInput8.Location" type="System.Drawing.Point, System.Drawing">
     <value>408, 243</value>
@@ -2416,7 +2440,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>56</value>
+    <value>57</value>
   </data>
   <data name="txtNumberOfSwitches.Location" type="System.Drawing.Point, System.Drawing">
     <value>61, 20</value>
@@ -2437,34 +2461,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;txtNumberOfSwitches.ZOrder" xml:space="preserve">
-    <value>57</value>
-  </data>
-  <data name="labelDriverId.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelDriverId.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 40</value>
-  </data>
-  <data name="labelDriverId.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 21</value>
-  </data>
-  <data name="labelDriverId.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="labelDriverId.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;labelDriverId.Name" xml:space="preserve">
-    <value>labelDriverId</value>
-  </data>
-  <data name="&gt;&gt;labelDriverId.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelDriverId.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;labelDriverId.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>59</value>
   </data>
   <data name="&gt;&gt;chkOut8.Name" xml:space="preserve">
     <value>chkOut8</value>
@@ -2584,7 +2581,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="chkOut8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2796,6 +2793,9 @@
   <data name="&gt;&gt;chkOut2.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>220, 17</value>
+  </metadata>
   <data name="chkOut1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -2813,6 +2813,9 @@
   </data>
   <data name="chkOut1.Text" xml:space="preserve">
     <value>checkBox1</value>
+  </data>
+  <data name="chkOut1.ToolTip" xml:space="preserve">
+    <value>tooltip test text</value>
   </data>
   <data name="&gt;&gt;chkOut1.Name" xml:space="preserve">
     <value>chkOut1</value>
@@ -2944,7 +2947,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="chkIn8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3238,13 +3241,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;statusStrip1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="toolStripStatusLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 17</value>
   </data>
   <data name="numericUpDown1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>695, 30</value>
+    <value>633, 50</value>
   </data>
   <data name="numericUpDown1.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 20</value>
@@ -3262,27 +3265,141 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;numericUpDown1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
-  <data name="cmbLang.Location" type="System.Drawing.Point, System.Drawing">
-    <value>640, 72</value>
+  <data name="labelDriverId.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="cmbLang.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
+  <data name="labelDriverId.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 40</value>
   </data>
-  <data name="cmbLang.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+  <data name="labelDriverId.Size" type="System.Drawing.Size, System.Drawing">
+    <value>291, 21</value>
   </data>
-  <data name="&gt;&gt;cmbLang.Name" xml:space="preserve">
-    <value>cmbLang</value>
+  <data name="labelDriverId.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="&gt;&gt;cmbLang.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="labelDriverId.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;cmbLang.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelDriverId.Name" xml:space="preserve">
+    <value>labelDriverId</value>
+  </data>
+  <data name="&gt;&gt;labelDriverId.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelDriverId.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;cmbLang.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelDriverId.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>220, 17</value>
+  </metadata>
+  <data name="label14.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
+    <value>630, 34</value>
+  </data>
+  <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 13</value>
+  </data>
+  <data name="label14.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="label14.Text" xml:space="preserve">
+    <value>Check connection interval</value>
+  </data>
+  <data name="&gt;&gt;label14.Name" xml:space="preserve">
+    <value>label14</value>
+  </data>
+  <data name="&gt;&gt;label14.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label14.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label14.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="txtIPaddr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>207, 20</value>
+  </data>
+  <data name="txtIPaddr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 20</value>
+  </data>
+  <data name="txtIPaddr.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;txtIPaddr.Name" xml:space="preserve">
+    <value>txtIPaddr</value>
+  </data>
+  <data name="&gt;&gt;txtIPaddr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtIPaddr.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;txtIPaddr.ZOrder" xml:space="preserve">
+    <value>58</value>
+  </data>
+  <data name="label15.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
+    <value>157, 23</value>
+  </data>
+  <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 13</value>
+  </data>
+  <data name="label15.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="label15.Text" xml:space="preserve">
+    <value>IP addr</value>
+  </data>
+  <data name="&gt;&gt;label15.Name" xml:space="preserve">
+    <value>label15</value>
+  </data>
+  <data name="&gt;&gt;label15.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label15.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
+    <value>56</value>
+  </data>
+  <data name="label16.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
+    <value>695, 52</value>
+  </data>
+  <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
+  </data>
+  <data name="label16.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="label16.Text" xml:space="preserve">
+    <value>1/10 sec</value>
+  </data>
+  <data name="&gt;&gt;label16.Name" xml:space="preserve">
+    <value>label16</value>
+  </data>
+  <data name="&gt;&gt;label16.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label16.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label16.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -3293,6 +3410,9 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>780, 534</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Switchdriver Test</value>
@@ -3308,6 +3428,12 @@
   </data>
   <data name="&gt;&gt;toolStripStatusLabel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
+    <value>toolTip1</value>
+  </data>
+  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>TestFrm</value>

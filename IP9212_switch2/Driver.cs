@@ -197,7 +197,15 @@ namespace ASCOM.IP9212_v2
 
         public string Action(string actionName, string actionParameters)
         {
-            throw new ASCOM.ActionNotImplementedException("Action " + actionName + " is not implemented by this driver");
+            // Get device IP address
+            if (actionName == "IPAddress")
+            {
+                return ip_addr;
+            }
+            else
+            {
+                throw new ASCOM.ActionNotImplementedException("Action " + actionName + " is not implemented by this driver");
+            }
         }
 
         public void CommandBlind(string command, bool raw)
@@ -566,6 +574,7 @@ namespace ASCOM.IP9212_v2
         #endregion
 
         #endregion
+        
         #endregion
 
         #region private methods
@@ -738,34 +747,6 @@ namespace ASCOM.IP9212_v2
             }
         }
 
-        /// <summary>
-        /// Read the device configuration from the ASCOM Profile store
-        /// </summary>
-        internal void __ReadProfile()
-        {
-            using (Profile driverProfile = new Profile())
-            {
-                driverProfile.DeviceType = "Switch";
-                traceState = Convert.ToBoolean(driverProfile.GetValue(driverID, traceStateProfileName, string.Empty, traceStateDefault));
-                //comPort = driverProfile.GetValue(driverID, comPortProfileName, string.Empty, comPortDefault);
-            }
-        }
-
-        /// <summary>
-        /// Write the device configuration to the  ASCOM  Profile store
-        /// </summary>
-        internal void __WriteProfile()
-        {
-            using (Profile driverProfile = new Profile())
-            {
-                driverProfile.DeviceType = "Switch";
-             
-                driverProfile.WriteValue(driverID, traceStateProfileName, traceState.ToString());
-                //driverProfile.WriteValue(driverID, comPortProfileName, comPort.ToString());
-            }
-        }
-
-        
         /// <summary>
         /// Read settings from ASCOM profile storage
         /// </summary>

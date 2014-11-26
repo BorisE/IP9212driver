@@ -126,7 +126,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cmdOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>333, 147</value>
+    <value>333, 151</value>
   </data>
   <data name="cmdOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 24</value>
@@ -157,7 +157,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>434, 147</value>
+    <value>437, 151</value>
   </data>
   <data name="cmdCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 25</value>
@@ -187,7 +187,7 @@
     <value>NoControl</value>
   </data>
   <data name="picASCOM.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 13</value>
+    <value>17, 16</value>
   </data>
   <data name="picASCOM.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 56</value>
@@ -210,14 +210,47 @@
   <data name="&gt;&gt;picASCOM.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="label9.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>142, 20</value>
+  </data>
+  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 13</value>
+  </data>
+  <data name="label9.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="label9.Text" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="&gt;&gt;label9.Name" xml:space="preserve">
+    <value>label9</value>
+  </data>
+  <data name="&gt;&gt;label9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label9.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="cmbLang.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 15</value>
+    <value>203, 15</value>
   </data>
   <data name="cmbLang.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 21</value>
+    <value>99, 21</value>
   </data>
   <data name="cmbLang.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
+  </data>
+  <metadata name="myToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="cmbLang.ToolTip" xml:space="preserve">
+    <value>Выбор языка интерфейса</value>
   </data>
   <data name="&gt;&gt;cmbLang.Name" xml:space="preserve">
     <value>cmbLang</value>
@@ -229,7 +262,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;cmbLang.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -259,7 +292,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="label6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -289,7 +322,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -319,7 +352,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -349,7 +382,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="txtCacheRead.Location" type="System.Drawing.Point, System.Drawing">
     <value>209, 68</value>
@@ -360,9 +393,6 @@
   <data name="txtCacheRead.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <metadata name="myToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="txtCacheRead.ToolTip" xml:space="preserve">
     <value>Cache timeout in seconds for reading switch values. Default 4 sec.
 
@@ -378,7 +408,7 @@ This value is used to cache "GetValue" result. Many times programs query all 16 
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;txtCacheRead.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="txtCacheConnect.Location" type="System.Drawing.Point, System.Drawing">
     <value>209, 45</value>
@@ -405,7 +435,7 @@ With high network query intensivity the device can hang. So the driver is using 
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;txtCacheConnect.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="chkTrace.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -438,7 +468,7 @@ With high network query intensivity the device can hang. So the driver is using 
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;chkTrace.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 87</value>
@@ -771,6 +801,9 @@ Factory default for the device is "12345678"
   <data name="port.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
   </data>
+  <data name="port.ToolTip" xml:space="preserve">
+    <value>Номер порта. 80 подойдет в 99.9% случаев </value>
+  </data>
   <data name="&gt;&gt;port.Name" xml:space="preserve">
     <value>port</value>
   </data>
@@ -900,7 +933,7 @@ They are marked with "V" and "R" sign respectively</value>
     <value>NoControl</value>
   </data>
   <data name="linkLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 49</value>
+    <value>71, 52</value>
   </data>
   <data name="linkLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 13</value>
@@ -910,6 +943,9 @@ They are marked with "V" and "R" sign respectively</value>
   </data>
   <data name="linkLabel1.Text" xml:space="preserve">
     <value>Driver by Astromania</value>
+  </data>
+  <data name="linkLabel1.ToolTip" xml:space="preserve">
+    <value>Driver written by Boris Emchenko</value>
   </data>
   <data name="&gt;&gt;linkLabel1.Name" xml:space="preserve">
     <value>linkLabel1</value>
@@ -930,7 +966,7 @@ They are marked with "V" and "R" sign respectively</value>
     <value>NoControl</value>
   </data>
   <data name="lblVersion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 75</value>
+    <value>10, 78</value>
   </data>
   <data name="lblVersion.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 13</value>
@@ -960,7 +996,7 @@ They are marked with "V" and "R" sign respectively</value>
     <value>NoControl</value>
   </data>
   <data name="linkLabel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 19</value>
+    <value>71, 22</value>
   </data>
   <data name="linkLabel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 13</value>
@@ -987,7 +1023,7 @@ They are marked with "V" and "R" sign respectively</value>
     <value>329, 12</value>
   </data>
   <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 115</value>
+    <value>190, 129</value>
   </data>
   <data name="groupBox5.TabIndex" type="System.Int32, mscorlib">
     <value>35</value>
@@ -1019,14 +1055,11 @@ They are marked with "V" and "R" sign respectively</value>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>535, 660</value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Aviosus IP9212 Switch Driver Setup</value>
+    <value>Aviosys IP9212 ASCOM Switch Driver Setup</value>
   </data>
   <data name="&gt;&gt;SwitchId.Name" xml:space="preserve">
     <value>SwitchId</value>

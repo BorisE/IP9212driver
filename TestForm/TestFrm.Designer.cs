@@ -100,7 +100,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtNumberOfSwitches = new System.Windows.Forms.TextBox();
-            this.labelDriverId = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.chkOut8 = new System.Windows.Forms.CheckBox();
             this.chkOut7 = new System.Windows.Forms.CheckBox();
@@ -123,7 +122,12 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.cmbLang = new System.Windows.Forms.ComboBox();
+            this.labelDriverId = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtIPaddr = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -260,7 +264,9 @@
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.label15);
             this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.txtIPaddr);
             this.groupBox2.Controls.Add(this.txtNumberOfSwitches);
             resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
@@ -556,14 +562,6 @@
             resources.ApplyResources(this.txtNumberOfSwitches, "txtNumberOfSwitches");
             this.txtNumberOfSwitches.Name = "txtNumberOfSwitches";
             // 
-            // labelDriverId
-            // 
-            this.labelDriverId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelDriverId.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.TestForm.Properties.Settings.Default, "DriverId", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            resources.ApplyResources(this.labelDriverId, "labelDriverId");
-            this.labelDriverId.Name = "labelDriverId";
-            this.labelDriverId.Text = global::ASCOM.TestForm.Properties.Settings.Default.DriverId;
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.chkOut8);
@@ -631,6 +629,7 @@
             // 
             resources.ApplyResources(this.chkOut1, "chkOut1");
             this.chkOut1.Name = "chkOut1";
+            this.toolTip1.SetToolTip(this.chkOut1, resources.GetString("chkOut1.ToolTip"));
             this.chkOut1.UseVisualStyleBackColor = true;
             this.chkOut1.Click += new System.EventHandler(this.chkOut_Click);
             // 
@@ -720,17 +719,45 @@
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
-            // cmbLang
+            // labelDriverId
             // 
-            this.cmbLang.FormattingEnabled = true;
-            resources.ApplyResources(this.cmbLang, "cmbLang");
-            this.cmbLang.Name = "cmbLang";
+            this.labelDriverId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelDriverId.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.TestForm.Properties.Settings.Default, "DriverId", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            resources.ApplyResources(this.labelDriverId, "labelDriverId");
+            this.labelDriverId.Name = "labelDriverId";
+            this.labelDriverId.Text = global::ASCOM.TestForm.Properties.Settings.Default.DriverId;
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.toolTip1.ToolTipTitle = "Description";
+            // 
+            // label14
+            // 
+            resources.ApplyResources(this.label14, "label14");
+            this.label14.Name = "label14";
+            // 
+            // txtIPaddr
+            // 
+            resources.ApplyResources(this.txtIPaddr, "txtIPaddr");
+            this.txtIPaddr.Name = "txtIPaddr";
+            // 
+            // label15
+            // 
+            resources.ApplyResources(this.label15, "label15");
+            this.label15.Name = "label15";
+            // 
+            // label16
+            // 
+            resources.ApplyResources(this.label16, "label16");
+            this.label16.Name = "label16";
             // 
             // TestFrm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.cmbLang);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.label14);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox4);
@@ -854,7 +881,11 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.ComboBox cmbLang;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox txtIPaddr;
+        private System.Windows.Forms.Label label16;
     }
 }
 
