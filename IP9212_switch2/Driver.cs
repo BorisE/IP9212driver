@@ -16,7 +16,8 @@
 // -----------	---	-----	-------------------------------------------------------
 // 25-10-2014	XXX 2.0.0a	Initial created from ASCOM driver template. Not working yet
 // 24-11-2014	XXX 2.0.1	Beta 1. Working
-// 26-11-2014	XXX 2.0.2	Beta 2. Change behaviour for NC contacts (ports 1 - 4). Now true means CLOSED contact, false - OPENED contact (earlier for ports 1..4: true - OPENED, false - CLOSED)
+// 25-11-2014	XXX 2.0.2	Beta 2. Change behaviour for NC contacts (ports 1 - 4). Now true means CLOSED contact, false - OPENED contact (earlier for ports 1..4: true - OPENED, false - CLOSED). Switched to Threads
+// 26-11-2014	XXX 2.0.3	Beta 3. Caching input/output switches data
 // --------------------------------------------------------------------------------
 //
 #define Switch

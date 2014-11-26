@@ -9,6 +9,7 @@
 
 25.11.2014 2.0.2 (beta 2) 
 - switch to classical Thread instead of async/await (got strange non async results due to SynchContext)
+- all values for Output Switch (both NC and NO) is now transformed into universal on/off states!
 
 24.11.2014 2.0.1 (beta 1) 
 - at once first working release! (buggy but nevertheless)

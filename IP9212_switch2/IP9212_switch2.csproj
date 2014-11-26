@@ -136,7 +136,7 @@
     <None Include="app.config" />
     <None Include="ASCOM.png" />
     <None Include="ASCOMDriverTemplate.snk" />
-    <None Include="ClassDiagram1.cd" />
+    <None Include="ip9212_switch_hardware_diagram.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
