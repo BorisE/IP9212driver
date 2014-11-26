@@ -1,11 +1,14 @@
 ﻿Change log
 
-26.11.2014 2.0.2 (beta 2) 
-- switch to classical Thread instead of async/await (got strange non async results due to SynchContext)
+26.11.2014 2.0.3 (beta 3) 
 - introduced caching for input and output switches reading
 - improved caching for isconnected calls
 - tested semaphores under heavy loads
-- tons of bugs
+- tested on real IP device
+- tons of bugs curreted
+
+25.11.2014 2.0.2 (beta 2) 
+- switch to classical Thread instead of async/await (got strange non async results due to SynchContext)
 
 24.11.2014 2.0.1 (beta 1) 
 - at once first working release! (buggy but nevertheless)
