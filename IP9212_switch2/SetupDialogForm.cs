@@ -7,6 +7,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Reflection;
 using System.Globalization;
+using System.Threading;
+
 using System.Diagnostics;
 
 using ASCOM.Utilities;
@@ -21,6 +23,10 @@ namespace ASCOM.IP9212_v2
 
         public SetupDialogForm()
         {
+
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Switch.currentLang);
+            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(Switch.currentLang);            
+            
             InitializeComponent();
 
             // Initialise current values of user settings from the ASCOM Profile 
@@ -37,18 +43,28 @@ namespace ASCOM.IP9212_v2
             lblVersion.Text += Environment.NewLine + "File: "+ fileVersion;
             lblVersion.Text += Environment.NewLine + "Compile time: " + RetrieveLinkerTimestamp();
 
+            cmbLang.DataSource = new CultureInfo[]{
+                CultureInfo.GetCultureInfo("en-US"),
+                CultureInfo.GetCultureInfo("ru-RU")
+            };
+            cmbLang.DisplayMember = "NativeName";
+            cmbLang.ValueMember = "Name";
 
+            cmbLang.SelectedValue = Switch.currentLang;
 
         }
 
         private void SetupDialogForm_Load(object sender, EventArgs e)
         {
+           
             PopulateGrid();
         }
         
         private void cmdOK_Click(object sender, EventArgs e) // OK button event handler
         {
             Switch.traceState = chkTrace.Checked;
+            Switch.currentLang = cmbLang.SelectedValue.ToString();
+            //Switch.ConnectCheck_Cache_Timeout = 11111111111111;
 
             //Convert data from grid to settings vars
             SaveGrid();
@@ -138,7 +154,7 @@ namespace ASCOM.IP9212_v2
         {
             try
             {
-                System.Diagnostics.Process.Start("http://astromania.info/");
+                System.Diagnostics.Process.Start("http://www.aviosys.com/9212delux.html");
             }
             catch (System.ComponentModel.Win32Exception noBrowser)
             {

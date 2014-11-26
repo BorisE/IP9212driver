@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TestFrm));
             this.buttonChoose = new System.Windows.Forms.Button();
             this.buttonConnect = new System.Windows.Forms.Button();
             this.DriverName = new System.Windows.Forms.Label();
@@ -122,6 +123,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.cmbLang = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -132,93 +134,59 @@
             // 
             // buttonChoose
             // 
-            this.buttonChoose.Location = new System.Drawing.Point(309, 10);
+            resources.ApplyResources(this.buttonChoose, "buttonChoose");
             this.buttonChoose.Name = "buttonChoose";
-            this.buttonChoose.Size = new System.Drawing.Size(72, 23);
-            this.buttonChoose.TabIndex = 0;
-            this.buttonChoose.Text = "Choose";
             this.buttonChoose.UseVisualStyleBackColor = true;
             this.buttonChoose.Click += new System.EventHandler(this.buttonChoose_Click);
             // 
             // buttonConnect
             // 
-            this.buttonConnect.Location = new System.Drawing.Point(309, 39);
+            resources.ApplyResources(this.buttonConnect, "buttonConnect");
             this.buttonConnect.Name = "buttonConnect";
-            this.buttonConnect.Size = new System.Drawing.Size(72, 23);
-            this.buttonConnect.TabIndex = 1;
-            this.buttonConnect.Text = "Connect";
             this.buttonConnect.UseVisualStyleBackColor = true;
             this.buttonConnect.Click += new System.EventHandler(this.buttonConnect_Click);
             // 
             // DriverName
             // 
             this.DriverName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.DriverName.Location = new System.Drawing.Point(83, 13);
+            resources.ApplyResources(this.DriverName, "DriverName");
             this.DriverName.Name = "DriverName";
-            this.DriverName.Size = new System.Drawing.Size(291, 21);
-            this.DriverName.TabIndex = 2;
-            this.DriverName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(5, 17);
+            resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Driver Name";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 65);
+            resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Description";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 111);
+            resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 13);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "DriverInfo";
             // 
             // DriverVersion
             // 
             this.DriverVersion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.DriverVersion.Location = new System.Drawing.Point(83, 38);
+            resources.ApplyResources(this.DriverVersion, "DriverVersion");
             this.DriverVersion.Name = "DriverVersion";
-            this.DriverVersion.Size = new System.Drawing.Size(291, 21);
-            this.DriverVersion.TabIndex = 2;
-            this.DriverVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 42);
+            resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(70, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "DriverVersion";
             // 
             // DriverInfo
             // 
-            this.DriverInfo.Location = new System.Drawing.Point(83, 108);
-            this.DriverInfo.Multiline = true;
+            resources.ApplyResources(this.DriverInfo, "DriverInfo");
             this.DriverInfo.Name = "DriverInfo";
-            this.DriverInfo.Size = new System.Drawing.Size(291, 38);
-            this.DriverInfo.TabIndex = 4;
             // 
             // DriverDescription
             // 
-            this.DriverDescription.Location = new System.Drawing.Point(83, 62);
-            this.DriverDescription.Multiline = true;
+            resources.ApplyResources(this.DriverDescription, "DriverDescription");
             this.DriverDescription.Name = "DriverDescription";
-            this.DriverDescription.Size = new System.Drawing.Size(291, 40);
-            this.DriverDescription.TabIndex = 4;
             // 
             // groupBox1
             // 
@@ -230,12 +198,9 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.DriverVersion);
             this.groupBox1.Controls.Add(this.DriverName);
-            this.groupBox1.Location = new System.Drawing.Point(7, 72);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(385, 157);
-            this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Version";
             // 
             // groupBox2
             // 
@@ -297,447 +262,307 @@
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.txtNumberOfSwitches);
-            this.groupBox2.Location = new System.Drawing.Point(11, 236);
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(763, 271);
-            this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Switch";
             // 
             // txtInput8
             // 
-            this.txtInput8.Location = new System.Drawing.Point(408, 243);
+            resources.ApplyResources(this.txtInput8, "txtInput8");
             this.txtInput8.Name = "txtInput8";
-            this.txtInput8.Size = new System.Drawing.Size(30, 20);
-            this.txtInput8.TabIndex = 3;
             // 
             // txtInDesc8
             // 
-            this.txtInDesc8.Location = new System.Drawing.Point(570, 243);
+            resources.ApplyResources(this.txtInDesc8, "txtInDesc8");
             this.txtInDesc8.Name = "txtInDesc8";
-            this.txtInDesc8.Size = new System.Drawing.Size(180, 20);
-            this.txtInDesc8.TabIndex = 3;
             // 
             // txtInName8
             // 
-            this.txtInName8.Location = new System.Drawing.Point(444, 243);
+            resources.ApplyResources(this.txtInName8, "txtInName8");
             this.txtInName8.Name = "txtInName8";
-            this.txtInName8.Size = new System.Drawing.Size(120, 20);
-            this.txtInName8.TabIndex = 3;
             // 
             // txtOutName8
             // 
-            this.txtOutName8.Location = new System.Drawing.Point(69, 243);
+            resources.ApplyResources(this.txtOutName8, "txtOutName8");
             this.txtOutName8.Name = "txtOutName8";
-            this.txtOutName8.Size = new System.Drawing.Size(120, 20);
-            this.txtOutName8.TabIndex = 3;
             // 
             // txtOutDesc8
             // 
-            this.txtOutDesc8.Location = new System.Drawing.Point(195, 243);
+            resources.ApplyResources(this.txtOutDesc8, "txtOutDesc8");
             this.txtOutDesc8.Name = "txtOutDesc8";
-            this.txtOutDesc8.Size = new System.Drawing.Size(180, 20);
-            this.txtOutDesc8.TabIndex = 3;
             // 
             // txtOutput8
             // 
-            this.txtOutput8.Location = new System.Drawing.Point(33, 243);
+            resources.ApplyResources(this.txtOutput8, "txtOutput8");
             this.txtOutput8.Name = "txtOutput8";
-            this.txtOutput8.Size = new System.Drawing.Size(30, 20);
-            this.txtOutput8.TabIndex = 3;
             // 
             // txtInput7
             // 
-            this.txtInput7.Location = new System.Drawing.Point(408, 217);
+            resources.ApplyResources(this.txtInput7, "txtInput7");
             this.txtInput7.Name = "txtInput7";
-            this.txtInput7.Size = new System.Drawing.Size(30, 20);
-            this.txtInput7.TabIndex = 3;
             // 
             // txtInDesc7
             // 
-            this.txtInDesc7.Location = new System.Drawing.Point(570, 217);
+            resources.ApplyResources(this.txtInDesc7, "txtInDesc7");
             this.txtInDesc7.Name = "txtInDesc7";
-            this.txtInDesc7.Size = new System.Drawing.Size(180, 20);
-            this.txtInDesc7.TabIndex = 3;
             // 
             // txtInName7
             // 
-            this.txtInName7.Location = new System.Drawing.Point(444, 217);
+            resources.ApplyResources(this.txtInName7, "txtInName7");
             this.txtInName7.Name = "txtInName7";
-            this.txtInName7.Size = new System.Drawing.Size(120, 20);
-            this.txtInName7.TabIndex = 3;
             // 
             // txtOutName7
             // 
-            this.txtOutName7.Location = new System.Drawing.Point(69, 217);
+            resources.ApplyResources(this.txtOutName7, "txtOutName7");
             this.txtOutName7.Name = "txtOutName7";
-            this.txtOutName7.Size = new System.Drawing.Size(120, 20);
-            this.txtOutName7.TabIndex = 3;
             // 
             // txtOutDesc7
             // 
-            this.txtOutDesc7.Location = new System.Drawing.Point(195, 217);
+            resources.ApplyResources(this.txtOutDesc7, "txtOutDesc7");
             this.txtOutDesc7.Name = "txtOutDesc7";
-            this.txtOutDesc7.Size = new System.Drawing.Size(180, 20);
-            this.txtOutDesc7.TabIndex = 3;
             // 
             // txtOutput7
             // 
-            this.txtOutput7.Location = new System.Drawing.Point(33, 217);
+            resources.ApplyResources(this.txtOutput7, "txtOutput7");
             this.txtOutput7.Name = "txtOutput7";
-            this.txtOutput7.Size = new System.Drawing.Size(30, 20);
-            this.txtOutput7.TabIndex = 3;
             // 
             // txtInput6
             // 
-            this.txtInput6.Location = new System.Drawing.Point(408, 191);
+            resources.ApplyResources(this.txtInput6, "txtInput6");
             this.txtInput6.Name = "txtInput6";
-            this.txtInput6.Size = new System.Drawing.Size(30, 20);
-            this.txtInput6.TabIndex = 3;
             // 
             // txtInDesc6
             // 
-            this.txtInDesc6.Location = new System.Drawing.Point(570, 191);
+            resources.ApplyResources(this.txtInDesc6, "txtInDesc6");
             this.txtInDesc6.Name = "txtInDesc6";
-            this.txtInDesc6.Size = new System.Drawing.Size(180, 20);
-            this.txtInDesc6.TabIndex = 3;
             // 
             // txtInName6
             // 
-            this.txtInName6.Location = new System.Drawing.Point(444, 191);
+            resources.ApplyResources(this.txtInName6, "txtInName6");
             this.txtInName6.Name = "txtInName6";
-            this.txtInName6.Size = new System.Drawing.Size(120, 20);
-            this.txtInName6.TabIndex = 3;
             // 
             // txtOutName6
             // 
-            this.txtOutName6.Location = new System.Drawing.Point(69, 191);
+            resources.ApplyResources(this.txtOutName6, "txtOutName6");
             this.txtOutName6.Name = "txtOutName6";
-            this.txtOutName6.Size = new System.Drawing.Size(120, 20);
-            this.txtOutName6.TabIndex = 3;
             // 
             // txtOutDesc6
             // 
-            this.txtOutDesc6.Location = new System.Drawing.Point(195, 191);
+            resources.ApplyResources(this.txtOutDesc6, "txtOutDesc6");
             this.txtOutDesc6.Name = "txtOutDesc6";
-            this.txtOutDesc6.Size = new System.Drawing.Size(180, 20);
-            this.txtOutDesc6.TabIndex = 3;
             // 
             // txtOutput6
             // 
-            this.txtOutput6.Location = new System.Drawing.Point(33, 191);
+            resources.ApplyResources(this.txtOutput6, "txtOutput6");
             this.txtOutput6.Name = "txtOutput6";
-            this.txtOutput6.Size = new System.Drawing.Size(30, 20);
-            this.txtOutput6.TabIndex = 3;
             // 
             // txtInput5
             // 
-            this.txtInput5.Location = new System.Drawing.Point(408, 165);
+            resources.ApplyResources(this.txtInput5, "txtInput5");
             this.txtInput5.Name = "txtInput5";
-            this.txtInput5.Size = new System.Drawing.Size(30, 20);
-            this.txtInput5.TabIndex = 3;
             // 
             // txtInDesc5
             // 
-            this.txtInDesc5.Location = new System.Drawing.Point(570, 165);
+            resources.ApplyResources(this.txtInDesc5, "txtInDesc5");
             this.txtInDesc5.Name = "txtInDesc5";
-            this.txtInDesc5.Size = new System.Drawing.Size(180, 20);
-            this.txtInDesc5.TabIndex = 3;
             // 
             // txtInName5
             // 
-            this.txtInName5.Location = new System.Drawing.Point(444, 165);
+            resources.ApplyResources(this.txtInName5, "txtInName5");
             this.txtInName5.Name = "txtInName5";
-            this.txtInName5.Size = new System.Drawing.Size(120, 20);
-            this.txtInName5.TabIndex = 3;
             // 
             // txtOutName5
             // 
-            this.txtOutName5.Location = new System.Drawing.Point(69, 165);
+            resources.ApplyResources(this.txtOutName5, "txtOutName5");
             this.txtOutName5.Name = "txtOutName5";
-            this.txtOutName5.Size = new System.Drawing.Size(120, 20);
-            this.txtOutName5.TabIndex = 3;
             // 
             // txtOutDesc5
             // 
-            this.txtOutDesc5.Location = new System.Drawing.Point(195, 165);
+            resources.ApplyResources(this.txtOutDesc5, "txtOutDesc5");
             this.txtOutDesc5.Name = "txtOutDesc5";
-            this.txtOutDesc5.Size = new System.Drawing.Size(180, 20);
-            this.txtOutDesc5.TabIndex = 3;
             // 
             // txtOutput5
             // 
-            this.txtOutput5.Location = new System.Drawing.Point(33, 165);
+            resources.ApplyResources(this.txtOutput5, "txtOutput5");
             this.txtOutput5.Name = "txtOutput5";
-            this.txtOutput5.Size = new System.Drawing.Size(30, 20);
-            this.txtOutput5.TabIndex = 3;
             // 
             // txtInput4
             // 
-            this.txtInput4.Location = new System.Drawing.Point(408, 139);
+            resources.ApplyResources(this.txtInput4, "txtInput4");
             this.txtInput4.Name = "txtInput4";
-            this.txtInput4.Size = new System.Drawing.Size(30, 20);
-            this.txtInput4.TabIndex = 3;
             // 
             // txtInDesc4
             // 
-            this.txtInDesc4.Location = new System.Drawing.Point(570, 139);
+            resources.ApplyResources(this.txtInDesc4, "txtInDesc4");
             this.txtInDesc4.Name = "txtInDesc4";
-            this.txtInDesc4.Size = new System.Drawing.Size(180, 20);
-            this.txtInDesc4.TabIndex = 3;
             // 
             // txtInName4
             // 
-            this.txtInName4.Location = new System.Drawing.Point(444, 139);
+            resources.ApplyResources(this.txtInName4, "txtInName4");
             this.txtInName4.Name = "txtInName4";
-            this.txtInName4.Size = new System.Drawing.Size(120, 20);
-            this.txtInName4.TabIndex = 3;
             // 
             // txtOutName4
             // 
-            this.txtOutName4.Location = new System.Drawing.Point(69, 139);
+            resources.ApplyResources(this.txtOutName4, "txtOutName4");
             this.txtOutName4.Name = "txtOutName4";
-            this.txtOutName4.Size = new System.Drawing.Size(120, 20);
-            this.txtOutName4.TabIndex = 3;
             // 
             // txtOutDesc4
             // 
-            this.txtOutDesc4.Location = new System.Drawing.Point(195, 139);
+            resources.ApplyResources(this.txtOutDesc4, "txtOutDesc4");
             this.txtOutDesc4.Name = "txtOutDesc4";
-            this.txtOutDesc4.Size = new System.Drawing.Size(180, 20);
-            this.txtOutDesc4.TabIndex = 3;
             // 
             // txtOutput4
             // 
-            this.txtOutput4.Location = new System.Drawing.Point(33, 139);
+            resources.ApplyResources(this.txtOutput4, "txtOutput4");
             this.txtOutput4.Name = "txtOutput4";
-            this.txtOutput4.Size = new System.Drawing.Size(30, 20);
-            this.txtOutput4.TabIndex = 3;
             // 
             // txtInput3
             // 
-            this.txtInput3.Location = new System.Drawing.Point(408, 113);
+            resources.ApplyResources(this.txtInput3, "txtInput3");
             this.txtInput3.Name = "txtInput3";
-            this.txtInput3.Size = new System.Drawing.Size(30, 20);
-            this.txtInput3.TabIndex = 3;
             // 
             // txtInDesc3
             // 
-            this.txtInDesc3.Location = new System.Drawing.Point(570, 113);
+            resources.ApplyResources(this.txtInDesc3, "txtInDesc3");
             this.txtInDesc3.Name = "txtInDesc3";
-            this.txtInDesc3.Size = new System.Drawing.Size(180, 20);
-            this.txtInDesc3.TabIndex = 3;
             // 
             // txtInName3
             // 
-            this.txtInName3.Location = new System.Drawing.Point(444, 113);
+            resources.ApplyResources(this.txtInName3, "txtInName3");
             this.txtInName3.Name = "txtInName3";
-            this.txtInName3.Size = new System.Drawing.Size(120, 20);
-            this.txtInName3.TabIndex = 3;
             // 
             // txtOutName3
             // 
-            this.txtOutName3.Location = new System.Drawing.Point(69, 113);
+            resources.ApplyResources(this.txtOutName3, "txtOutName3");
             this.txtOutName3.Name = "txtOutName3";
-            this.txtOutName3.Size = new System.Drawing.Size(120, 20);
-            this.txtOutName3.TabIndex = 3;
             // 
             // txtOutDesc3
             // 
-            this.txtOutDesc3.Location = new System.Drawing.Point(195, 113);
+            resources.ApplyResources(this.txtOutDesc3, "txtOutDesc3");
             this.txtOutDesc3.Name = "txtOutDesc3";
-            this.txtOutDesc3.Size = new System.Drawing.Size(180, 20);
-            this.txtOutDesc3.TabIndex = 3;
             // 
             // txtOutput3
             // 
-            this.txtOutput3.Location = new System.Drawing.Point(33, 113);
+            resources.ApplyResources(this.txtOutput3, "txtOutput3");
             this.txtOutput3.Name = "txtOutput3";
-            this.txtOutput3.Size = new System.Drawing.Size(30, 20);
-            this.txtOutput3.TabIndex = 3;
             // 
             // txtInput2
             // 
-            this.txtInput2.Location = new System.Drawing.Point(408, 87);
+            resources.ApplyResources(this.txtInput2, "txtInput2");
             this.txtInput2.Name = "txtInput2";
-            this.txtInput2.Size = new System.Drawing.Size(30, 20);
-            this.txtInput2.TabIndex = 3;
             // 
             // txtInDesc2
             // 
-            this.txtInDesc2.Location = new System.Drawing.Point(570, 87);
+            resources.ApplyResources(this.txtInDesc2, "txtInDesc2");
             this.txtInDesc2.Name = "txtInDesc2";
-            this.txtInDesc2.Size = new System.Drawing.Size(180, 20);
-            this.txtInDesc2.TabIndex = 3;
             // 
             // txtInName2
             // 
-            this.txtInName2.Location = new System.Drawing.Point(444, 87);
+            resources.ApplyResources(this.txtInName2, "txtInName2");
             this.txtInName2.Name = "txtInName2";
-            this.txtInName2.Size = new System.Drawing.Size(120, 20);
-            this.txtInName2.TabIndex = 3;
             // 
             // txtOutName2
             // 
-            this.txtOutName2.Location = new System.Drawing.Point(69, 87);
+            resources.ApplyResources(this.txtOutName2, "txtOutName2");
             this.txtOutName2.Name = "txtOutName2";
-            this.txtOutName2.Size = new System.Drawing.Size(120, 20);
-            this.txtOutName2.TabIndex = 3;
             // 
             // txtOutDesc2
             // 
-            this.txtOutDesc2.Location = new System.Drawing.Point(195, 87);
+            resources.ApplyResources(this.txtOutDesc2, "txtOutDesc2");
             this.txtOutDesc2.Name = "txtOutDesc2";
-            this.txtOutDesc2.Size = new System.Drawing.Size(180, 20);
-            this.txtOutDesc2.TabIndex = 3;
             // 
             // txtOutput2
             // 
-            this.txtOutput2.Location = new System.Drawing.Point(33, 87);
+            resources.ApplyResources(this.txtOutput2, "txtOutput2");
             this.txtOutput2.Name = "txtOutput2";
-            this.txtOutput2.Size = new System.Drawing.Size(30, 20);
-            this.txtOutput2.TabIndex = 3;
             // 
             // txtInput1
             // 
-            this.txtInput1.Location = new System.Drawing.Point(408, 61);
+            resources.ApplyResources(this.txtInput1, "txtInput1");
             this.txtInput1.Name = "txtInput1";
-            this.txtInput1.Size = new System.Drawing.Size(30, 20);
-            this.txtInput1.TabIndex = 3;
             // 
             // txtInDesc1
             // 
-            this.txtInDesc1.Location = new System.Drawing.Point(570, 61);
+            resources.ApplyResources(this.txtInDesc1, "txtInDesc1");
             this.txtInDesc1.Name = "txtInDesc1";
-            this.txtInDesc1.Size = new System.Drawing.Size(180, 20);
-            this.txtInDesc1.TabIndex = 3;
             // 
             // txtInName1
             // 
-            this.txtInName1.Location = new System.Drawing.Point(444, 61);
+            resources.ApplyResources(this.txtInName1, "txtInName1");
             this.txtInName1.Name = "txtInName1";
-            this.txtInName1.Size = new System.Drawing.Size(120, 20);
-            this.txtInName1.TabIndex = 3;
             // 
             // txtOutName1
             // 
-            this.txtOutName1.Location = new System.Drawing.Point(69, 61);
+            resources.ApplyResources(this.txtOutName1, "txtOutName1");
             this.txtOutName1.Name = "txtOutName1";
-            this.txtOutName1.Size = new System.Drawing.Size(120, 20);
-            this.txtOutName1.TabIndex = 3;
             // 
             // txtOutDesc1
             // 
-            this.txtOutDesc1.Location = new System.Drawing.Point(195, 61);
+            resources.ApplyResources(this.txtOutDesc1, "txtOutDesc1");
             this.txtOutDesc1.Name = "txtOutDesc1";
-            this.txtOutDesc1.Size = new System.Drawing.Size(180, 20);
-            this.txtOutDesc1.TabIndex = 3;
             // 
             // txtOutput1
             // 
-            this.txtOutput1.Location = new System.Drawing.Point(33, 61);
+            resources.ApplyResources(this.txtOutput1, "txtOutput1");
             this.txtOutput1.Name = "txtOutput1";
-            this.txtOutput1.Size = new System.Drawing.Size(30, 20);
-            this.txtOutput1.TabIndex = 3;
             // 
             // label13
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(11, 246);
+            resources.ApplyResources(this.label13, "label13");
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(13, 13);
-            this.label13.TabIndex = 2;
-            this.label13.Text = "8";
             // 
             // label12
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(11, 220);
+            resources.ApplyResources(this.label12, "label12");
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(13, 13);
-            this.label12.TabIndex = 2;
-            this.label12.Text = "7";
             // 
             // label11
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(11, 194);
+            resources.ApplyResources(this.label11, "label11");
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(13, 13);
-            this.label11.TabIndex = 2;
-            this.label11.Text = "6";
             // 
             // label10
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(11, 168);
+            resources.ApplyResources(this.label10, "label10");
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(13, 13);
-            this.label10.TabIndex = 2;
-            this.label10.Text = "5";
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(11, 142);
+            resources.ApplyResources(this.label9, "label9");
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(13, 13);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "4";
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(11, 116);
+            resources.ApplyResources(this.label8, "label8");
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(13, 13);
-            this.label8.TabIndex = 2;
-            this.label8.Text = "3";
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(11, 90);
+            resources.ApplyResources(this.label7, "label7");
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(13, 13);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "2";
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(11, 64);
+            resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(13, 13);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "1";
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 23);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Number";
             // 
             // txtNumberOfSwitches
             // 
-            this.txtNumberOfSwitches.Location = new System.Drawing.Point(61, 20);
+            resources.ApplyResources(this.txtNumberOfSwitches, "txtNumberOfSwitches");
             this.txtNumberOfSwitches.Name = "txtNumberOfSwitches";
-            this.txtNumberOfSwitches.Size = new System.Drawing.Size(52, 20);
-            this.txtNumberOfSwitches.TabIndex = 0;
             // 
             // labelDriverId
             // 
             this.labelDriverId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.labelDriverId.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.TestForm.Properties.Settings.Default, "DriverId", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.labelDriverId.Location = new System.Drawing.Point(12, 40);
+            resources.ApplyResources(this.labelDriverId, "labelDriverId");
             this.labelDriverId.Name = "labelDriverId";
-            this.labelDriverId.Size = new System.Drawing.Size(291, 21);
-            this.labelDriverId.TabIndex = 2;
             this.labelDriverId.Text = global::ASCOM.TestForm.Properties.Settings.Default.DriverId;
-            this.labelDriverId.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // groupBox3
             // 
@@ -749,98 +574,63 @@
             this.groupBox3.Controls.Add(this.chkOut3);
             this.groupBox3.Controls.Add(this.chkOut2);
             this.groupBox3.Controls.Add(this.chkOut1);
-            this.groupBox3.Location = new System.Drawing.Point(412, 14);
+            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(97, 214);
-            this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Output";
             // 
             // chkOut8
             // 
-            this.chkOut8.AutoSize = true;
-            this.chkOut8.Location = new System.Drawing.Point(7, 188);
+            resources.ApplyResources(this.chkOut8, "chkOut8");
             this.chkOut8.Name = "chkOut8";
-            this.chkOut8.Size = new System.Drawing.Size(80, 17);
-            this.chkOut8.TabIndex = 0;
-            this.chkOut8.Text = "checkBox1";
             this.chkOut8.UseVisualStyleBackColor = true;
             this.chkOut8.Click += new System.EventHandler(this.chkOut_Click);
             // 
             // chkOut7
             // 
-            this.chkOut7.AutoSize = true;
-            this.chkOut7.Location = new System.Drawing.Point(7, 165);
+            resources.ApplyResources(this.chkOut7, "chkOut7");
             this.chkOut7.Name = "chkOut7";
-            this.chkOut7.Size = new System.Drawing.Size(80, 17);
-            this.chkOut7.TabIndex = 0;
-            this.chkOut7.Text = "checkBox1";
             this.chkOut7.UseVisualStyleBackColor = true;
             this.chkOut7.Click += new System.EventHandler(this.chkOut_Click);
             // 
             // chkOut6
             // 
-            this.chkOut6.AutoSize = true;
-            this.chkOut6.Location = new System.Drawing.Point(7, 142);
+            resources.ApplyResources(this.chkOut6, "chkOut6");
             this.chkOut6.Name = "chkOut6";
-            this.chkOut6.Size = new System.Drawing.Size(80, 17);
-            this.chkOut6.TabIndex = 0;
-            this.chkOut6.Text = "checkBox1";
             this.chkOut6.UseVisualStyleBackColor = true;
             this.chkOut6.Click += new System.EventHandler(this.chkOut_Click);
             // 
             // chkOut5
             // 
-            this.chkOut5.AutoSize = true;
-            this.chkOut5.Location = new System.Drawing.Point(7, 119);
+            resources.ApplyResources(this.chkOut5, "chkOut5");
             this.chkOut5.Name = "chkOut5";
-            this.chkOut5.Size = new System.Drawing.Size(80, 17);
-            this.chkOut5.TabIndex = 0;
-            this.chkOut5.Text = "checkBox1";
             this.chkOut5.UseVisualStyleBackColor = true;
             this.chkOut5.Click += new System.EventHandler(this.chkOut_Click);
             // 
             // chkOut4
             // 
-            this.chkOut4.AutoSize = true;
-            this.chkOut4.Location = new System.Drawing.Point(7, 88);
+            resources.ApplyResources(this.chkOut4, "chkOut4");
             this.chkOut4.Name = "chkOut4";
-            this.chkOut4.Size = new System.Drawing.Size(80, 17);
-            this.chkOut4.TabIndex = 0;
-            this.chkOut4.Text = "checkBox1";
             this.chkOut4.UseVisualStyleBackColor = true;
             this.chkOut4.Click += new System.EventHandler(this.chkOut_Click);
             // 
             // chkOut3
             // 
-            this.chkOut3.AutoSize = true;
-            this.chkOut3.Location = new System.Drawing.Point(7, 65);
+            resources.ApplyResources(this.chkOut3, "chkOut3");
             this.chkOut3.Name = "chkOut3";
-            this.chkOut3.Size = new System.Drawing.Size(80, 17);
-            this.chkOut3.TabIndex = 0;
-            this.chkOut3.Text = "checkBox1";
             this.chkOut3.UseVisualStyleBackColor = true;
             this.chkOut3.Click += new System.EventHandler(this.chkOut_Click);
             // 
             // chkOut2
             // 
-            this.chkOut2.AutoSize = true;
-            this.chkOut2.Location = new System.Drawing.Point(7, 42);
+            resources.ApplyResources(this.chkOut2, "chkOut2");
             this.chkOut2.Name = "chkOut2";
-            this.chkOut2.Size = new System.Drawing.Size(80, 17);
-            this.chkOut2.TabIndex = 0;
-            this.chkOut2.Text = "checkBox1";
             this.chkOut2.UseVisualStyleBackColor = true;
             this.chkOut2.Click += new System.EventHandler(this.chkOut_Click);
             // 
             // chkOut1
             // 
-            this.chkOut1.AutoSize = true;
-            this.chkOut1.Location = new System.Drawing.Point(7, 19);
+            resources.ApplyResources(this.chkOut1, "chkOut1");
             this.chkOut1.Name = "chkOut1";
-            this.chkOut1.Size = new System.Drawing.Size(80, 17);
-            this.chkOut1.TabIndex = 0;
-            this.chkOut1.Text = "checkBox1";
             this.chkOut1.UseVisualStyleBackColor = true;
             this.chkOut1.Click += new System.EventHandler(this.chkOut_Click);
             // 
@@ -854,99 +644,56 @@
             this.groupBox4.Controls.Add(this.chkIn3);
             this.groupBox4.Controls.Add(this.chkIn2);
             this.groupBox4.Controls.Add(this.chkIn1);
-            this.groupBox4.Location = new System.Drawing.Point(515, 14);
+            resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(97, 214);
-            this.groupBox4.TabIndex = 7;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Input";
             // 
             // chkIn8
             // 
-            this.chkIn8.AutoSize = true;
-            this.chkIn8.Enabled = false;
-            this.chkIn8.Location = new System.Drawing.Point(7, 188);
+            resources.ApplyResources(this.chkIn8, "chkIn8");
             this.chkIn8.Name = "chkIn8";
-            this.chkIn8.Size = new System.Drawing.Size(80, 17);
-            this.chkIn8.TabIndex = 0;
-            this.chkIn8.Text = "checkBox1";
             this.chkIn8.UseVisualStyleBackColor = true;
             // 
             // chkIn7
             // 
-            this.chkIn7.AutoSize = true;
-            this.chkIn7.Enabled = false;
-            this.chkIn7.Location = new System.Drawing.Point(7, 165);
+            resources.ApplyResources(this.chkIn7, "chkIn7");
             this.chkIn7.Name = "chkIn7";
-            this.chkIn7.Size = new System.Drawing.Size(80, 17);
-            this.chkIn7.TabIndex = 0;
-            this.chkIn7.Text = "checkBox1";
             this.chkIn7.UseVisualStyleBackColor = true;
             // 
             // chkIn6
             // 
-            this.chkIn6.AutoSize = true;
-            this.chkIn6.Enabled = false;
-            this.chkIn6.Location = new System.Drawing.Point(7, 142);
+            resources.ApplyResources(this.chkIn6, "chkIn6");
             this.chkIn6.Name = "chkIn6";
-            this.chkIn6.Size = new System.Drawing.Size(80, 17);
-            this.chkIn6.TabIndex = 0;
-            this.chkIn6.Text = "checkBox1";
             this.chkIn6.UseVisualStyleBackColor = true;
             // 
             // chkIn5
             // 
-            this.chkIn5.AutoSize = true;
-            this.chkIn5.Enabled = false;
-            this.chkIn5.Location = new System.Drawing.Point(7, 119);
+            resources.ApplyResources(this.chkIn5, "chkIn5");
             this.chkIn5.Name = "chkIn5";
-            this.chkIn5.Size = new System.Drawing.Size(80, 17);
-            this.chkIn5.TabIndex = 0;
-            this.chkIn5.Text = "checkBox1";
             this.chkIn5.UseVisualStyleBackColor = true;
             // 
             // chkIn4
             // 
-            this.chkIn4.AutoSize = true;
-            this.chkIn4.Enabled = false;
-            this.chkIn4.Location = new System.Drawing.Point(7, 88);
+            resources.ApplyResources(this.chkIn4, "chkIn4");
             this.chkIn4.Name = "chkIn4";
-            this.chkIn4.Size = new System.Drawing.Size(80, 17);
-            this.chkIn4.TabIndex = 0;
-            this.chkIn4.Text = "checkBox1";
             this.chkIn4.UseVisualStyleBackColor = true;
             // 
             // chkIn3
             // 
-            this.chkIn3.AutoSize = true;
-            this.chkIn3.Enabled = false;
-            this.chkIn3.Location = new System.Drawing.Point(7, 65);
+            resources.ApplyResources(this.chkIn3, "chkIn3");
             this.chkIn3.Name = "chkIn3";
-            this.chkIn3.Size = new System.Drawing.Size(80, 17);
-            this.chkIn3.TabIndex = 0;
-            this.chkIn3.Text = "checkBox1";
             this.chkIn3.UseVisualStyleBackColor = true;
             // 
             // chkIn2
             // 
-            this.chkIn2.AutoSize = true;
-            this.chkIn2.Enabled = false;
-            this.chkIn2.Location = new System.Drawing.Point(7, 42);
+            resources.ApplyResources(this.chkIn2, "chkIn2");
             this.chkIn2.Name = "chkIn2";
-            this.chkIn2.Size = new System.Drawing.Size(80, 17);
-            this.chkIn2.TabIndex = 0;
-            this.chkIn2.Text = "checkBox1";
             this.chkIn2.UseVisualStyleBackColor = true;
             // 
             // chkIn1
             // 
-            this.chkIn1.AutoSize = true;
-            this.chkIn1.Enabled = false;
-            this.chkIn1.Location = new System.Drawing.Point(7, 19);
+            resources.ApplyResources(this.chkIn1, "chkIn1");
             this.chkIn1.Name = "chkIn1";
-            this.chkIn1.Size = new System.Drawing.Size(80, 17);
-            this.chkIn1.TabIndex = 0;
-            this.chkIn1.Text = "checkBox1";
             this.chkIn1.UseVisualStyleBackColor = true;
             // 
             // timer1
@@ -959,30 +706,31 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 512);
+            resources.ApplyResources(this.statusStrip1, "statusStrip1");
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(780, 22);
-            this.statusStrip1.TabIndex = 8;
-            this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
+            resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(695, 30);
+            resources.ApplyResources(this.numericUpDown1, "numericUpDown1");
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(56, 20);
-            this.numericUpDown1.TabIndex = 9;
             this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
+            // cmbLang
+            // 
+            this.cmbLang.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbLang, "cmbLang");
+            this.cmbLang.Name = "cmbLang";
             // 
             // TestFrm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(780, 534);
+            this.Controls.Add(this.cmbLang);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox4);
@@ -993,7 +741,6 @@
             this.Controls.Add(this.buttonConnect);
             this.Controls.Add(this.buttonChoose);
             this.Name = "TestFrm";
-            this.Text = "Switchdriver Test";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
@@ -1107,6 +854,7 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.ComboBox cmbLang;
     }
 }
 

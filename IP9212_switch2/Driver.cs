@@ -15,9 +15,10 @@
 // Date			Who	Vers	Description
 // -----------	---	-----	-------------------------------------------------------
 // 25-10-2014	XXX 2.0.0a	Initial created from ASCOM driver template. Not working yet
-// 24-11-2014	XXX 2.0.1	Beta 1. Working
+// 24-11-2014	XXX 2.0.1	Beta 1. First working version 
 // 25-11-2014	XXX 2.0.2	Beta 2. Change behaviour for NC contacts (ports 1 - 4). Now true means CLOSED contact, false - OPENED contact (earlier for ports 1..4: true - OPENED, false - CLOSED). Switched to Threads
 // 26-11-2014	XXX 2.0.3	Beta 3. Caching input/output switches data
+// 26-11-2014	XXX 2.0.4	Beta 4. Localization
 // --------------------------------------------------------------------------------
 //
 #define Switch
@@ -97,6 +98,22 @@ namespace ASCOM.IP9212_v2
             public bool? Val = null;
         }
         public static List<switchDataClass> SwitchData = new List<switchDataClass>();
+
+        public static string currentLang;
+        internal static string currentLocalizationProfileName = "Current language";
+        internal static string currentLangDefault="ru-RU";
+
+        public static int ConnectCheck_Cache_Timeout;
+        internal static string ConnectCheck_Cache_Timeout_ProfileName="ConnectCheck_Cache_Timeout";
+        internal static int ConnectCheck_Cache_Timeout_def=20;
+
+        public static int OutputRead_Cache_Timeout;
+        internal static string OutputRead_Cache_Timeout_ProfileName="OutputRead_Cache_Timeout";
+        internal static int OutputRead_Cache_Timeout_def=5;
+
+        public static int InputRead_Cache_Timeout;
+        internal static string InputRead_Cache_Timeout_ProfileName="InputRead_Cache_Timeout";
+        internal static int InputRead_Cache_Timeout_def=5;
 
         #endregion Settings variables
 
@@ -822,6 +839,24 @@ namespace ASCOM.IP9212_v2
                 }
 
 
+                //Language
+                try
+                {
+                    currentLang = p.GetValue(driverID, currentLocalizationProfileName, string.Empty, currentLangDefault);
+                }
+                catch (Exception e)
+                {
+                    currentLang = currentLangDefault;
+                    tl.LogMessage("readSettings", "Wrong input string for [currentLang]: [" + e.Message + "]");
+                }
+
+
+                //Cache settings
+                //p.WriteValue(driverID, ConnectCheck_Cache_Timeout_ProfileName, ConnectCheck_Cache_Timeout.ToString());
+                //p.WriteValue(driverID, OutputRead_Cache_Timeout_ProfileName, OutputRead_Cache_Timeout.ToString());
+                //p.WriteValue(driverID, InputRead_Cache_Timeout_ProfileName, InputRead_Cache_Timeout.ToString());
+
+
                 //Switch data
                 for (int i = 0; i < numSwitch/2; i++)
                 {
@@ -895,6 +930,14 @@ namespace ASCOM.IP9212_v2
 
                 //Trace value
                 p.WriteValue(driverID, traceStateProfileName, traceState.ToString());
+
+                //Language
+                p.WriteValue(driverID, currentLocalizationProfileName, currentLang);
+
+                //Cache settings
+                p.WriteValue(driverID, ConnectCheck_Cache_Timeout_ProfileName, ConnectCheck_Cache_Timeout.ToString());
+                p.WriteValue(driverID, OutputRead_Cache_Timeout_ProfileName, OutputRead_Cache_Timeout.ToString());
+                p.WriteValue(driverID, InputRead_Cache_Timeout_ProfileName, InputRead_Cache_Timeout.ToString());
 
                 //Switch data
                 for (int i = 0; i < numSwitch/2; i++)

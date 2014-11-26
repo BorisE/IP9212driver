@@ -1,5 +1,8 @@
 ﻿Change log
 
+26.11.2014 2.0.4 (beta 4) 
+- added localization for setup dialog (russian language)
+
 26.11.2014 2.0.3 (beta 3) 
 - introduced caching for input and output switches reading
 - improved caching for isconnected calls

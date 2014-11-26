@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
 
+using System.Globalization;
+using System.Threading;
+
+
 namespace ASCOM.TestForm
 {
     public partial class TestFrm : Form
@@ -18,6 +22,14 @@ namespace ASCOM.TestForm
         private void Form1_Load(object sender, EventArgs e)
         {
             numericUpDown1.Value = timer1.Interval / 100;
+
+            cmbLang.DataSource = new CultureInfo[]{
+                CultureInfo.GetCultureInfo("en-US"),
+                CultureInfo.GetCultureInfo("ru-RU")
+            };
+            cmbLang.DisplayMember = "NativeName";
+            cmbLang.ValueMember = "Name";
+
         }
         
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
