@@ -28,20 +28,15 @@ namespace ASCOM.IP9212_v2
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetupDialogForm));
             this.cmdOK = new System.Windows.Forms.Button();
             this.cmdCancel = new System.Windows.Forms.Button();
             this.picASCOM = new System.Windows.Forms.PictureBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.cmbLang = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.chkTrace = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -52,20 +47,24 @@ namespace ASCOM.IP9212_v2
             this.SwitchName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SwitchDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.ipaddr = new System.Windows.Forms.TextBox();
-            this.login = new System.Windows.Forms.TextBox();
-            this.pass = new System.Windows.Forms.TextBox();
-            this.port = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.dataGridInputSwitch = new System.Windows.Forms.DataGridView();
             this.InputSwitchId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.InputSwitchName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.InputSwitchDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.myToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.myToolTip = new System.Windows.Forms.ToolTip();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.lblVersion = new System.Windows.Forms.Label();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.cmbLang = new System.Windows.Forms.ComboBox();
+            this.txtCacheRead = new System.Windows.Forms.TextBox();
+            this.txtCacheConnect = new System.Windows.Forms.TextBox();
+            this.chkTrace = new System.Windows.Forms.CheckBox();
+            this.ipaddr = new System.Windows.Forms.TextBox();
+            this.login = new System.Windows.Forms.TextBox();
+            this.pass = new System.Windows.Forms.TextBox();
+            this.port = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picASCOM)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -109,21 +108,12 @@ namespace ASCOM.IP9212_v2
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.label1);
-            this.groupBox3.Controls.Add(this.textBox2);
-            this.groupBox3.Controls.Add(this.textBox1);
+            this.groupBox3.Controls.Add(this.txtCacheRead);
+            this.groupBox3.Controls.Add(this.txtCacheConnect);
             this.groupBox3.Controls.Add(this.chkTrace);
             resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
-            // 
-            // cmbLang
-            // 
-            this.cmbLang.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212.Properties.Settings.Default, "Language", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cmbLang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbLang.FormattingEnabled = true;
-            resources.ApplyResources(this.cmbLang, "cmbLang");
-            this.cmbLang.Name = "cmbLang";
-            this.cmbLang.Text = global::ASCOM.IP9212.Properties.Settings.Default.Language;
             // 
             // label8
             // 
@@ -144,31 +134,6 @@ namespace ASCOM.IP9212_v2
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            // 
-            // textBox2
-            // 
-            this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212.Properties.Settings.Default, "CheckCacheTimeout", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            resources.ApplyResources(this.textBox2, "textBox2");
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Text = global::ASCOM.IP9212.Properties.Settings.Default.CheckCacheTimeout;
-            this.myToolTip.SetToolTip(this.textBox2, resources.GetString("textBox2.ToolTip"));
-            // 
-            // textBox1
-            // 
-            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212.Properties.Settings.Default, "CheckCacheTimeout", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            resources.ApplyResources(this.textBox1, "textBox1");
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Text = global::ASCOM.IP9212.Properties.Settings.Default.CheckCacheTimeout;
-            this.myToolTip.SetToolTip(this.textBox1, resources.GetString("textBox1.ToolTip"));
-            // 
-            // chkTrace
-            // 
-            resources.ApplyResources(this.chkTrace, "chkTrace");
-            this.chkTrace.Checked = global::ASCOM.IP9212.Properties.Settings.Default.trace;
-            this.chkTrace.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkTrace.Name = "chkTrace";
-            this.myToolTip.SetToolTip(this.chkTrace, resources.GetString("chkTrace.ToolTip"));
-            this.chkTrace.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -246,33 +211,6 @@ namespace ASCOM.IP9212_v2
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
-            // ipaddr
-            // 
-            resources.ApplyResources(this.ipaddr, "ipaddr");
-            this.ipaddr.Name = "ipaddr";
-            this.ipaddr.Text = global::ASCOM.IP9212.Properties.Settings.Default.ipaddr;
-            this.myToolTip.SetToolTip(this.ipaddr, resources.GetString("ipaddr.ToolTip"));
-            // 
-            // login
-            // 
-            resources.ApplyResources(this.login, "login");
-            this.login.Name = "login";
-            this.login.Text = global::ASCOM.IP9212.Properties.Settings.Default.iplogin;
-            this.myToolTip.SetToolTip(this.login, resources.GetString("login.ToolTip"));
-            // 
-            // pass
-            // 
-            resources.ApplyResources(this.pass, "pass");
-            this.pass.Name = "pass";
-            this.pass.Text = global::ASCOM.IP9212.Properties.Settings.Default.ippass;
-            this.myToolTip.SetToolTip(this.pass, resources.GetString("pass.ToolTip"));
-            // 
-            // port
-            // 
-            resources.ApplyResources(this.port, "port");
-            this.port.Name = "port";
-            this.port.Text = global::ASCOM.IP9212.Properties.Settings.Default.ipport;
-            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.dataGridInputSwitch);
@@ -344,6 +282,67 @@ namespace ASCOM.IP9212_v2
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
             // 
+            // cmbLang
+            // 
+            this.cmbLang.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212.Properties.Settings.Default, "Language", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cmbLang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbLang.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbLang, "cmbLang");
+            this.cmbLang.Name = "cmbLang";
+            this.cmbLang.Text = global::ASCOM.IP9212.Properties.Settings.Default.Language;
+            // 
+            // txtCacheRead
+            // 
+            this.txtCacheRead.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212.Properties.Settings.Default, "ReadCacheTimeout", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            resources.ApplyResources(this.txtCacheRead, "txtCacheRead");
+            this.txtCacheRead.Name = "txtCacheRead";
+            this.txtCacheRead.Text = global::ASCOM.IP9212.Properties.Settings.Default.ReadCacheTimeout;
+            this.myToolTip.SetToolTip(this.txtCacheRead, resources.GetString("txtCacheRead.ToolTip"));
+            // 
+            // txtCacheConnect
+            // 
+            this.txtCacheConnect.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212.Properties.Settings.Default, "CheckCacheTimeout", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            resources.ApplyResources(this.txtCacheConnect, "txtCacheConnect");
+            this.txtCacheConnect.Name = "txtCacheConnect";
+            this.txtCacheConnect.Text = global::ASCOM.IP9212.Properties.Settings.Default.CheckCacheTimeout;
+            this.myToolTip.SetToolTip(this.txtCacheConnect, resources.GetString("txtCacheConnect.ToolTip"));
+            // 
+            // chkTrace
+            // 
+            resources.ApplyResources(this.chkTrace, "chkTrace");
+            this.chkTrace.Checked = global::ASCOM.IP9212.Properties.Settings.Default.trace;
+            this.chkTrace.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkTrace.Name = "chkTrace";
+            this.myToolTip.SetToolTip(this.chkTrace, resources.GetString("chkTrace.ToolTip"));
+            this.chkTrace.UseVisualStyleBackColor = true;
+            // 
+            // ipaddr
+            // 
+            resources.ApplyResources(this.ipaddr, "ipaddr");
+            this.ipaddr.Name = "ipaddr";
+            this.ipaddr.Text = global::ASCOM.IP9212.Properties.Settings.Default.ipaddr;
+            this.myToolTip.SetToolTip(this.ipaddr, resources.GetString("ipaddr.ToolTip"));
+            // 
+            // login
+            // 
+            resources.ApplyResources(this.login, "login");
+            this.login.Name = "login";
+            this.login.Text = global::ASCOM.IP9212.Properties.Settings.Default.iplogin;
+            this.myToolTip.SetToolTip(this.login, resources.GetString("login.ToolTip"));
+            // 
+            // pass
+            // 
+            resources.ApplyResources(this.pass, "pass");
+            this.pass.Name = "pass";
+            this.pass.Text = global::ASCOM.IP9212.Properties.Settings.Default.ippass;
+            this.myToolTip.SetToolTip(this.pass, resources.GetString("pass.ToolTip"));
+            // 
+            // port
+            // 
+            resources.ApplyResources(this.port, "port");
+            this.port.Name = "port";
+            this.port.Text = global::ASCOM.IP9212.Properties.Settings.Default.ipport;
+            // 
             // SetupDialogForm
             // 
             resources.ApplyResources(this, "$this");
@@ -399,7 +398,7 @@ namespace ASCOM.IP9212_v2
         private System.Windows.Forms.ToolTip myToolTip;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtCacheConnect;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label lblVersion;
         private System.Windows.Forms.LinkLabel linkLabel2;
@@ -407,7 +406,7 @@ namespace ASCOM.IP9212_v2
         private System.Windows.Forms.ComboBox cmbLang;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtCacheRead;
         private System.Windows.Forms.DataGridViewTextBoxColumn SwitchId;
         private System.Windows.Forms.DataGridViewTextBoxColumn SwitchName;
         private System.Windows.Forms.DataGridViewTextBoxColumn SwitchDescription;

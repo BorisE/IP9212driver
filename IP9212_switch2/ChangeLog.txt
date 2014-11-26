@@ -1,5 +1,8 @@
 ﻿Change log
 
+26.11.2014 2.0.5 (beta 5) 
+- improved caching (reset cache after writing)
+
 26.11.2014 2.0.4 (beta 4) 
 - added localization for setup dialog (russian language)
 

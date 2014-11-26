@@ -58,16 +58,17 @@ namespace ASCOM.IP9212_v2
         /// </summary>
         public string ASCOM_ERROR_MESSAGE = "";
 
-        //Caching connection check
+        //CACHING
         public static DateTime EXPIRED_CACHE = new DateTime(2010, 05, 12, 13, 15, 00); //CONSTANT FOR MARKING AN OLD TIME
+        //Caching connection check
         private DateTime lastConnectedCheck = EXPIRED_CACHE; //when was the last hardware checking provided for connect state
-        int CACHE_CONNECTED_CHECK_MAX_INTERVAL = 2; //how often to held hardware checking (in seconds)
+        public static int CACHE_CONNECTED_CHECK_MAX_INTERVAL = 20; //how often to held hardware checking (in seconds)
         //Caching output read
         private DateTime lastOutputReadCheck = EXPIRED_CACHE; //when was the last hardware checking provided for connect state
-        int CACHE_OUTPUT_MAX_INTERVAL = 2; //how often to held hardware checking (in seconds)
+        public static int CACHE_OUTPUT_MAX_INTERVAL = 2; //how often to held hardware checking (in seconds)
         //Caching input read
         private DateTime lastInputReadCheck = EXPIRED_CACHE; //when was the last hardware checking provided for connect state
-        int CACHE_INPUT_MAX_INTERVAL = 2; //how often to held hardware checking (in seconds)
+        public static int CACHE_INPUT_MAX_INTERVAL = 2; //how often to held hardware checking (in seconds)
 
         /// <summary>
         /// Constructor of IP9212_switch_class
@@ -380,27 +381,38 @@ namespace ASCOM.IP9212_v2
         /// <returns>Returns bool TRUE or FALSE</returns> 
         public bool getInputSwitchStatus(int SwitchId, bool forcedflag = false)
         {
-            tl.LogMessage("getInputSwitchStatus", "Enter (" + SwitchId+")");
+            tl.LogMessage("getInputSwitchStatus", "Enter (" + SwitchId + "), forced=" + forcedflag);
 
-            //Measure how much time have passed since last HARDWARE input reading
-            TimeSpan passed = DateTime.Now - lastInputReadCheck;
-            if (forcedflag || passed.TotalSeconds > CACHE_INPUT_MAX_INTERVAL)
+            bool curSwitchState = false;
+
+            if (forcedflag)
             {
-                // read data
-                tl.LogMessage("getInputSwitchStatus", String.Format("Cached expired, read hardware values [in cache was: {0}s]...", passed.TotalSeconds));
-
+                tl.LogMessage("getInputSwitchStatus", "Forced to read switch");
+                // curSwitchState = getInputStatusOne(SwitchId); //need to write new method (may be?)
                 input_state_arr = getInputStatus();
-
-                // reset read cache moment
-                lastInputReadCheck = DateTime.Now;
             }
             else
             {
-                // use previos value
-                tl.LogMessage("getInputSwitchStatus", "Using cached values [in cache:" + passed.TotalSeconds + "s]");
-            }
+                //Measure how much time have passed since last HARDWARE input reading
+                TimeSpan passed = DateTime.Now - lastInputReadCheck;
+                if (passed.TotalSeconds > CACHE_INPUT_MAX_INTERVAL)
+                {
+                    // read data
+                    tl.LogMessage("getInputSwitchStatus", String.Format("Cached expired, read hardware values [in cache was: {0}s]...", passed.TotalSeconds));
 
-            bool curSwitchState = (input_state_arr[SwitchId + 1] == 1);
+                    input_state_arr = getInputStatus();
+
+                    // reset read cache moment
+                    lastInputReadCheck = DateTime.Now;
+                }
+                else
+                {
+                    // use previos value
+                    tl.LogMessage("getInputSwitchStatus", "Using cached values [in cache:" + passed.TotalSeconds + "s]");
+                }
+
+                curSwitchState = (input_state_arr[SwitchId + 1] == 1);
+            }
 
             tl.LogMessage("getInputSwitchStatus", "getInputSwitchStatus(" + SwitchId + "):" + curSwitchState);
 
@@ -689,7 +701,6 @@ namespace ASCOM.IP9212_v2
             //return data
             bool ret = false;
 
-
             if (string.IsNullOrEmpty(ip_addr))
             {
                 tl.LogMessage("setOutputStatus", "ERROR (ip_addr wasn't set)!");
@@ -720,7 +731,6 @@ namespace ASCOM.IP9212_v2
                 data.Close();
                 reader.Close();
 
-                //Thread.Sleep(1000);
                 IP9212Semaphore.Release();//unlock ip9212 device for others
                 tlsem.LogMessage("setOutputStatus", "Release");
 
@@ -741,8 +751,10 @@ namespace ASCOM.IP9212_v2
                 tl.LogMessage("setOutputStatus", "Exit by web error");
                 return ret;
             }
-            // Parse data
-            // not implemented yet
+            
+            // Reset cached read values
+            lastOutputReadCheck = EXPIRED_CACHE;
+            lastInputReadCheck = EXPIRED_CACHE; 
 
             return ret;
         }

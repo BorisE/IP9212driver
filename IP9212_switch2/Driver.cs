@@ -850,12 +850,46 @@ namespace ASCOM.IP9212_v2
                     tl.LogMessage("readSettings", "Wrong input string for [currentLang]: [" + e.Message + "]");
                 }
 
-
                 //Cache settings
-                //p.WriteValue(driverID, ConnectCheck_Cache_Timeout_ProfileName, ConnectCheck_Cache_Timeout.ToString());
-                //p.WriteValue(driverID, OutputRead_Cache_Timeout_ProfileName, OutputRead_Cache_Timeout.ToString());
-                //p.WriteValue(driverID, InputRead_Cache_Timeout_ProfileName, InputRead_Cache_Timeout.ToString());
-
+                try
+                {
+                    ConnectCheck_Cache_Timeout = Convert.ToInt32(p.GetValue(driverID, ConnectCheck_Cache_Timeout_ProfileName, string.Empty, ConnectCheck_Cache_Timeout_def.ToString()));
+                }
+                catch (Exception e)
+                {
+                    ConnectCheck_Cache_Timeout = ConnectCheck_Cache_Timeout_def;
+                    tl.LogMessage("readSettings", "Wrong input string for [currentLang]: [" + e.Message + "]");
+                }
+                try
+                {
+                    OutputRead_Cache_Timeout = Convert.ToInt32(p.GetValue(driverID, ConnectCheck_Cache_Timeout_ProfileName, string.Empty, ConnectCheck_Cache_Timeout_def.ToString()));
+                }
+                catch (Exception e)
+                {
+                    ConnectCheck_Cache_Timeout = ConnectCheck_Cache_Timeout_def;
+                    tl.LogMessage("readSettings", "Wrong input string for [ConnectCheck_Cache_Timeout]: [" + e.Message + "]");
+                }
+                try
+                {
+                    OutputRead_Cache_Timeout = Convert.ToInt32(p.GetValue(driverID, OutputRead_Cache_Timeout_ProfileName, string.Empty, OutputRead_Cache_Timeout_def.ToString()));
+                }
+                catch (Exception e)
+                {
+                    OutputRead_Cache_Timeout = OutputRead_Cache_Timeout_def;
+                    tl.LogMessage("readSettings", "Wrong input string for [OutputRead_Cache_Timeout]: [" + e.Message + "]");
+                }
+                try
+                {
+                    InputRead_Cache_Timeout = Convert.ToInt32(p.GetValue(driverID, InputRead_Cache_Timeout_ProfileName, string.Empty, InputRead_Cache_Timeout_def.ToString()));
+                }
+                catch (Exception e)
+                {
+                    InputRead_Cache_Timeout = InputRead_Cache_Timeout_def;
+                    tl.LogMessage("readSettings", "Wrong input string for [InputRead_Cache_Timeout]: [" + e.Message + "]");
+                }
+                IP9212_switch_hardware_class.CACHE_CONNECTED_CHECK_MAX_INTERVAL = ConnectCheck_Cache_Timeout;
+                IP9212_switch_hardware_class.CACHE_OUTPUT_MAX_INTERVAL = OutputRead_Cache_Timeout;
+                IP9212_switch_hardware_class.CACHE_INPUT_MAX_INTERVAL = InputRead_Cache_Timeout;
 
                 //Switch data
                 for (int i = 0; i < numSwitch/2; i++)

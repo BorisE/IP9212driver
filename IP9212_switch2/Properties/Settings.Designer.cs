@@ -91,5 +91,17 @@ namespace ASCOM.IP9212.Properties {
                 this["Language"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("4")]
+        public string ReadCacheTimeout {
+            get {
+                return ((string)(this["ReadCacheTimeout"]));
+            }
+            set {
+                this["ReadCacheTimeout"] = value;
+            }
+        }
     }
 }

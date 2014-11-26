@@ -51,6 +51,8 @@ namespace ASCOM.IP9212_v2
             cmbLang.ValueMember = "Name";
 
             cmbLang.SelectedValue = Switch.currentLang;
+            txtCacheConnect.Text=Switch.ConnectCheck_Cache_Timeout.ToString();
+            txtCacheRead.Text=Switch.InputRead_Cache_Timeout.ToString();
 
         }
 
@@ -64,7 +66,12 @@ namespace ASCOM.IP9212_v2
         {
             Switch.traceState = chkTrace.Checked;
             Switch.currentLang = cmbLang.SelectedValue.ToString();
-            //Switch.ConnectCheck_Cache_Timeout = 11111111111111;
+            Switch.ConnectCheck_Cache_Timeout = Convert.ToInt32(txtCacheConnect.Text);
+            Switch.InputRead_Cache_Timeout = Convert.ToInt32(txtCacheRead.Text);
+            Switch.OutputRead_Cache_Timeout = Switch.InputRead_Cache_Timeout; //set output=input read
+            IP9212_switch_hardware_class.CACHE_CONNECTED_CHECK_MAX_INTERVAL = Switch.ConnectCheck_Cache_Timeout;
+            IP9212_switch_hardware_class.CACHE_OUTPUT_MAX_INTERVAL = Switch.OutputRead_Cache_Timeout;
+            IP9212_switch_hardware_class.CACHE_INPUT_MAX_INTERVAL = Switch.InputRead_Cache_Timeout;
 
             //Convert data from grid to settings vars
             SaveGrid();
