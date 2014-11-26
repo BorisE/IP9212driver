@@ -457,6 +457,8 @@ namespace ASCOM.IP9212_v2
                 throw new MethodNotImplementedException(str);
             }
 
+            bool state_correct = (id <= 3 ? !state : state);
+
             bool retVal = Hardware.setOutputStatus(id, state);
             tl.LogMessage("SetSwitch", string.Format("SetSwitch({0}): {1}", id, retVal));
         }

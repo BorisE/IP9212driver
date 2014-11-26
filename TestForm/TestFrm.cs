@@ -76,14 +76,14 @@ namespace ASCOM.TestForm
             {
                 try
                 {
-                    ((TextBox)this.Controls.Find("txtOutput" + i, true)[0]).Text = driver.GetSwitch((short)(i - 1)).ToString();
+                    /*((TextBox)this.Controls.Find("txtOutput" + i, true)[0]).Text = driver.GetSwitch((short)(i - 1)).ToString();
                     ((TextBox)this.Controls.Find("txtOutName" + i, true)[0]).Text = driver.GetSwitchName((short)(i - 1)).ToString();
                     ((TextBox)this.Controls.Find("txtOutDesc" + i, true)[0]).Text = driver.GetSwitchDescription((short)(i - 1)).ToString();
 
                     ((TextBox)this.Controls.Find("txtInput" + i, true)[0]).Text = driver.GetSwitch((short)(i + 7)).ToString();
                     ((TextBox)this.Controls.Find("txtInName" + i, true)[0]).Text = driver.GetSwitchName((short)(i + 7)).ToString();
                     ((TextBox)this.Controls.Find("txtInDesc" + i, true)[0]).Text = driver.GetSwitchDescription((short)(i + 7)).ToString();
-
+                    */
 
                     ((CheckBox)this.Controls.Find("chkOut" + i, true)[0]).Text = driver.GetSwitchName((short)(i - 1)).ToString();
                     ((CheckBox)this.Controls.Find("chkOut" + i, true)[0]).Checked = driver.GetSwitch((short)(i - 1));
@@ -120,7 +120,8 @@ namespace ASCOM.TestForm
 
 
             string chkName = ((CheckBox)sender).Name;
-            short chkNum = Convert.ToInt16(chkName.Substring(6, 1));  //chkOut1
+            short chkNum = Convert.ToInt16(chkName.Substring(6, 1));  //chkOut1 -> 0
+            chkNum--;
 
             if (driver != null)
                 driver.SetSwitch(chkNum, ((CheckBox)sender).Checked);
