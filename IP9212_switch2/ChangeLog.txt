@@ -1,4 +1,11 @@
-﻿Change log
+﻿ASCOM Aviosys IP9212 Switch driver
+Written by Boris Emchenko
+http://astromania.info
+
+Change log
+
+26.11.2014 2.0.6 
+- first release version
 
 26.11.2014 2.0.5 (beta 5) 
 - improved caching (reset cache after writing)

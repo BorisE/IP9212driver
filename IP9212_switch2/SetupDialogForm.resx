@@ -213,8 +213,11 @@
   <data name="label9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 20</value>
+    <value>109, 19</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 13</value>
@@ -238,10 +241,10 @@
     <value>0</value>
   </data>
   <data name="cmbLang.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 15</value>
+    <value>170, 15</value>
   </data>
   <data name="cmbLang.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 21</value>
+    <value>132, 21</value>
   </data>
   <data name="cmbLang.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -758,7 +761,7 @@ Factory default for the device is "admin"</value>
     <value>4</value>
   </data>
   <data name="pass.Location" type="System.Drawing.Point, System.Drawing">
-    <value>209, 45</value>
+    <value>216, 45</value>
   </data>
   <data name="pass.MaxLength" type="System.Int32, mscorlib">
     <value>14</value>
@@ -977,6 +980,9 @@ They are marked with "V" and "R" sign respectively</value>
   <data name="lblVersion.Text" xml:space="preserve">
     <value>Driver version</value>
   </data>
+  <data name="lblVersion.ToolTip" xml:space="preserve">
+    <value>Версия драйвера</value>
+  </data>
   <data name="&gt;&gt;lblVersion.Name" xml:space="preserve">
     <value>lblVersion</value>
   </data>
@@ -1006,6 +1012,9 @@ They are marked with "V" and "R" sign respectively</value>
   </data>
   <data name="linkLabel2.Text" xml:space="preserve">
     <value>Device by Aviosys</value>
+  </data>
+  <data name="linkLabel2.ToolTip" xml:space="preserve">
+    <value>Перейти на сайт производителя</value>
   </data>
   <data name="&gt;&gt;linkLabel2.Name" xml:space="preserve">
     <value>linkLabel2</value>

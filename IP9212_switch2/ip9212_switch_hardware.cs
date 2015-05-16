@@ -19,7 +19,7 @@ namespace ASCOM.IP9212_v2
     /// </summary>
     public class IP9212_switch_hardware_class
     {
-        internal bool debugFlag = true;
+        internal bool debugFlag = false;
 
         public string ip_addr, ip_port, ip_login, ip_pass;
 
