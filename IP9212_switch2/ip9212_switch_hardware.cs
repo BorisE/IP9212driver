@@ -211,6 +211,10 @@ namespace ASCOM.IP9212_v2
 
             string siteipURL;
             siteipURL = "http://" + ip_login + ":" + ip_pass + "@" + ip_addr + ":" + ip_port + "/set.cmd?cmd=getio";
+            // new style
+            siteipURL = "http://" + ip_addr + ":" + ip_port + "/Set.cmd?user=" + ip_login + "+pass=" + ip_pass + "CMD=getio";
+
+            
             //FOR DEBUGGING
             if (debugFlag)
             {
@@ -314,7 +318,11 @@ namespace ASCOM.IP9212_v2
             }
 
             string siteipURL;
-            siteipURL = "http://" + ip_login + ":" + ip_pass + "@" + ip_addr + ":" + ip_port + "/set.cmd?cmd=getio";
+            // old style
+            //siteipURL = "http://" + ip_login + ":" + ip_pass + "@" + ip_addr + ":" + ip_port + "/set.cmd?cmd=getio";
+            // new style
+            siteipURL = "http://" + ip_addr + ":" + ip_port + "/Set.cmd?user=" + ip_login + "+pass=" + ip_pass + "CMD=getio";
+
             //FOR DEBUGGING
             if (debugFlag)
             {
@@ -475,6 +483,9 @@ namespace ASCOM.IP9212_v2
 
             string siteipURL;
             siteipURL = "http://" + ip_login + ":" + ip_pass + "@" + ip_addr + ":" + ip_port + "/set.cmd?cmd=getio";
+            // new style
+            siteipURL = "http://" + ip_addr + ":" + ip_port + "/Set.cmd?user=" + ip_login + "+pass=" + ip_pass + "CMD=getio";
+
             //FOR DEBUGGING
             if (debugFlag)
             {
@@ -591,6 +602,8 @@ namespace ASCOM.IP9212_v2
             }
             string siteipURL;
             siteipURL = "http://" + ip_login + ":" + ip_pass + "@" + ip_addr + ":" + ip_port + "/set.cmd?cmd=getpower";
+            // new style
+            siteipURL = "http://" + ip_addr + ":" + ip_port + "/Set.cmd?user=" + ip_login + "+pass=" + ip_pass + "CMD=getpower";
 
             //FOR DEBUGGING
             if (debugFlag)
@@ -710,6 +723,9 @@ namespace ASCOM.IP9212_v2
                 //return ret;
             }
             string siteipURL = "http://" + ip_login + ":" + ip_pass + "@" + ip_addr + ":" + ip_port + "/set.cmd?cmd=setpower+P6" + HardPortNumber + "=" + intPortValue;
+            // new style
+            siteipURL = "http://" + ip_addr + ":" + ip_port + "/Set.cmd?user=" + ip_login + "+pass=" + ip_pass + "CMD=setpower+P6" + HardPortNumber + "=" + intPortValue; 
+
             //FOR DEBUGGING
             if (debugFlag)
             {

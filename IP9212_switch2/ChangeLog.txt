@@ -4,7 +4,8 @@ http://astromania.info
 
 Change log
 
-16.05.2015 2.0.6b
+16.05.2015 2.0.7
+- device authorization procedures were changed
 - minor changes
 
 26.11.2014 2.0.6 
