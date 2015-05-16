@@ -4,6 +4,9 @@ http://astromania.info
 
 Change log
 
+16.05.2015 2.0.6b
+- minor changes
+
 26.11.2014 2.0.6 
 - first release version
 
@@ -21,8 +24,8 @@ Change log
 - tons of bugs curreted
 
 25.11.2014 2.0.2 (beta 2) 
-- switch to classical Thread instead of async/await (got strange non async results due to SynchContext)
-- all values for Output Switch (both NC and NO) is now transformed into universal on/off states!
+- switch to classical Thread instead of async/await (got strange non async results due to SyncContext)
+- all values for Output Switch (both NC and NO) is now transformed into universal on/off states
 
 24.11.2014 2.0.1 (beta 1) 
 - at once first working release! (buggy but nevertheless)

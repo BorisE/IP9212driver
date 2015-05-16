@@ -157,7 +157,7 @@ namespace ASCOM.IP9212_v2
             }
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void linkAviosys_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             try
             {
@@ -177,9 +177,34 @@ namespace ASCOM.IP9212_v2
             {
                 MessageBox.Show(other.Message);
             }
+        }
+
+        private void linkAstromania_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                if (Thread.CurrentThread.CurrentUICulture.Name == "ru-RU")
+                {
+                    System.Diagnostics.Process.Start("http://astromania.info/articles/ip9212driver");
+                }
+                else
+                {
+                    System.Diagnostics.Process.Start("http://astromania.info/articles/ip9212driver");
+                }
+            }
+            catch (System.ComponentModel.Win32Exception noBrowser)
+            {
+                if (noBrowser.ErrorCode == -2147467259)
+                    MessageBox.Show(noBrowser.Message);
+            }
+            catch (System.Exception other)
+            {
+                MessageBox.Show(other.Message);
+            }
 
         }
 
+        
         private DateTime RetrieveLinkerTimestamp()
         {
             string filePath = System.Reflection.Assembly.GetCallingAssembly().Location;

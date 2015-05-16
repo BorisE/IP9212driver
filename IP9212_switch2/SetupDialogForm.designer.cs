@@ -63,9 +63,9 @@ namespace ASCOM.IP9212_v2
             this.InputSwitchName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.InputSwitchDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.myToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.linkAstromania = new System.Windows.Forms.LinkLabel();
             this.lblVersion = new System.Windows.Forms.Label();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.linkAviosys = new System.Windows.Forms.LinkLabel();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.picASCOM)).BeginInit();
             this.groupBox3.SuspendLayout();
@@ -324,13 +324,13 @@ namespace ASCOM.IP9212_v2
             this.InputSwitchDescription.Name = "InputSwitchDescription";
             this.InputSwitchDescription.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // linkLabel1
+            // linkAstromania
             // 
-            resources.ApplyResources(this.linkLabel1, "linkLabel1");
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.TabStop = true;
-            this.myToolTip.SetToolTip(this.linkLabel1, resources.GetString("linkLabel1.ToolTip"));
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            resources.ApplyResources(this.linkAstromania, "linkAstromania");
+            this.linkAstromania.Name = "linkAstromania";
+            this.linkAstromania.TabStop = true;
+            this.myToolTip.SetToolTip(this.linkAstromania, resources.GetString("linkAstromania.ToolTip"));
+            this.linkAstromania.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkAstromania_LinkClicked);
             // 
             // lblVersion
             // 
@@ -338,19 +338,19 @@ namespace ASCOM.IP9212_v2
             this.lblVersion.Name = "lblVersion";
             this.myToolTip.SetToolTip(this.lblVersion, resources.GetString("lblVersion.ToolTip"));
             // 
-            // linkLabel2
+            // linkAviosys
             // 
-            resources.ApplyResources(this.linkLabel2, "linkLabel2");
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.TabStop = true;
-            this.myToolTip.SetToolTip(this.linkLabel2, resources.GetString("linkLabel2.ToolTip"));
-            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            resources.ApplyResources(this.linkAviosys, "linkAviosys");
+            this.linkAviosys.Name = "linkAviosys";
+            this.linkAviosys.TabStop = true;
+            this.myToolTip.SetToolTip(this.linkAviosys, resources.GetString("linkAviosys.ToolTip"));
+            this.linkAviosys.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkAviosys_LinkClicked);
             // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.lblVersion);
-            this.groupBox5.Controls.Add(this.linkLabel2);
-            this.groupBox5.Controls.Add(this.linkLabel1);
+            this.groupBox5.Controls.Add(this.linkAviosys);
+            this.groupBox5.Controls.Add(this.linkAstromania);
             this.groupBox5.Controls.Add(this.picASCOM);
             resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Name = "groupBox5";
@@ -412,9 +412,9 @@ namespace ASCOM.IP9212_v2
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtCacheConnect;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel linkAstromania;
         private System.Windows.Forms.Label lblVersion;
-        private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.LinkLabel linkAviosys;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.ComboBox cmbLang;
         private System.Windows.Forms.Label label8;
