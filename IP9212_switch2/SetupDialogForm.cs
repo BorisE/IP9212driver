@@ -12,7 +12,7 @@ using System.Threading;
 using System.Diagnostics;
 
 using ASCOM.Utilities;
-using ASCOM.IP9212;
+//using ASCOM.IP9212;
 
 
 namespace ASCOM.IP9212_v2
@@ -23,15 +23,23 @@ namespace ASCOM.IP9212_v2
 
         public SetupDialogForm()
         {
-
+            //Set language
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Switch.currentLang);
-            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(Switch.currentLang);            
+            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(Switch.currentLang);
             
             InitializeComponent();
 
             // Initialise current values of user settings from the ASCOM Profile 
             chkTrace.Checked = Switch.traceState;
+            txtCacheConnect.Text = Switch.ConnectCheck_Cache_Timeout.ToString();
+            txtCacheRead.Text = Switch.InputRead_Cache_Timeout.ToString();
+
+            ipaddr.Text = Switch.ip_addr;
+            port.Text = Switch.ip_port;
+            login.Text = Switch.ip_login;
+            pass.Text = Switch.ip_pass;
             
+
             //Write driver version
             Version ver = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
 
@@ -39,20 +47,18 @@ namespace ASCOM.IP9212_v2
             //MessageBox.Show("Application " + assemName.Name + ", Version " + ver.ToString());
             string fileVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion;
 
-            lblVersion.Text = "Driver: " + driverVersion;
-            lblVersion.Text += Environment.NewLine + "File: "+ fileVersion;
-            lblVersion.Text += Environment.NewLine + "Compile time: " + RetrieveLinkerTimestamp();
+            lblVersion.Text = "Driver: " + fileVersion;
+            lblVersion.Text += Environment.NewLine + "Assembly: " + driverVersion;
+            lblVersion.Text += Environment.NewLine + "Compile time: " + RetrieveLinkerTimestamp().ToString("yyyy-MM-dd HH:mm");
 
+            //Language
             cmbLang.DataSource = new CultureInfo[]{
                 CultureInfo.GetCultureInfo("en-US"),
                 CultureInfo.GetCultureInfo("ru-RU")
             };
             cmbLang.DisplayMember = "NativeName";
             cmbLang.ValueMember = "Name";
-
             cmbLang.SelectedValue = Switch.currentLang;
-            txtCacheConnect.Text=Switch.ConnectCheck_Cache_Timeout.ToString();
-            txtCacheRead.Text=Switch.InputRead_Cache_Timeout.ToString();
 
         }
 
@@ -64,14 +70,24 @@ namespace ASCOM.IP9212_v2
         
         private void cmdOK_Click(object sender, EventArgs e) // OK button event handler
         {
+            //device access data
+            Switch.ip_addr = ipaddr.Text;
+            Switch.ip_port = port.Text;
+            Switch.ip_login = login.Text;
+            Switch.ip_pass = pass.Text;
+            
             Switch.traceState = chkTrace.Checked;
-            Switch.currentLang = cmbLang.SelectedValue.ToString();
+            
+            //timeouts
             Switch.ConnectCheck_Cache_Timeout = Convert.ToInt32(txtCacheConnect.Text);
             Switch.InputRead_Cache_Timeout = Convert.ToInt32(txtCacheRead.Text);
             Switch.OutputRead_Cache_Timeout = Switch.InputRead_Cache_Timeout; //set output=input read
             IP9212_switch_hardware_class.CACHE_CONNECTED_CHECK_MAX_INTERVAL = Switch.ConnectCheck_Cache_Timeout;
             IP9212_switch_hardware_class.CACHE_OUTPUT_MAX_INTERVAL = Switch.OutputRead_Cache_Timeout;
             IP9212_switch_hardware_class.CACHE_INPUT_MAX_INTERVAL = Switch.InputRead_Cache_Timeout;
+
+            //Language combobox
+            Switch.currentLang = cmbLang.SelectedValue.ToString();
 
             //Convert data from grid to settings vars
             SaveGrid();
@@ -84,6 +100,7 @@ namespace ASCOM.IP9212_v2
         {
             Close();
         }
+
 
         private void BrowseToAscom(object sender, EventArgs e) // Click on ASCOM logo event handler
         {
@@ -179,6 +196,31 @@ namespace ASCOM.IP9212_v2
             }
         }
 
+        private void BrowseToAstromania(object sender, EventArgs e) // Click on ASCOM logo event handler
+        {
+            try
+            {
+                if (Thread.CurrentThread.CurrentUICulture.Name == "ru-RU")
+                {
+                    System.Diagnostics.Process.Start("http://astromania.info/");
+                }
+                else
+                {
+                    System.Diagnostics.Process.Start("http://astromania.info/");
+                }
+            }
+            catch (System.ComponentModel.Win32Exception noBrowser)
+            {
+                if (noBrowser.ErrorCode == -2147467259)
+                    MessageBox.Show(noBrowser.Message);
+            }
+            catch (System.Exception other)
+            {
+                MessageBox.Show(other.Message);
+            }
+        }
+
+        
         private void linkAstromania_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             try

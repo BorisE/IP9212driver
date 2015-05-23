@@ -2,19 +2,19 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ASCOM.IP9212.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ipaddr" Type="System.String" Scope="Application">
+    <Setting Name="ipaddr" Type="System.String" Scope="User">
       <Value Profile="(Default)">192.168.1.90</Value>
     </Setting>
-    <Setting Name="ipport" Type="System.String" Scope="Application">
+    <Setting Name="ipport" Type="System.String" Scope="User">
       <Value Profile="(Default)">80</Value>
     </Setting>
-    <Setting Name="iplogin" Type="System.String" Scope="Application">
+    <Setting Name="iplogin" Type="System.String" Scope="User">
       <Value Profile="(Default)">admin</Value>
     </Setting>
-    <Setting Name="ippass" Type="System.String" Scope="Application">
+    <Setting Name="ippass" Type="System.String" Scope="User">
       <Value Profile="(Default)">12345678</Value>
     </Setting>
-    <Setting Name="trace" Type="System.Boolean" Scope="Application">
+    <Setting Name="trace" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="CheckCacheTimeout" Type="System.String" Scope="User">

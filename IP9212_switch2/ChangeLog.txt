@@ -4,6 +4,11 @@ http://astromania.info
 
 Change log
 
+23.05.2015 2.0.8
+- settings savings bug corrected
+- custom timeout on web rrquests
+- exception handling corrected
+
 16.05.2015 2.0.7
 - device authorization procedures were changed
 - minor changes

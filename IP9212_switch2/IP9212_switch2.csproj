@@ -8,7 +8,7 @@
     <ProjectGuid>{64308775-BD4A-469C-BCAB-3ED830B811AF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ASCOM.IP9212</RootNamespace>
+    <RootNamespace>ASCOM.IP9212_v2</RootNamespace>
     <AssemblyName>IP9212_switch</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -55,7 +55,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <RegisterForComInterop>false</RegisterForComInterop>
+    <RegisterForComInterop>true</RegisterForComInterop>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -104,7 +104,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Driver.cs" />
-    <Compile Include="ip9212_switch_hardware.cs" />
+    <Compile Include="ip9212_switch_hardware.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -139,6 +141,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ChangeLog.txt" />
+    <None Include="Resources\logo_48_blue.png" />
+    <None Include="Resources\logo_256_blue.png" />
+    <None Include="Resources\logo_512_blue.png" />
     <None Include="app.config" />
     <None Include="ASCOM.png" />
     <None Include="ASCOMDriverTemplate.snk" />

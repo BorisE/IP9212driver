@@ -14,6 +14,19 @@ using ASCOM.DeviceInterface;
 
 namespace ASCOM.IP9212_v2
 {
+
+    public class MyWebClient : WebClient
+    {
+        public int Timeout = 5 * 1000;
+
+        protected override WebRequest GetWebRequest(Uri uri)
+        {
+            WebRequest w = base.GetWebRequest(uri);
+            w.Timeout = Timeout;
+            return w;
+        }
+    }
+    
     /// <summary>
     /// Class for working with ip9212 device
     /// </summary>
@@ -224,7 +237,7 @@ namespace ASCOM.IP9212_v2
             tl.LogMessage("CheckLink_async", "(thread" + Thread.CurrentThread.ManagedThreadId + ") download url:" + siteipURL);
 
             // Send http query
-            WebClient client = new WebClient();
+            MyWebClient client = new MyWebClient();
             try
             {
                 //tl.LogMessage("Semaphore", "WaitOne");
@@ -237,7 +250,7 @@ namespace ASCOM.IP9212_v2
 
                 tl.LogMessage("CheckLink_async", "(thread" + Thread.CurrentThread.ManagedThreadId + ") http request was sent");
             }
-            catch (WebException e)
+            catch (Exception e)
             {
                 //tl.LogMessage("Semaphore", "Release");
                 IP9212Semaphore.Release();//unlock ip9212 device for others
@@ -245,7 +258,7 @@ namespace ASCOM.IP9212_v2
             
                 hardware_connected_flag = false;
 
-                tl.LogMessage("CheckLink_async", "(thread" + Thread.CurrentThread.ManagedThreadId + ") error:" + e.Status);
+                tl.LogMessage("CheckLink_async", "(thread" + Thread.CurrentThread.ManagedThreadId + ") error:" + ((WebException)e).Status);
                 tl.LogMessage("CheckLink_async", "(thread" + Thread.CurrentThread.ManagedThreadId + ") exit on web error");
 
                 return;
@@ -339,7 +352,7 @@ namespace ASCOM.IP9212_v2
             tlsem.LogMessage("checkLink_forced", "WaitOne passed (thread" + Thread.CurrentThread.ManagedThreadId + ")");
 
             string s = "";
-            WebClient client = new WebClient();
+            MyWebClient client = new MyWebClient();
             try
             {
                 Stream data = client.OpenRead(uri_siteipURL);
@@ -364,7 +377,7 @@ namespace ASCOM.IP9212_v2
                     tl.LogMessage("checkLink_forced", "Downloaded data error - string not found");
                 }
             }
-            catch (WebException e)
+            catch (Exception e)
             {
                 IP9212Semaphore.Release();//unlock ip9212 device for others
                 tlsem.LogMessage("checkLink_forced", "Release on WebException");
@@ -387,11 +400,11 @@ namespace ASCOM.IP9212_v2
         /// Get input sensor status
         /// </summary>
         /// <returns>Returns bool TRUE or FALSE</returns> 
-        public bool getInputSwitchStatus(int SwitchId, bool forcedflag = false)
+        public bool? getInputSwitchStatus(int SwitchId, bool forcedflag = false)
         {
             tl.LogMessage("getInputSwitchStatus", "Enter (" + SwitchId + "), forced=" + forcedflag);
 
-            bool curSwitchState = false;
+            bool? curSwitchState = null;
 
             if (forcedflag)
             {
@@ -419,7 +432,16 @@ namespace ASCOM.IP9212_v2
                     tl.LogMessage("getInputSwitchStatus", "Using cached values [in cache:" + passed.TotalSeconds + "s]");
                 }
 
-                curSwitchState = (input_state_arr[SwitchId + 1] == 1);
+                
+                //////////
+                if (input_state_arr.Length < 9 || input_state_arr[0] < 1)
+                {
+                    curSwitchState = null;
+                }
+                else
+                {
+                    curSwitchState = (input_state_arr[SwitchId + 1] == 1);
+                }
             }
 
             tl.LogMessage("getInputSwitchStatus", "getInputSwitchStatus(" + SwitchId + "):" + curSwitchState);
@@ -432,7 +454,7 @@ namespace ASCOM.IP9212_v2
         /// Get output sensor status
         /// </summary>
         /// <returns>Returns bool TRUE or FALSE</returns> 
-        public bool getOutputSwitchStatus(int SwitchId, bool forcedflag = false)
+        public bool? getOutputSwitchStatus(int SwitchId, bool forcedflag = false)
         {
             tl.LogMessage("getOutputSwitchStatus", "Enter (" + SwitchId+")");
 
@@ -454,7 +476,16 @@ namespace ASCOM.IP9212_v2
                 tl.LogMessage("getOutputSwitchStatus", "Using cached values [in cache:" + passed.TotalSeconds + "s]");
             }
 
-            bool curSwitchState = (output_state_arr[SwitchId + 1] == 1);
+            ///////////////
+            bool? curSwitchState = null;
+            if (output_state_arr.Length<9 || output_state_arr[0]<1)
+            {
+                curSwitchState = null;
+            }
+            else
+            {
+                curSwitchState = (output_state_arr[SwitchId + 1] == 1);
+            }
             
             tl.LogMessage("getOutputSwitchStatus", "getOutputSwitchStatus(" + SwitchId + "):" + curSwitchState);
 
@@ -499,7 +530,7 @@ namespace ASCOM.IP9212_v2
             tlsem.LogMessage("getInputStatus", "WaitOne passed");
 
             string s = "";
-            WebClient client = new WebClient();
+            MyWebClient client = new MyWebClient();
             try
             {
                 Stream data = client.OpenRead(siteipURL);
@@ -513,7 +544,7 @@ namespace ASCOM.IP9212_v2
 
                 tl.LogMessage("getInputStatus", "Download str:" + s);
             }
-            catch (WebException e)
+            catch (Exception e)
             {
                 IP9212Semaphore.Release();//unlock ip9212 device for others
                 tlsem.LogMessage("getInputStatus", "Release on WebException");
@@ -619,7 +650,7 @@ namespace ASCOM.IP9212_v2
             tlsem.LogMessage("getOutputStatus", "WaitOne passed");
 
             string s = "";
-            WebClient client = new WebClient();
+            MyWebClient client = new MyWebClient();
             try
             {
                 Stream data = client.OpenRead(siteipURL);
@@ -633,7 +664,7 @@ namespace ASCOM.IP9212_v2
 
                 tl.LogMessage("getOutputStatus", "Download str:" + s);
             }
-            catch (WebException e)
+            catch (Exception e)
             {
                 IP9212Semaphore.Release();//unlock ip9212 device for others
                 tlsem.LogMessage("getOutputStatus", "Release on WebException");
@@ -738,7 +769,7 @@ namespace ASCOM.IP9212_v2
             IP9212Semaphore.WaitOne(); // lock working with IP9212
             tlsem.LogMessage("setOutputStatus", "WaitOne passed");
             string s = "";
-            WebClient client = new WebClient();
+            MyWebClient client = new MyWebClient();
             try
             {
                 Stream data = client.OpenRead(siteipURL);
@@ -754,7 +785,7 @@ namespace ASCOM.IP9212_v2
 
                 ret = true;
             }
-            catch (WebException e)
+            catch (Exception e)
             {
                 IP9212Semaphore.Release();//unlock ip9212 device for others
                 tlsem.LogMessage("setOutputStatus", "Release on WebException");

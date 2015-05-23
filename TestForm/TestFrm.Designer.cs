@@ -98,7 +98,9 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtIPaddr = new System.Windows.Forms.TextBox();
             this.txtNumberOfSwitches = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.chkOut8 = new System.Windows.Forms.CheckBox();
@@ -125,9 +127,8 @@
             this.labelDriverId = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label14 = new System.Windows.Forms.Label();
-            this.txtIPaddr = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -552,10 +553,20 @@
             resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
             // 
+            // label15
+            // 
+            resources.ApplyResources(this.label15, "label15");
+            this.label15.Name = "label15";
+            // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
+            // 
+            // txtIPaddr
+            // 
+            resources.ApplyResources(this.txtIPaddr, "txtIPaddr");
+            this.txtIPaddr.Name = "txtIPaddr";
             // 
             // txtNumberOfSwitches
             // 
@@ -737,20 +748,15 @@
             resources.ApplyResources(this.label14, "label14");
             this.label14.Name = "label14";
             // 
-            // txtIPaddr
-            // 
-            resources.ApplyResources(this.txtIPaddr, "txtIPaddr");
-            this.txtIPaddr.Name = "txtIPaddr";
-            // 
-            // label15
-            // 
-            resources.ApplyResources(this.label15, "label15");
-            this.label15.Name = "label15";
-            // 
             // label16
             // 
             resources.ApplyResources(this.label16, "label16");
             this.label16.Name = "label16";
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             // 
             // TestFrm
             // 
@@ -886,6 +892,7 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox txtIPaddr;
         private System.Windows.Forms.Label label16;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 

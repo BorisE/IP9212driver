@@ -66,6 +66,38 @@ namespace ASCOM.TestForm
 
         }
 
+        private void GetFields()
+        {
+            for (int i = 1; i <= driver.MaxSwitch / 2; i++)
+            {
+                try
+                {
+                    ((TextBox)this.Controls.Find("txtOutput" + i, true)[0]).Text = driver.GetSwitch((short)(i - 1)).ToString();
+                    ((TextBox)this.Controls.Find("txtOutName" + i, true)[0]).Text = driver.GetSwitchName((short)(i - 1)).ToString();
+                    ((TextBox)this.Controls.Find("txtOutDesc" + i, true)[0]).Text = driver.GetSwitchDescription((short)(i - 1)).ToString();
+
+                    ((TextBox)this.Controls.Find("txtInput" + i, true)[0]).Text = driver.GetSwitch((short)(i + 7)).ToString();
+                    ((TextBox)this.Controls.Find("txtInName" + i, true)[0]).Text = driver.GetSwitchName((short)(i + 7)).ToString();
+                    ((TextBox)this.Controls.Find("txtInDesc" + i, true)[0]).Text = driver.GetSwitchDescription((short)(i + 7)).ToString();
+
+
+                    ((CheckBox)this.Controls.Find("chkOut" + i, true)[0]).Text = driver.GetSwitchName((short)(i - 1)).ToString();
+                    ((CheckBox)this.Controls.Find("chkOut" + i, true)[0]).Checked = driver.GetSwitch((short)(i - 1));
+
+                    toolTip1.SetToolTip(((CheckBox)this.Controls.Find("chkOut" + i, true)[0]), driver.GetSwitchDescription((short)(i - 1)));
+
+                    ((CheckBox)this.Controls.Find("chkIn" + i, true)[0]).Text = driver.GetSwitchName((short)(i + 7)).ToString();
+                    ((CheckBox)this.Controls.Find("chkIn" + i, true)[0]).Checked = driver.GetSwitch((short)(i + 7));
+
+                    toolTip1.SetToolTip(((CheckBox)this.Controls.Find("chkIn" + i, true)[0]), driver.GetSwitchDescription((short)(i + 7)));
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+        }
         private void UpdateFields()
         {
             DriverName.Text = driver.Name;
@@ -101,7 +133,10 @@ namespace ASCOM.TestForm
                     toolTip1.SetToolTip(((CheckBox)this.Controls.Find("chkIn" + i, true)[0]), driver.GetSwitchDescription((short)(i + 7)));
 
                 }
-                catch { }
+                catch (Exception ex) 
+                {
+                    MessageBox.Show(ex.ToString());
+                }
             }
         }
 
@@ -137,17 +172,28 @@ namespace ASCOM.TestForm
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (driver != null)
-            {
-                connectStatus = driver.Connected;
-                toolStripStatusLabel1.Text = (connectStatus ? "Connected" : "Disconnected") + " at " + DateTime.Now;
-                UpdateFields();
-            }
+            if (!backgroundWorker1.IsBusy)
+                backgroundWorker1.RunWorkerAsync();
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             timer1.Interval = (int)numericUpDown1.Value*100;
+        }
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            if (driver != null)
+            {
+                connectStatus = driver.Connected;
+                toolStripStatusLabel1.Text = (connectStatus ? "Connected" : "Disconnected") + " at " + DateTime.Now;
+                if (!connectStatus) driver.Connected = true;
+            }
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            UpdateFields();
         }        
     
     }

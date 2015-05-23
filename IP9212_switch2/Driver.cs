@@ -19,6 +19,7 @@
 // 25-11-2014	XXX 2.0.2	Beta 2. Change behaviour for NC contacts (ports 1 - 4). Now true means CLOSED contact, false - OPENED contact (earlier for ports 1..4: true - OPENED, false - CLOSED). Switched to Threads
 // 26-11-2014	XXX 2.0.3	Beta 3. Caching input/output switches data
 // 26-11-2014	XXX 2.0.4	Beta 4. Localization
+// 23-05-2015	XXX 2.0.7	Device access changed. 
 // --------------------------------------------------------------------------------
 //
 #define Switch
@@ -28,6 +29,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Runtime.InteropServices;
+using System.Reflection;
 
 using ASCOM;
 using ASCOM.Astrometry;
@@ -181,7 +183,12 @@ namespace ASCOM.IP9212_v2
                 var result = F.ShowDialog();
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
-                    writeSettings(); // Persist device configuration values to the ASCOM Profile store
+                    Properties.Settings.Default.Save();
+                    //writeSettings(); // Persist device configuration values to the ASCOM Profile store - WAS ALREADY CALLED in SetupDialog_OK
+                }
+                else
+                {
+                    Properties.Settings.Default.Reload();
                 }
             }
         }
@@ -305,7 +312,8 @@ namespace ASCOM.IP9212_v2
             get
             {
                 Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-                string driverInfo = driverDescription + ". Version: " + String.Format(CultureInfo.InvariantCulture, "{0}.{1}", version.Major, version.Minor);
+                string driverInfo = driverDescription + ". Version: " + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion +
+                    ", assembly version: " + String.Format(CultureInfo.InvariantCulture, "{0}.{1} build {2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
                 tl.LogMessage("DriverInfo Get", driverInfo);
                 return driverInfo;
             }
@@ -316,7 +324,7 @@ namespace ASCOM.IP9212_v2
             get
             {
                 Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-                string driverVersion = String.Format(CultureInfo.InvariantCulture, "{0}.{1} build {2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
+                string driverVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion + " / " + String.Format(CultureInfo.InvariantCulture, "{0}.{1} build {2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
                 //driverVersion=version.ToString();
                 tl.LogMessage("DriverVersion Get", driverVersion);
                 return driverVersion;
@@ -448,21 +456,50 @@ namespace ASCOM.IP9212_v2
         {
             Validate("GetSwitch", id);
 
-            bool retVal = false;
+            bool? retVal = false;
             if (id <= 7)
             {
                 //read value for output switch
                 retVal = Hardware.getOutputSwitchStatus(id);
-                //invert for NO ports (0-3)
-                if (id <= 3)
-                    retVal = ! retVal;
 
-            }else{
+                if (retVal == null)
+                {
+                    tl.LogMessage("GetSwitch", string.Format("ERROR! GetSwitch({0}) returns null value! ", id));
+                    Connected = false;
+                    retVal = false;
+                    //throw new ArgumentNullException("Switch [" + id + "] state cannot be read");
+                    //throw new ASCOM.InvalidValueException("Switch ["+id+"] state cannot be read");
+                }
+                else
+                {
+                    //invert for NO ports (0-3)
+                    if (id <= 3)
+                        retVal = !retVal;
+                }
+            }
+            else
+            {
+                //read value for input switch
                 retVal = Hardware.getInputSwitchStatus(id - 8);
+
+                if (retVal == null)
+                {
+                    tl.LogMessage("GetSwitch", string.Format("ERROR! GetSwitch({0}) returns null value! ", id));
+                    Connected = false;
+                    retVal = false;
+                    //throw new ArgumentNullException("Switch [" + id + "] state cannot be read");
+                    //throw new ASCOM.InvalidValueException("Switch ["+id+"] state cannot be read");
+                }
+                else
+                {
+                    //invert for NO ports (0-3)
+                    if (id <= 3)
+                        retVal = !retVal;
+                }
             }
 
             tl.LogMessage("GetSwitch", string.Format("GetSwitch({0}) = {1}", id, retVal));
-            return retVal;
+            return (bool)retVal;
         }
 
         /// <summary>
@@ -586,6 +623,11 @@ namespace ASCOM.IP9212_v2
         /// <param name="id">The id.</param>
         private void Validate(string message, short id)
         {
+            if (!IsConnected())
+            {
+                throw new ASCOM.NotConnectedException();
+            }
+            
             if (id < 0 || id >= numSwitch)
             {
                 tl.LogMessage(message, string.Format("Switch {0} not available, range is 0 to {1}", id, numSwitch - 1));
