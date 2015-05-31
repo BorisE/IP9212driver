@@ -4,6 +4,11 @@ http://astromania.info
 
 Change log
 
+31.05.2015 2.0.9
+- bug for NC output (0..3) state set 
+- emulataion of connection problems
+- new cusom actions (GetCacheParameter)
+
 23.05.2015 2.0.8
 - settings savings bug corrected
 - custom timeout on web rrquests

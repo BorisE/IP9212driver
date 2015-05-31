@@ -34,6 +34,13 @@ namespace ASCOM.IP9212_v2
     {
         internal bool debugFlag = false;
 
+        /// <summary>
+        /// Used to test hardaware connection lost failure
+        /// </summary>
+        internal bool EmulateConnectionLostFlag=false;
+        internal Int32 EmulateConnectionLostProbability = 3; //rand(1,EmulateConnectionLostProbability)
+
+
         public string ip_addr, ip_port, ip_login, ip_pass;
 
         /// <summary>
@@ -279,6 +286,7 @@ namespace ASCOM.IP9212_v2
             // Object was disposed before download complete, so we should release all and exit
                 return;
             }
+
             IP9212Semaphore.Release();//unlock ip9212 device for others
             //tl.LogMessage("Semaphore", "Release");
             tlsem.LogMessage("checkLink_DownloadCompleted", "Release");
@@ -303,6 +311,20 @@ namespace ASCOM.IP9212_v2
                     hardware_connected_flag = false;
                     tl.LogMessage("checkLink_DownloadCompleted", "string not found");
                 }
+
+                //////////////////////////////////////////////////////////////
+                //EmulateConnectionLost
+                if (EmulateConnectionLostFlag)
+                {
+                    Random rand = new Random(DateTime.Now.Millisecond);
+                    int flag = rand.Next(1, EmulateConnectionLostProbability);
+                    if (flag == 1)
+                    {
+                        hardware_connected_flag = false;
+                    }
+                }
+                //////////////////////////////////////////////////////////////
+
             }
             else
             {
@@ -391,6 +413,19 @@ namespace ASCOM.IP9212_v2
             //Reset cache for non forced IsConnected calles - we already get the newest data!
             lastConnectedCheck = DateTime.Now;
             
+            //////////////////////////////////////////////////////////////
+            //EmulateConnectionLost
+            if (EmulateConnectionLostFlag)
+            {
+                Random rand = new Random(DateTime.Now.Millisecond);
+                int flag = rand.Next(1, EmulateConnectionLostProbability);
+                if (flag == 1)
+                {
+                    hardware_connected_flag = false;
+                }
+            }
+            //////////////////////////////////////////////////////////////
+
             tl.LogMessage("checkLink_forced", "Exit, ret value " + hardware_connected_flag.ToString());
             return hardware_connected_flag;
         }

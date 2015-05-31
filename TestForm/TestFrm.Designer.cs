@@ -42,7 +42,10 @@
             this.DriverDescription = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.txtInput8 = new System.Windows.Forms.TextBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.txtInDesc8 = new System.Windows.Forms.TextBox();
             this.txtInName8 = new System.Windows.Forms.TextBox();
             this.txtOutName8 = new System.Windows.Forms.TextBox();
@@ -123,18 +126,20 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.labelDriverId = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label14 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorker_connect = new System.ComponentModel.BackgroundWorker();
+            this.txtLog = new System.Windows.Forms.RichTextBox();
+            this.txtCacheConnection = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.txtCacheSensorData = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.statusStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonChoose
@@ -209,7 +214,10 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label16);
+            this.groupBox2.Controls.Add(this.label14);
             this.groupBox2.Controls.Add(this.txtInput8);
+            this.groupBox2.Controls.Add(this.numericUpDown1);
             this.groupBox2.Controls.Add(this.txtInDesc8);
             this.groupBox2.Controls.Add(this.txtInName8);
             this.groupBox2.Controls.Add(this.txtOutName8);
@@ -265,18 +273,38 @@
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.label17);
+            this.groupBox2.Controls.Add(this.label19);
             this.groupBox2.Controls.Add(this.label15);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.txtIPaddr);
+            this.groupBox2.Controls.Add(this.txtCacheSensorData);
+            this.groupBox2.Controls.Add(this.txtCacheConnection);
             this.groupBox2.Controls.Add(this.txtNumberOfSwitches);
             resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
+            // label16
+            // 
+            resources.ApplyResources(this.label16, "label16");
+            this.label16.Name = "label16";
+            // 
+            // label14
+            // 
+            resources.ApplyResources(this.label14, "label14");
+            this.label14.Name = "label14";
+            // 
             // txtInput8
             // 
             resources.ApplyResources(this.txtInput8, "txtInput8");
             this.txtInput8.Name = "txtInput8";
+            // 
+            // numericUpDown1
+            // 
+            resources.ApplyResources(this.numericUpDown1, "numericUpDown1");
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // txtInDesc8
             // 
@@ -724,12 +752,6 @@
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
             // 
-            // numericUpDown1
-            // 
-            resources.ApplyResources(this.numericUpDown1, "numericUpDown1");
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
-            // 
             // labelDriverId
             // 
             this.labelDriverId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -743,28 +765,44 @@
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip1.ToolTipTitle = "Description";
             // 
-            // label14
+            // backgroundWorker_connect
             // 
-            resources.ApplyResources(this.label14, "label14");
-            this.label14.Name = "label14";
+            this.backgroundWorker_connect.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker_connect.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker_connect.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // label16
+            // txtLog
             // 
-            resources.ApplyResources(this.label16, "label16");
-            this.label16.Name = "label16";
+            resources.ApplyResources(this.txtLog, "txtLog");
+            this.txtLog.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtLog.Name = "txtLog";
+            this.txtLog.TextChanged += new System.EventHandler(this.txtLog_TextChanged);
             // 
-            // backgroundWorker1
+            // txtCacheConnection
             // 
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            resources.ApplyResources(this.txtCacheConnection, "txtCacheConnection");
+            this.txtCacheConnection.Name = "txtCacheConnection";
+            // 
+            // label19
+            // 
+            resources.ApplyResources(this.label19, "label19");
+            this.label19.Name = "label19";
+            // 
+            // txtCacheSensorData
+            // 
+            resources.ApplyResources(this.txtCacheSensorData, "txtCacheSensorData");
+            this.txtCacheSensorData.Name = "txtCacheSensorData";
+            // 
+            // label17
+            // 
+            resources.ApplyResources(this.label17, "label17");
+            this.label17.Name = "label17";
             // 
             // TestFrm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label16);
-            this.Controls.Add(this.label14);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.txtLog);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -780,13 +818,13 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -892,7 +930,12 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox txtIPaddr;
         private System.Windows.Forms.Label label16;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker_connect;
+        private System.Windows.Forms.RichTextBox txtLog;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox txtCacheSensorData;
+        private System.Windows.Forms.TextBox txtCacheConnection;
     }
 }
 

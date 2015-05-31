@@ -175,7 +175,7 @@ namespace ASCOM.IP9212_v2
         {
             // consider only showing the setup dialog if not connected
             // or call a different dialog if connected
-            if (IsConnected(CONNECTIONCHECK_FORCED))
+            if (IsConnectedWrapper(CONNECTIONCHECK_FORCED))
                 System.Windows.Forms.MessageBox.Show("Already connected, just press OK");
 
             using (SetupDialogForm F = new SetupDialogForm())
@@ -202,12 +202,31 @@ namespace ASCOM.IP9212_v2
             }
         }
 
+        /// <summary>
+        /// Custom driver methods
+        /// </summary>
         public string Action(string actionName, string actionParameters)
         {
             // Get device IP address
             if (actionName == "IPAddress")
             {
                 return ip_addr;
+            }
+            // Get device IP address
+            else if (actionName == "GetCacheParameter")
+            {
+                if (actionParameters == "CacheCheckConnection")
+                {
+                    return ConnectCheck_Cache_Timeout.ToString();
+                 }
+                else if (actionParameters == "CacheSensorState")
+                {
+                    return OutputRead_Cache_Timeout.ToString();
+                }
+                else
+                {
+                    return "";
+                }
             }
             else
             {
@@ -258,7 +277,7 @@ namespace ASCOM.IP9212_v2
         {
             get
             {
-                bool tempIsConnFlag=IsConnected();
+                bool tempIsConnFlag=IsConnectedWrapper();
                 tl.LogMessage("Connected Get", tempIsConnFlag.ToString());
                 return tempIsConnFlag;
             }
@@ -266,7 +285,7 @@ namespace ASCOM.IP9212_v2
             {
                 tl.LogMessage("Connected Set", value.ToString());
 
-                if (value == IsConnected(CONNECTIONCHECK_FORCED))
+                if (value == IsConnectedWrapper(CONNECTIONCHECK_FORCED))
                     return;
 
                 if (value)
@@ -279,7 +298,8 @@ namespace ASCOM.IP9212_v2
                     if (connectedState == false)
                     {
                         //if driver couldn't connect to ip9212 then raise an exception. 
-                        throw new ASCOM.DriverException("Couldn't connect to IP9212 control device on [" + ip_addr + "]");
+                        throw new ASCOM.DriverException("Couldn't connect to IP9212 control device on [" + ip_addr + "]",0);
+                        //throw new System.InvalidOperationException("Couldn't connect to IP9212 control device on [" + ip_addr + "]");
                     }
 
                 }
@@ -522,7 +542,7 @@ namespace ASCOM.IP9212_v2
 
             bool state_correct = (id <= 3 ? !state : state);
 
-            bool retVal = Hardware.setOutputStatus(id, state);
+            bool retVal = Hardware.setOutputStatus(id, state_correct);
             tl.LogMessage("SetSwitch", string.Format("SetSwitch({0}): {1}", id, retVal));
         }
 
@@ -623,11 +643,13 @@ namespace ASCOM.IP9212_v2
         /// <param name="id">The id.</param>
         private void Validate(string message, short id)
         {
-            if (!IsConnected())
+            if (!IsConnectedWrapper())
             {
-                throw new ASCOM.NotConnectedException();
+                throw new ASCOM.NotConnectedException("Device lost connection");
+                //Exception ex = new Exception("Not connected");
+                //throw ex;
             }
-            
+
             if (id < 0 || id >= numSwitch)
             {
                 tl.LogMessage(message, string.Format("Switch {0} not available, range is 0 to {1}", id, numSwitch - 1));
@@ -756,9 +778,9 @@ namespace ASCOM.IP9212_v2
         /// <summary>
         /// Returns true if there is a valid connection to the driver hardware
         /// </summary>
-        private bool IsConnected(bool forcedflag = CONNECTIONCHECK_CACHED)
+        private bool IsConnectedWrapper(bool forcedflag = CONNECTIONCHECK_CACHED)
         {
-            tl.LogMessage("IsConnected", "Enter" + (forcedflag == CONNECTIONCHECK_FORCED?" (forced)":" (cached)"));
+            tl.LogMessage("IsConnectedWrapper", "Enter" + (forcedflag == CONNECTIONCHECK_FORCED?" (forced)":" (cached)"));
 
             // Check that the driver hardware connection exists and is connected to the hardware
             if (!connectedState)
@@ -772,7 +794,7 @@ namespace ASCOM.IP9212_v2
                 connectedState = Hardware.IsConnected(forcedflag);
             }
 
-            tl.LogMessage("IsConnected", "Exit. Return status = " + connectedState.ToString());
+            tl.LogMessage("IsConnectedWrapper", "Exit. Return status = " + connectedState.ToString());
             return connectedState;
         }
 
@@ -783,7 +805,7 @@ namespace ASCOM.IP9212_v2
         private void CheckConnected(string message)
         {
             tl.LogMessage("CheckConnected", "[" + message + "]");
-            if (!IsConnected())
+            if (!IsConnectedWrapper())
             {
                 throw new ASCOM.NotConnectedException(message);
             }
