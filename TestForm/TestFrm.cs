@@ -19,13 +19,36 @@ using System.Linq;
 using System.Globalization;
 using System.Threading;
 
+using System.Diagnostics;
+using System.Reflection;
+using System.Deployment.Application;
+
+using System.Runtime.InteropServices;
+
 using ASCOM;
 
 namespace ASCOM.TestForm
 {
     public partial class TestFrm : Form
     {
+    // P/Invoke constants
+    private const int WM_SYSCOMMAND = 0x112;
+    private const int MF_STRING = 0x0;
+    private const int MF_SEPARATOR = 0x800;
 
+    // P/Invoke declarations
+    [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+    private static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
+
+    [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+    private static extern bool AppendMenu(IntPtr hMenu, int uFlags, int uIDNewItem, string lpNewItem);
+
+    [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+    private static extern bool InsertMenu(IntPtr hMenu, int uPosition, int uFlags, int uIDNewItem, string lpNewItem);
+
+
+    // ID for the About item on the system menu
+    private int SYSMENU_ABOUT_ID = 0x1;
 
         private ASCOM.DriverAccess.Switch driver;
 
@@ -282,6 +305,44 @@ namespace ASCOM.TestForm
         {
             txtLog.SelectionStart = txtLog.Text.Length;
         }
+
+        protected override void OnHandleCreated(EventArgs e)
+        {
+            base.OnHandleCreated(e);
+
+            // Get a handle to a copy of this form's system (window) menu
+            IntPtr hSysMenu = GetSystemMenu(this.Handle, false);
+
+            // Add a separator
+            AppendMenu(hSysMenu, MF_SEPARATOR, 0, string.Empty);
+
+            // Add the About menu item
+            AppendMenu(hSysMenu, MF_STRING, SYSMENU_ABOUT_ID, "&About…");
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            base.WndProc(ref m);
+
+            // Test if the About item was selected from the system menu
+            if ((m.Msg == WM_SYSCOMMAND) && ((int)m.WParam == SYSMENU_ABOUT_ID))
+            {
+                //Assembly Version
+                Version AssemblyVersion = Assembly.GetExecutingAssembly().GetName().Version;
+                string AssemblyVersionSt = AssemblyVersion.Major.ToString() + "." + AssemblyVersion.Minor.ToString() + "." + AssemblyVersion.Build.ToString() + " rev " + AssemblyVersion.Revision.ToString();
+
+                //File Version
+                string FileVersionSt = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion;
+
+                string St = "Application fro testing ASCOM switch driver for Aviosys IP9212 power server";
+                St += Environment.NewLine + "Assembly version: " + AssemblyVersionSt;
+                St += Environment.NewLine + "File version: " + FileVersionSt;
+
+                MessageBox.Show(St,"About");
+            }
+
+        }
+
 
     
     }
