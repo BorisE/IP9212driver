@@ -126,7 +126,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cmdOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>447, 186</value>
+    <value>450, 186</value>
   </data>
   <data name="cmdOK.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -160,7 +160,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>586, 186</value>
+    <value>589, 186</value>
   </data>
   <data name="cmdCancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -767,10 +767,10 @@ With high network query intensivity the device can hang. So the driver is using 
     <value>#</value>
   </data>
   <data name="SwitchId.MinimumWidth" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>45</value>
   </data>
   <data name="SwitchId.Width" type="System.Int32, mscorlib">
-    <value>40</value>
+    <value>50</value>
   </data>
   <metadata name="SwitchName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -779,10 +779,10 @@ With high network query intensivity the device can hang. So the driver is using 
     <value>Name</value>
   </data>
   <data name="SwitchName.MinimumWidth" type="System.Int32, mscorlib">
-    <value>50</value>
+    <value>100</value>
   </data>
   <data name="SwitchName.Width" type="System.Int32, mscorlib">
-    <value>180</value>
+    <value>202</value>
   </data>
   <metadata name="SwitchDescription.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -794,7 +794,7 @@ With high network query intensivity the device can hang. So the driver is using 
     <value>100</value>
   </data>
   <data name="SwitchDescription.Width" type="System.Int32, mscorlib">
-    <value>280</value>
+    <value>415</value>
   </data>
   <data name="dataGridOutputSwitch.Location" type="System.Drawing.Point, System.Drawing">
     <value>17, 25</value>
@@ -809,7 +809,7 @@ With high network query intensivity the device can hang. So the driver is using 
     <value>None</value>
   </data>
   <data name="dataGridOutputSwitch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>671, 227</value>
+    <value>671, 218</value>
   </data>
   <data name="dataGridOutputSwitch.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -842,7 +842,7 @@ This cannot be changed</value>
     <value>4, 4, 4, 4</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>707, 263</value>
+    <value>707, 254</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
@@ -1019,8 +1019,11 @@ Factory default for the device is "12345678"
   <data name="InputSwitchId.HeaderText" xml:space="preserve">
     <value>#</value>
   </data>
+  <data name="InputSwitchId.MinimumWidth" type="System.Int32, mscorlib">
+    <value>45</value>
+  </data>
   <data name="InputSwitchId.Width" type="System.Int32, mscorlib">
-    <value>40</value>
+    <value>50</value>
   </data>
   <metadata name="InputSwitchName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1028,8 +1031,11 @@ Factory default for the device is "12345678"
   <data name="InputSwitchName.HeaderText" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="InputSwitchName.MinimumWidth" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
   <data name="InputSwitchName.Width" type="System.Int32, mscorlib">
-    <value>180</value>
+    <value>202</value>
   </data>
   <metadata name="InputSwitchDescription.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1038,7 +1044,7 @@ Factory default for the device is "12345678"
     <value>Description</value>
   </data>
   <data name="InputSwitchDescription.Width" type="System.Int32, mscorlib">
-    <value>280</value>
+    <value>415</value>
   </data>
   <data name="dataGridInputSwitch.Location" type="System.Drawing.Point, System.Drawing">
     <value>17, 23</value>
@@ -1050,7 +1056,7 @@ Factory default for the device is "12345678"
     <value>None</value>
   </data>
   <data name="dataGridInputSwitch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>671, 245</value>
+    <value>671, 218</value>
   </data>
   <data name="dataGridInputSwitch.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1088,7 +1094,7 @@ They are marked with "V" and "R" sign respectively</value>
     <value>4, 4, 4, 4</value>
   </data>
   <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>707, 283</value>
+    <value>707, 250</value>
   </data>
   <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
@@ -1289,10 +1295,7 @@ They are marked with "V" and "R" sign respectively</value>
     <value>8, 16</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>716, 812</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+    <value>719, 787</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1303,23 +1306,11 @@ They are marked with "V" and "R" sign respectively</value>
   <data name="$this.Text" xml:space="preserve">
     <value>ASCOM Aviosys IP9212 Switch Driver Setup</value>
   </data>
-  <data name="&gt;&gt;SwitchId.Name" xml:space="preserve">
-    <value>SwitchId</value>
+  <data name="&gt;&gt;myToolTip.Name" xml:space="preserve">
+    <value>myToolTip</value>
   </data>
-  <data name="&gt;&gt;SwitchId.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SwitchName.Name" xml:space="preserve">
-    <value>SwitchName</value>
-  </data>
-  <data name="&gt;&gt;SwitchName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SwitchDescription.Name" xml:space="preserve">
-    <value>SwitchDescription</value>
-  </data>
-  <data name="&gt;&gt;SwitchDescription.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;myToolTip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;InputSwitchId.Name" xml:space="preserve">
     <value>InputSwitchId</value>
@@ -1339,11 +1330,23 @@ They are marked with "V" and "R" sign respectively</value>
   <data name="&gt;&gt;InputSwitchDescription.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;myToolTip.Name" xml:space="preserve">
-    <value>myToolTip</value>
+  <data name="&gt;&gt;SwitchId.Name" xml:space="preserve">
+    <value>SwitchId</value>
   </data>
-  <data name="&gt;&gt;myToolTip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;SwitchId.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SwitchName.Name" xml:space="preserve">
+    <value>SwitchName</value>
+  </data>
+  <data name="&gt;&gt;SwitchName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SwitchDescription.Name" xml:space="preserve">
+    <value>SwitchDescription</value>
+  </data>
+  <data name="&gt;&gt;SwitchDescription.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>SetupDialogForm</value>

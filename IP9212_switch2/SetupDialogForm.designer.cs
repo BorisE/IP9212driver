@@ -35,42 +35,42 @@ namespace ASCOM.IP9212_v2
             this.picASCOM = new System.Windows.Forms.PictureBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.cmbLang = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtNetworkTimeout = new System.Windows.Forms.TextBox();
+            this.txtCacheRead = new System.Windows.Forms.TextBox();
+            this.txtCacheConnect = new System.Windows.Forms.TextBox();
+            this.chkTrace = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridOutputSwitch = new System.Windows.Forms.DataGridView();
-            this.SwitchId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SwitchName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SwitchDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ipaddr = new System.Windows.Forms.TextBox();
+            this.login = new System.Windows.Forms.TextBox();
+            this.pass = new System.Windows.Forms.TextBox();
+            this.port = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.dataGridInputSwitch = new System.Windows.Forms.DataGridView();
-            this.InputSwitchId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.InputSwitchName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.InputSwitchDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.myToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.linkAstromania = new System.Windows.Forms.LinkLabel();
             this.lblVersion = new System.Windows.Forms.Label();
             this.linkAviosys = new System.Windows.Forms.LinkLabel();
             this.picAstromania = new System.Windows.Forms.PictureBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.cmbLang = new System.Windows.Forms.ComboBox();
-            this.txtNetworkTimeout = new System.Windows.Forms.TextBox();
-            this.txtCacheRead = new System.Windows.Forms.TextBox();
-            this.txtCacheConnect = new System.Windows.Forms.TextBox();
-            this.chkTrace = new System.Windows.Forms.CheckBox();
-            this.ipaddr = new System.Windows.Forms.TextBox();
-            this.login = new System.Windows.Forms.TextBox();
-            this.pass = new System.Windows.Forms.TextBox();
-            this.port = new System.Windows.Forms.TextBox();
+            this.InputSwitchId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.InputSwitchName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.InputSwitchDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SwitchId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SwitchName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SwitchDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.picASCOM)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -128,10 +128,25 @@ namespace ASCOM.IP9212_v2
             resources.ApplyResources(this.label9, "label9");
             this.label9.Name = "label9";
             // 
+            // cmbLang
+            // 
+            this.cmbLang.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212_v2.Properties.Settings.Default, "Language", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cmbLang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbLang.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbLang, "cmbLang");
+            this.cmbLang.Name = "cmbLang";
+            this.cmbLang.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.Language;
+            this.myToolTip.SetToolTip(this.cmbLang, resources.GetString("cmbLang.ToolTip"));
+            // 
             // label8
             // 
             resources.ApplyResources(this.label8, "label8");
             this.label8.Name = "label8";
+            // 
+            // label11
+            // 
+            resources.ApplyResources(this.label11, "label11");
+            this.label11.Name = "label11";
             // 
             // label6
             // 
@@ -143,10 +158,48 @@ namespace ASCOM.IP9212_v2
             resources.ApplyResources(this.label7, "label7");
             this.label7.Name = "label7";
             // 
+            // label10
+            // 
+            resources.ApplyResources(this.label10, "label10");
+            this.label10.Name = "label10";
+            // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
+            // 
+            // txtNetworkTimeout
+            // 
+            this.txtNetworkTimeout.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212_v2.Properties.Settings.Default, "Network_timeout", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            resources.ApplyResources(this.txtNetworkTimeout, "txtNetworkTimeout");
+            this.txtNetworkTimeout.Name = "txtNetworkTimeout";
+            this.txtNetworkTimeout.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.Network_timeout;
+            this.myToolTip.SetToolTip(this.txtNetworkTimeout, resources.GetString("txtNetworkTimeout.ToolTip"));
+            // 
+            // txtCacheRead
+            // 
+            this.txtCacheRead.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212_v2.Properties.Settings.Default, "ReadCacheTimeout", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            resources.ApplyResources(this.txtCacheRead, "txtCacheRead");
+            this.txtCacheRead.Name = "txtCacheRead";
+            this.txtCacheRead.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.ReadCacheTimeout;
+            this.myToolTip.SetToolTip(this.txtCacheRead, resources.GetString("txtCacheRead.ToolTip"));
+            // 
+            // txtCacheConnect
+            // 
+            this.txtCacheConnect.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212_v2.Properties.Settings.Default, "CheckCacheTimeout", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            resources.ApplyResources(this.txtCacheConnect, "txtCacheConnect");
+            this.txtCacheConnect.Name = "txtCacheConnect";
+            this.txtCacheConnect.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.CheckCacheTimeout;
+            this.myToolTip.SetToolTip(this.txtCacheConnect, resources.GetString("txtCacheConnect.ToolTip"));
+            // 
+            // chkTrace
+            // 
+            resources.ApplyResources(this.chkTrace, "chkTrace");
+            this.chkTrace.Checked = global::ASCOM.IP9212_v2.Properties.Settings.Default.trace;
+            this.chkTrace.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkTrace.Name = "chkTrace";
+            this.myToolTip.SetToolTip(this.chkTrace, resources.GetString("chkTrace.ToolTip"));
+            this.chkTrace.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -191,25 +244,6 @@ namespace ASCOM.IP9212_v2
             this.dataGridOutputSwitch.ShowCellToolTips = false;
             this.myToolTip.SetToolTip(this.dataGridOutputSwitch, resources.GetString("dataGridOutputSwitch.ToolTip"));
             // 
-            // SwitchId
-            // 
-            resources.ApplyResources(this.SwitchId, "SwitchId");
-            this.SwitchId.Name = "SwitchId";
-            this.SwitchId.ReadOnly = true;
-            this.SwitchId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // SwitchName
-            // 
-            resources.ApplyResources(this.SwitchName, "SwitchName");
-            this.SwitchName.Name = "SwitchName";
-            this.SwitchName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // SwitchDescription
-            // 
-            resources.ApplyResources(this.SwitchDescription, "SwitchDescription");
-            this.SwitchDescription.Name = "SwitchDescription";
-            this.SwitchDescription.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label2);
@@ -223,6 +257,34 @@ namespace ASCOM.IP9212_v2
             resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
+            // 
+            // ipaddr
+            // 
+            resources.ApplyResources(this.ipaddr, "ipaddr");
+            this.ipaddr.Name = "ipaddr";
+            this.ipaddr.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.ipaddr;
+            this.myToolTip.SetToolTip(this.ipaddr, resources.GetString("ipaddr.ToolTip"));
+            // 
+            // login
+            // 
+            resources.ApplyResources(this.login, "login");
+            this.login.Name = "login";
+            this.login.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.iplogin;
+            this.myToolTip.SetToolTip(this.login, resources.GetString("login.ToolTip"));
+            // 
+            // pass
+            // 
+            resources.ApplyResources(this.pass, "pass");
+            this.pass.Name = "pass";
+            this.pass.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.ippass;
+            this.myToolTip.SetToolTip(this.pass, resources.GetString("pass.ToolTip"));
+            // 
+            // port
+            // 
+            resources.ApplyResources(this.port, "port");
+            this.port.Name = "port";
+            this.port.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.ipport;
+            this.myToolTip.SetToolTip(this.port, resources.GetString("port.ToolTip"));
             // 
             // groupBox4
             // 
@@ -246,25 +308,6 @@ namespace ASCOM.IP9212_v2
             this.dataGridInputSwitch.RowHeadersVisible = false;
             this.dataGridInputSwitch.ShowCellToolTips = false;
             this.myToolTip.SetToolTip(this.dataGridInputSwitch, resources.GetString("dataGridInputSwitch.ToolTip"));
-            // 
-            // InputSwitchId
-            // 
-            resources.ApplyResources(this.InputSwitchId, "InputSwitchId");
-            this.InputSwitchId.Name = "InputSwitchId";
-            this.InputSwitchId.ReadOnly = true;
-            this.InputSwitchId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // InputSwitchName
-            // 
-            resources.ApplyResources(this.InputSwitchName, "InputSwitchName");
-            this.InputSwitchName.Name = "InputSwitchName";
-            this.InputSwitchName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // InputSwitchDescription
-            // 
-            resources.ApplyResources(this.InputSwitchDescription, "InputSwitchDescription");
-            this.InputSwitchDescription.Name = "InputSwitchDescription";
-            this.InputSwitchDescription.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // linkAstromania
             // 
@@ -309,86 +352,43 @@ namespace ASCOM.IP9212_v2
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
             // 
-            // label10
+            // InputSwitchId
             // 
-            resources.ApplyResources(this.label10, "label10");
-            this.label10.Name = "label10";
+            resources.ApplyResources(this.InputSwitchId, "InputSwitchId");
+            this.InputSwitchId.Name = "InputSwitchId";
+            this.InputSwitchId.ReadOnly = true;
+            this.InputSwitchId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // label11
+            // InputSwitchName
             // 
-            resources.ApplyResources(this.label11, "label11");
-            this.label11.Name = "label11";
+            resources.ApplyResources(this.InputSwitchName, "InputSwitchName");
+            this.InputSwitchName.Name = "InputSwitchName";
+            this.InputSwitchName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // cmbLang
+            // InputSwitchDescription
             // 
-            this.cmbLang.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212_v2.Properties.Settings.Default, "Language", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cmbLang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbLang.FormattingEnabled = true;
-            resources.ApplyResources(this.cmbLang, "cmbLang");
-            this.cmbLang.Name = "cmbLang";
-            this.cmbLang.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.Language;
-            this.myToolTip.SetToolTip(this.cmbLang, resources.GetString("cmbLang.ToolTip"));
+            resources.ApplyResources(this.InputSwitchDescription, "InputSwitchDescription");
+            this.InputSwitchDescription.Name = "InputSwitchDescription";
+            this.InputSwitchDescription.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // txtNetworkTimeout
+            // SwitchId
             // 
-            this.txtNetworkTimeout.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212_v2.Properties.Settings.Default, "Network_timeout", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            resources.ApplyResources(this.txtNetworkTimeout, "txtNetworkTimeout");
-            this.txtNetworkTimeout.Name = "txtNetworkTimeout";
-            this.txtNetworkTimeout.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.Network_timeout;
-            this.myToolTip.SetToolTip(this.txtNetworkTimeout, resources.GetString("txtNetworkTimeout.ToolTip"));
+            resources.ApplyResources(this.SwitchId, "SwitchId");
+            this.SwitchId.Name = "SwitchId";
+            this.SwitchId.ReadOnly = true;
+            this.SwitchId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // txtCacheRead
+            // SwitchName
             // 
-            this.txtCacheRead.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212_v2.Properties.Settings.Default, "ReadCacheTimeout", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            resources.ApplyResources(this.txtCacheRead, "txtCacheRead");
-            this.txtCacheRead.Name = "txtCacheRead";
-            this.txtCacheRead.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.ReadCacheTimeout;
-            this.myToolTip.SetToolTip(this.txtCacheRead, resources.GetString("txtCacheRead.ToolTip"));
+            resources.ApplyResources(this.SwitchName, "SwitchName");
+            this.SwitchName.Name = "SwitchName";
+            this.SwitchName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // txtCacheConnect
+            // SwitchDescription
             // 
-            this.txtCacheConnect.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212_v2.Properties.Settings.Default, "CheckCacheTimeout", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            resources.ApplyResources(this.txtCacheConnect, "txtCacheConnect");
-            this.txtCacheConnect.Name = "txtCacheConnect";
-            this.txtCacheConnect.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.CheckCacheTimeout;
-            this.myToolTip.SetToolTip(this.txtCacheConnect, resources.GetString("txtCacheConnect.ToolTip"));
-            // 
-            // chkTrace
-            // 
-            resources.ApplyResources(this.chkTrace, "chkTrace");
-            this.chkTrace.Checked = global::ASCOM.IP9212_v2.Properties.Settings.Default.trace;
-            this.chkTrace.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkTrace.Name = "chkTrace";
-            this.myToolTip.SetToolTip(this.chkTrace, resources.GetString("chkTrace.ToolTip"));
-            this.chkTrace.UseVisualStyleBackColor = true;
-            // 
-            // ipaddr
-            // 
-            resources.ApplyResources(this.ipaddr, "ipaddr");
-            this.ipaddr.Name = "ipaddr";
-            this.ipaddr.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.ipaddr;
-            this.myToolTip.SetToolTip(this.ipaddr, resources.GetString("ipaddr.ToolTip"));
-            // 
-            // login
-            // 
-            resources.ApplyResources(this.login, "login");
-            this.login.Name = "login";
-            this.login.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.iplogin;
-            this.myToolTip.SetToolTip(this.login, resources.GetString("login.ToolTip"));
-            // 
-            // pass
-            // 
-            resources.ApplyResources(this.pass, "pass");
-            this.pass.Name = "pass";
-            this.pass.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.ippass;
-            this.myToolTip.SetToolTip(this.pass, resources.GetString("pass.ToolTip"));
-            // 
-            // port
-            // 
-            resources.ApplyResources(this.port, "port");
-            this.port.Name = "port";
-            this.port.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.ipport;
-            this.myToolTip.SetToolTip(this.port, resources.GetString("port.ToolTip"));
+            resources.ApplyResources(this.SwitchDescription, "SwitchDescription");
+            this.SwitchDescription.Name = "SwitchDescription";
+            this.SwitchDescription.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // SetupDialogForm
             // 
@@ -455,16 +455,16 @@ namespace ASCOM.IP9212_v2
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtCacheRead;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.PictureBox picAstromania;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtNetworkTimeout;
         private System.Windows.Forms.DataGridViewTextBoxColumn SwitchId;
         private System.Windows.Forms.DataGridViewTextBoxColumn SwitchName;
         private System.Windows.Forms.DataGridViewTextBoxColumn SwitchDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn InputSwitchId;
         private System.Windows.Forms.DataGridViewTextBoxColumn InputSwitchName;
         private System.Windows.Forms.DataGridViewTextBoxColumn InputSwitchDescription;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.PictureBox picAstromania;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox txtNetworkTimeout;
     }
 }
