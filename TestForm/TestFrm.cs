@@ -140,6 +140,7 @@ namespace ASCOM.TestForm
                 txtIPaddr.Text = driver.Action("IPAddress","");
                 txtCacheConnection.Text = driver.Action("GetCacheParameter", "CacheCheckConnection");
                 txtCacheSensorData.Text = driver.Action("GetCacheParameter", "CacheSensorState");
+                txtTimeout.Text = driver.Action("GetTimeout", "");
 
                 for (int i = 1; i <= driver.MaxSwitch / 2; i++)
                 {

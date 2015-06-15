@@ -4,6 +4,10 @@ http://astromania.info
 
 Change log
 
+15.06.2015 2.0.10
+- network timeout setting
+- strange (for me) behaiviour, when ASCOM calls Dispose method for dirver when cancel button is pressed in setupdialog. fixed
+
 31.05.2015 2.0.9
 - bug for NC output (0..3) state set 
 - emulataion of connection problems

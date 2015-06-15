@@ -118,5 +118,17 @@ namespace ASCOM.IP9212_v2.Properties {
                 this["ReadCacheTimeout"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public string Network_timeout {
+            get {
+                return ((string)(this["Network_timeout"]));
+            }
+            set {
+                this["Network_timeout"] = value;
+            }
+        }
     }
 }

@@ -212,13 +212,13 @@ namespace ASCOM.IP9212_v2
             {
                 return ip_addr;
             }
-            // Get device IP address
+            // Get cache settings
             else if (actionName == "GetCacheParameter")
             {
                 if (actionParameters == "CacheCheckConnection")
                 {
                     return ConnectCheck_Cache_Timeout.ToString();
-                 }
+                }
                 else if (actionParameters == "CacheSensorState")
                 {
                     return OutputRead_Cache_Timeout.ToString();
@@ -227,6 +227,11 @@ namespace ASCOM.IP9212_v2
                 {
                     return "";
                 }
+            }
+            // Get cache settings
+            else if (actionName == "GetTimeout")
+            {
+                return MyWebClient.Timeout.ToString();
             }
             else
             {
@@ -265,12 +270,14 @@ namespace ASCOM.IP9212_v2
         public void Dispose()
         {
             // Clean up the objects
+            /*
             Hardware.Dispose();
             Hardware = null;
 
             tl.Enabled = false;
             tl.Dispose();
             tl = null;
+            */
         }
 
         public bool Connected

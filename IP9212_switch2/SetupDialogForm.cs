@@ -70,30 +70,40 @@ namespace ASCOM.IP9212_v2
         
         private void cmdOK_Click(object sender, EventArgs e) // OK button event handler
         {
-            //device access data
-            Switch.ip_addr = ipaddr.Text;
-            Switch.ip_port = port.Text;
-            Switch.ip_login = login.Text;
-            Switch.ip_pass = pass.Text;
-            
-            Switch.traceState = chkTrace.Checked;
-            
-            //timeouts
-            Switch.ConnectCheck_Cache_Timeout = Convert.ToInt32(txtCacheConnect.Text);
-            Switch.InputRead_Cache_Timeout = Convert.ToInt32(txtCacheRead.Text);
-            Switch.OutputRead_Cache_Timeout = Switch.InputRead_Cache_Timeout; //set output=input read
-            IP9212_switch_hardware_class.CACHE_CONNECTED_CHECK_MAX_INTERVAL = Switch.ConnectCheck_Cache_Timeout;
-            IP9212_switch_hardware_class.CACHE_OUTPUT_MAX_INTERVAL = Switch.OutputRead_Cache_Timeout;
-            IP9212_switch_hardware_class.CACHE_INPUT_MAX_INTERVAL = Switch.InputRead_Cache_Timeout;
+            try
+            {
+                //device access data
+                Switch.ip_addr = ipaddr.Text;
+                Switch.ip_port = port.Text;
+                Switch.ip_login = login.Text;
+                Switch.ip_pass = pass.Text;
 
-            //Language combobox
-            Switch.currentLang = cmbLang.SelectedValue.ToString();
+                Switch.traceState = chkTrace.Checked;
 
-            //Convert data from grid to settings vars
-            SaveGrid();
-            
-            //Save settings into ASCOM Profile
-            Switch.writeSettings();
+                //timeouts
+                Switch.ConnectCheck_Cache_Timeout = Convert.ToInt32(txtCacheConnect.Text);
+                Switch.InputRead_Cache_Timeout = Convert.ToInt32(txtCacheRead.Text);
+                Switch.OutputRead_Cache_Timeout = Switch.InputRead_Cache_Timeout; //set output=input read
+                IP9212_switch_hardware_class.CACHE_CONNECTED_CHECK_MAX_INTERVAL = Switch.ConnectCheck_Cache_Timeout;
+                IP9212_switch_hardware_class.CACHE_OUTPUT_MAX_INTERVAL = Switch.OutputRead_Cache_Timeout;
+                IP9212_switch_hardware_class.CACHE_INPUT_MAX_INTERVAL = Switch.InputRead_Cache_Timeout;
+
+                MyWebClient.Timeout = Convert.ToInt32(txtNetworkTimeout.Text) * 1000;
+
+
+                //Language combobox
+                Switch.currentLang = cmbLang.SelectedValue.ToString();
+
+                //Convert data from grid to settings vars
+                SaveGrid();
+
+                //Save settings into ASCOM Profile
+                Switch.writeSettings();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Wrong parameter: " + ex.Message + Environment.NewLine + Environment.NewLine + ex.ToString());
+            }
         }
 
         private void cmdCancel_Click(object sender, EventArgs e) // Cancel button event handler

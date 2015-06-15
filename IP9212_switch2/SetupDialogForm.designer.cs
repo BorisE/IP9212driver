@@ -35,14 +35,10 @@ namespace ASCOM.IP9212_v2
             this.picASCOM = new System.Windows.Forms.PictureBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.cmbLang = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtCacheRead = new System.Windows.Forms.TextBox();
-            this.txtCacheConnect = new System.Windows.Forms.TextBox();
-            this.chkTrace = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -53,10 +49,6 @@ namespace ASCOM.IP9212_v2
             this.SwitchName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SwitchDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.ipaddr = new System.Windows.Forms.TextBox();
-            this.login = new System.Windows.Forms.TextBox();
-            this.pass = new System.Windows.Forms.TextBox();
-            this.port = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.dataGridInputSwitch = new System.Windows.Forms.DataGridView();
             this.InputSwitchId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,6 +60,17 @@ namespace ASCOM.IP9212_v2
             this.linkAviosys = new System.Windows.Forms.LinkLabel();
             this.picAstromania = new System.Windows.Forms.PictureBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.cmbLang = new System.Windows.Forms.ComboBox();
+            this.txtNetworkTimeout = new System.Windows.Forms.TextBox();
+            this.txtCacheRead = new System.Windows.Forms.TextBox();
+            this.txtCacheConnect = new System.Windows.Forms.TextBox();
+            this.chkTrace = new System.Windows.Forms.CheckBox();
+            this.ipaddr = new System.Windows.Forms.TextBox();
+            this.login = new System.Windows.Forms.TextBox();
+            this.pass = new System.Windows.Forms.TextBox();
+            this.port = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picASCOM)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -107,9 +110,12 @@ namespace ASCOM.IP9212_v2
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.cmbLang);
             this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.label11);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.label7);
+            this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.txtNetworkTimeout);
             this.groupBox3.Controls.Add(this.txtCacheRead);
             this.groupBox3.Controls.Add(this.txtCacheConnect);
             this.groupBox3.Controls.Add(this.chkTrace);
@@ -121,16 +127,6 @@ namespace ASCOM.IP9212_v2
             // 
             resources.ApplyResources(this.label9, "label9");
             this.label9.Name = "label9";
-            // 
-            // cmbLang
-            // 
-            this.cmbLang.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212_v2.Properties.Settings.Default, "Language", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cmbLang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbLang.FormattingEnabled = true;
-            resources.ApplyResources(this.cmbLang, "cmbLang");
-            this.cmbLang.Name = "cmbLang";
-            this.cmbLang.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.Language;
-            this.myToolTip.SetToolTip(this.cmbLang, resources.GetString("cmbLang.ToolTip"));
             // 
             // label8
             // 
@@ -151,31 +147,6 @@ namespace ASCOM.IP9212_v2
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            // 
-            // txtCacheRead
-            // 
-            this.txtCacheRead.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212_v2.Properties.Settings.Default, "ReadCacheTimeout", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            resources.ApplyResources(this.txtCacheRead, "txtCacheRead");
-            this.txtCacheRead.Name = "txtCacheRead";
-            this.txtCacheRead.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.ReadCacheTimeout;
-            this.myToolTip.SetToolTip(this.txtCacheRead, resources.GetString("txtCacheRead.ToolTip"));
-            // 
-            // txtCacheConnect
-            // 
-            this.txtCacheConnect.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212_v2.Properties.Settings.Default, "CheckCacheTimeout", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            resources.ApplyResources(this.txtCacheConnect, "txtCacheConnect");
-            this.txtCacheConnect.Name = "txtCacheConnect";
-            this.txtCacheConnect.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.CheckCacheTimeout;
-            this.myToolTip.SetToolTip(this.txtCacheConnect, resources.GetString("txtCacheConnect.ToolTip"));
-            // 
-            // chkTrace
-            // 
-            resources.ApplyResources(this.chkTrace, "chkTrace");
-            this.chkTrace.Checked = global::ASCOM.IP9212_v2.Properties.Settings.Default.trace;
-            this.chkTrace.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkTrace.Name = "chkTrace";
-            this.myToolTip.SetToolTip(this.chkTrace, resources.GetString("chkTrace.ToolTip"));
-            this.chkTrace.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -252,34 +223,6 @@ namespace ASCOM.IP9212_v2
             resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
-            // 
-            // ipaddr
-            // 
-            resources.ApplyResources(this.ipaddr, "ipaddr");
-            this.ipaddr.Name = "ipaddr";
-            this.ipaddr.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.ipaddr;
-            this.myToolTip.SetToolTip(this.ipaddr, resources.GetString("ipaddr.ToolTip"));
-            // 
-            // login
-            // 
-            resources.ApplyResources(this.login, "login");
-            this.login.Name = "login";
-            this.login.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.iplogin;
-            this.myToolTip.SetToolTip(this.login, resources.GetString("login.ToolTip"));
-            // 
-            // pass
-            // 
-            resources.ApplyResources(this.pass, "pass");
-            this.pass.Name = "pass";
-            this.pass.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.ippass;
-            this.myToolTip.SetToolTip(this.pass, resources.GetString("pass.ToolTip"));
-            // 
-            // port
-            // 
-            resources.ApplyResources(this.port, "port");
-            this.port.Name = "port";
-            this.port.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.ipport;
-            this.myToolTip.SetToolTip(this.port, resources.GetString("port.ToolTip"));
             // 
             // groupBox4
             // 
@@ -366,6 +309,87 @@ namespace ASCOM.IP9212_v2
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
             // 
+            // label10
+            // 
+            resources.ApplyResources(this.label10, "label10");
+            this.label10.Name = "label10";
+            // 
+            // label11
+            // 
+            resources.ApplyResources(this.label11, "label11");
+            this.label11.Name = "label11";
+            // 
+            // cmbLang
+            // 
+            this.cmbLang.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212_v2.Properties.Settings.Default, "Language", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cmbLang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbLang.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbLang, "cmbLang");
+            this.cmbLang.Name = "cmbLang";
+            this.cmbLang.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.Language;
+            this.myToolTip.SetToolTip(this.cmbLang, resources.GetString("cmbLang.ToolTip"));
+            // 
+            // txtNetworkTimeout
+            // 
+            this.txtNetworkTimeout.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212_v2.Properties.Settings.Default, "Network_timeout", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            resources.ApplyResources(this.txtNetworkTimeout, "txtNetworkTimeout");
+            this.txtNetworkTimeout.Name = "txtNetworkTimeout";
+            this.txtNetworkTimeout.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.Network_timeout;
+            this.myToolTip.SetToolTip(this.txtNetworkTimeout, resources.GetString("txtNetworkTimeout.ToolTip"));
+            // 
+            // txtCacheRead
+            // 
+            this.txtCacheRead.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212_v2.Properties.Settings.Default, "ReadCacheTimeout", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            resources.ApplyResources(this.txtCacheRead, "txtCacheRead");
+            this.txtCacheRead.Name = "txtCacheRead";
+            this.txtCacheRead.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.ReadCacheTimeout;
+            this.myToolTip.SetToolTip(this.txtCacheRead, resources.GetString("txtCacheRead.ToolTip"));
+            // 
+            // txtCacheConnect
+            // 
+            this.txtCacheConnect.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212_v2.Properties.Settings.Default, "CheckCacheTimeout", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            resources.ApplyResources(this.txtCacheConnect, "txtCacheConnect");
+            this.txtCacheConnect.Name = "txtCacheConnect";
+            this.txtCacheConnect.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.CheckCacheTimeout;
+            this.myToolTip.SetToolTip(this.txtCacheConnect, resources.GetString("txtCacheConnect.ToolTip"));
+            // 
+            // chkTrace
+            // 
+            resources.ApplyResources(this.chkTrace, "chkTrace");
+            this.chkTrace.Checked = global::ASCOM.IP9212_v2.Properties.Settings.Default.trace;
+            this.chkTrace.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkTrace.Name = "chkTrace";
+            this.myToolTip.SetToolTip(this.chkTrace, resources.GetString("chkTrace.ToolTip"));
+            this.chkTrace.UseVisualStyleBackColor = true;
+            // 
+            // ipaddr
+            // 
+            resources.ApplyResources(this.ipaddr, "ipaddr");
+            this.ipaddr.Name = "ipaddr";
+            this.ipaddr.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.ipaddr;
+            this.myToolTip.SetToolTip(this.ipaddr, resources.GetString("ipaddr.ToolTip"));
+            // 
+            // login
+            // 
+            resources.ApplyResources(this.login, "login");
+            this.login.Name = "login";
+            this.login.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.iplogin;
+            this.myToolTip.SetToolTip(this.login, resources.GetString("login.ToolTip"));
+            // 
+            // pass
+            // 
+            resources.ApplyResources(this.pass, "pass");
+            this.pass.Name = "pass";
+            this.pass.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.ippass;
+            this.myToolTip.SetToolTip(this.pass, resources.GetString("pass.ToolTip"));
+            // 
+            // port
+            // 
+            resources.ApplyResources(this.port, "port");
+            this.port.Name = "port";
+            this.port.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.ipport;
+            this.myToolTip.SetToolTip(this.port, resources.GetString("port.ToolTip"));
+            // 
             // SetupDialogForm
             // 
             resources.ApplyResources(this, "$this");
@@ -439,5 +463,8 @@ namespace ASCOM.IP9212_v2
         private System.Windows.Forms.DataGridViewTextBoxColumn InputSwitchDescription;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.PictureBox picAstromania;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtNetworkTimeout;
     }
 }

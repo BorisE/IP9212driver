@@ -17,7 +17,7 @@ namespace ASCOM.IP9212_v2
 
     public class MyWebClient : WebClient
     {
-        public int Timeout = 5 * 1000;
+        static public int Timeout = 5 * 1000;
 
         protected override WebRequest GetWebRequest(Uri uri)
         {

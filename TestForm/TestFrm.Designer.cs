@@ -101,9 +101,13 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtIPaddr = new System.Windows.Forms.TextBox();
+            this.txtCacheSensorData = new System.Windows.Forms.TextBox();
+            this.txtCacheConnection = new System.Windows.Forms.TextBox();
             this.txtNumberOfSwitches = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.chkOut8 = new System.Windows.Forms.CheckBox();
@@ -130,10 +134,8 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.backgroundWorker_connect = new System.ComponentModel.BackgroundWorker();
             this.txtLog = new System.Windows.Forms.RichTextBox();
-            this.txtCacheConnection = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.txtCacheSensorData = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
+            this.txtTimeout = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -273,12 +275,14 @@
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.label18);
             this.groupBox2.Controls.Add(this.label17);
             this.groupBox2.Controls.Add(this.label19);
             this.groupBox2.Controls.Add(this.label15);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.txtIPaddr);
             this.groupBox2.Controls.Add(this.txtCacheSensorData);
+            this.groupBox2.Controls.Add(this.txtTimeout);
             this.groupBox2.Controls.Add(this.txtCacheConnection);
             this.groupBox2.Controls.Add(this.txtNumberOfSwitches);
             resources.ApplyResources(this.groupBox2, "groupBox2");
@@ -581,6 +585,16 @@
             resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
             // 
+            // label17
+            // 
+            resources.ApplyResources(this.label17, "label17");
+            this.label17.Name = "label17";
+            // 
+            // label19
+            // 
+            resources.ApplyResources(this.label19, "label19");
+            this.label19.Name = "label19";
+            // 
             // label15
             // 
             resources.ApplyResources(this.label15, "label15");
@@ -595,6 +609,16 @@
             // 
             resources.ApplyResources(this.txtIPaddr, "txtIPaddr");
             this.txtIPaddr.Name = "txtIPaddr";
+            // 
+            // txtCacheSensorData
+            // 
+            resources.ApplyResources(this.txtCacheSensorData, "txtCacheSensorData");
+            this.txtCacheSensorData.Name = "txtCacheSensorData";
+            // 
+            // txtCacheConnection
+            // 
+            resources.ApplyResources(this.txtCacheConnection, "txtCacheConnection");
+            this.txtCacheConnection.Name = "txtCacheConnection";
             // 
             // txtNumberOfSwitches
             // 
@@ -778,25 +802,15 @@
             this.txtLog.Name = "txtLog";
             this.txtLog.TextChanged += new System.EventHandler(this.txtLog_TextChanged);
             // 
-            // txtCacheConnection
+            // txtTimeout
             // 
-            resources.ApplyResources(this.txtCacheConnection, "txtCacheConnection");
-            this.txtCacheConnection.Name = "txtCacheConnection";
+            resources.ApplyResources(this.txtTimeout, "txtTimeout");
+            this.txtTimeout.Name = "txtTimeout";
             // 
-            // label19
+            // label18
             // 
-            resources.ApplyResources(this.label19, "label19");
-            this.label19.Name = "label19";
-            // 
-            // txtCacheSensorData
-            // 
-            resources.ApplyResources(this.txtCacheSensorData, "txtCacheSensorData");
-            this.txtCacheSensorData.Name = "txtCacheSensorData";
-            // 
-            // label17
-            // 
-            resources.ApplyResources(this.label17, "label17");
-            this.label17.Name = "label17";
+            resources.ApplyResources(this.label18, "label18");
+            this.label18.Name = "label18";
             // 
             // TestFrm
             // 
@@ -936,6 +950,8 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox txtCacheSensorData;
         private System.Windows.Forms.TextBox txtCacheConnection;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox txtTimeout;
     }
 }
 
