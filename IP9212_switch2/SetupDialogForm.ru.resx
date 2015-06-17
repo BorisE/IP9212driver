@@ -117,17 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="cmdOK.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="cmdCancel.Text" xml:space="preserve">
     <value>Отмена</value>
   </data>
-  <data name="cmdCancel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="picASCOM.ToolTip" xml:space="preserve">
-    <value />
+  <data name="groupBox3.Text" xml:space="preserve">
+    <value>Расширенные</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
@@ -136,26 +130,11 @@
   <data name="label9.Text" xml:space="preserve">
     <value>Язык</value>
   </data>
-  <data name="label9.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label8.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label11.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label6.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>230, 17</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
     <value>Кэширования значений датчиков</value>
-  </data>
-  <data name="label7.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 17</value>
@@ -163,17 +142,11 @@
   <data name="label10.Text" xml:space="preserve">
     <value>Таймаут соединения</value>
   </data>
-  <data name="label10.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>233, 17</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Кэширование наличия соедиения</value>
-  </data>
-  <data name="label1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="txtCacheRead.ToolTip" xml:space="preserve">
     <value>Кэшировать результаты чтения состояния устройства в течение заданного интервала. По умолчанию 4 сек. Для отключения введите 0 сек.
@@ -198,23 +171,11 @@
 Нужно для отладки, в нормальном режиме работы стоит отключить.
 </value>
   </data>
-  <data name="groupBox3.Text" xml:space="preserve">
-    <value>Расширенные</value>
-  </data>
-  <data name="groupBox3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 17</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>Пароль</value>
-  </data>
-  <data name="label5.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 17</value>
@@ -222,23 +183,14 @@
   <data name="label4.Text" xml:space="preserve">
     <value>Логин</value>
   </data>
-  <data name="label4.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 17</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>IP адрес</value>
   </data>
-  <data name="label2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="SwitchName.HeaderText" xml:space="preserve">
-    <value>Название</value>
-  </data>
-  <data name="SwitchDescription.HeaderText" xml:space="preserve">
-    <value>Описание</value>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Настройки датчиков управления питанием</value>
   </data>
   <data name="dataGridOutputSwitch.ToolTip" xml:space="preserve">
     <value>В блоке управления питанием Aviosys IP9212 разные порты настроены по разному:
@@ -247,11 +199,14 @@ OUT5 - OUT8: Нормально разомкнутые (NO)
 Это фабричная настройка и она не может быть изменена.
 </value>
   </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>Настройки датчиков управления питанием</value>
+  <data name="SwitchName.HeaderText" xml:space="preserve">
+    <value>Название</value>
   </data>
-  <data name="groupBox2.ToolTip" xml:space="preserve">
-    <value />
+  <data name="SwitchDescription.HeaderText" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Настройки IP9212</value>
   </data>
   <data name="ipaddr.ToolTip" xml:space="preserve">
     <value>IP адрес устройства.
@@ -269,17 +224,8 @@ OUT5 - OUT8: Нормально разомкнутые (NO)
 По умолчанию из коробки "12345678"
 </value>
   </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Настройки IP9212</value>
-  </data>
-  <data name="groupBox1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="InputSwitchName.HeaderText" xml:space="preserve">
-    <value>Название</value>
-  </data>
-  <data name="InputSwitchDescription.HeaderText" xml:space="preserve">
-    <value>Описание</value>
+  <data name="groupBox4.Text" xml:space="preserve">
+    <value>Настройки датчиков</value>
   </data>
   <data name="dataGridInputSwitch.ToolTip" xml:space="preserve">
     <value>В модуле датчиков Aviosys IP9212 предусмотрены два типа датчиков:
@@ -292,25 +238,16 @@ ON: 0 Ом ~ 200 Ом
 OFF: 500 Ом ~ ∞
 В таблице порты отмечены знаками "V" и "R", соответственно</value>
   </data>
-  <data name="groupBox4.Text" xml:space="preserve">
-    <value>Настройки датчиков</value>
+  <data name="InputSwitchName.HeaderText" xml:space="preserve">
+    <value>Название</value>
   </data>
-  <data name="groupBox4.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="picAstromania.ToolTip" xml:space="preserve">
-    <value />
+  <data name="InputSwitchDescription.HeaderText" xml:space="preserve">
+    <value>Описание</value>
   </data>
   <data name="groupBox5.Text" xml:space="preserve">
     <value>О драйвере</value>
   </data>
-  <data name="groupBox5.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Настройки драйвера сервера питания Aviosys IP9212 (ASCOM Switch driver)</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
 </root>

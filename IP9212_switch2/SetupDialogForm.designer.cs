@@ -87,7 +87,6 @@ namespace ASCOM.IP9212_v2
             resources.ApplyResources(this.cmdOK, "cmdOK");
             this.cmdOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.cmdOK.Name = "cmdOK";
-            this.myToolTip.SetToolTip(this.cmdOK, resources.GetString("cmdOK.ToolTip"));
             this.cmdOK.UseVisualStyleBackColor = true;
             this.cmdOK.Click += new System.EventHandler(this.cmdOK_Click);
             // 
@@ -96,21 +95,18 @@ namespace ASCOM.IP9212_v2
             resources.ApplyResources(this.cmdCancel, "cmdCancel");
             this.cmdCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cmdCancel.Name = "cmdCancel";
-            this.myToolTip.SetToolTip(this.cmdCancel, resources.GetString("cmdCancel.ToolTip"));
             this.cmdCancel.UseVisualStyleBackColor = true;
             this.cmdCancel.Click += new System.EventHandler(this.cmdCancel_Click);
             // 
             // picASCOM
             // 
-            resources.ApplyResources(this.picASCOM, "picASCOM");
             this.picASCOM.Image = global::ASCOM.IP9212_v2.Properties.Resources.ASCOM;
+            resources.ApplyResources(this.picASCOM, "picASCOM");
             this.picASCOM.Name = "picASCOM";
             this.picASCOM.TabStop = false;
-            this.myToolTip.SetToolTip(this.picASCOM, resources.GetString("picASCOM.ToolTip"));
             // 
             // groupBox3
             // 
-            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.cmbLang);
             this.groupBox3.Controls.Add(this.label8);
@@ -123,22 +119,21 @@ namespace ASCOM.IP9212_v2
             this.groupBox3.Controls.Add(this.txtCacheRead);
             this.groupBox3.Controls.Add(this.txtCacheConnect);
             this.groupBox3.Controls.Add(this.chkTrace);
+            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
-            this.myToolTip.SetToolTip(this.groupBox3, resources.GetString("groupBox3.ToolTip"));
             // 
             // label9
             // 
             resources.ApplyResources(this.label9, "label9");
             this.label9.Name = "label9";
-            this.myToolTip.SetToolTip(this.label9, resources.GetString("label9.ToolTip"));
             // 
             // cmbLang
             // 
-            resources.ApplyResources(this.cmbLang, "cmbLang");
             this.cmbLang.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212_v2.Properties.Settings.Default, "Language", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cmbLang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLang.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbLang, "cmbLang");
             this.cmbLang.Name = "cmbLang";
             this.cmbLang.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.Language;
             this.myToolTip.SetToolTip(this.cmbLang, resources.GetString("cmbLang.ToolTip"));
@@ -147,58 +142,52 @@ namespace ASCOM.IP9212_v2
             // 
             resources.ApplyResources(this.label8, "label8");
             this.label8.Name = "label8";
-            this.myToolTip.SetToolTip(this.label8, resources.GetString("label8.ToolTip"));
             // 
             // label11
             // 
             resources.ApplyResources(this.label11, "label11");
             this.label11.Name = "label11";
-            this.myToolTip.SetToolTip(this.label11, resources.GetString("label11.ToolTip"));
             // 
             // label6
             // 
             resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
-            this.myToolTip.SetToolTip(this.label6, resources.GetString("label6.ToolTip"));
             // 
             // label7
             // 
             resources.ApplyResources(this.label7, "label7");
             this.label7.Name = "label7";
-            this.myToolTip.SetToolTip(this.label7, resources.GetString("label7.ToolTip"));
             // 
             // label10
             // 
             resources.ApplyResources(this.label10, "label10");
             this.label10.Name = "label10";
-            this.myToolTip.SetToolTip(this.label10, resources.GetString("label10.ToolTip"));
             // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.myToolTip.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
             // 
             // txtNetworkTimeout
             // 
-            resources.ApplyResources(this.txtNetworkTimeout, "txtNetworkTimeout");
             this.txtNetworkTimeout.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212_v2.Properties.Settings.Default, "Network_timeout", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            resources.ApplyResources(this.txtNetworkTimeout, "txtNetworkTimeout");
             this.txtNetworkTimeout.Name = "txtNetworkTimeout";
             this.txtNetworkTimeout.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.Network_timeout;
             this.myToolTip.SetToolTip(this.txtNetworkTimeout, resources.GetString("txtNetworkTimeout.ToolTip"));
             // 
             // txtCacheRead
             // 
-            resources.ApplyResources(this.txtCacheRead, "txtCacheRead");
             this.txtCacheRead.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212_v2.Properties.Settings.Default, "ReadCacheTimeout", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            resources.ApplyResources(this.txtCacheRead, "txtCacheRead");
             this.txtCacheRead.Name = "txtCacheRead";
             this.txtCacheRead.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.ReadCacheTimeout;
             this.myToolTip.SetToolTip(this.txtCacheRead, resources.GetString("txtCacheRead.ToolTip"));
             // 
             // txtCacheConnect
             // 
-            resources.ApplyResources(this.txtCacheConnect, "txtCacheConnect");
             this.txtCacheConnect.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ASCOM.IP9212_v2.Properties.Settings.Default, "CheckCacheTimeout", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            resources.ApplyResources(this.txtCacheConnect, "txtCacheConnect");
             this.txtCacheConnect.Name = "txtCacheConnect";
             this.txtCacheConnect.Text = global::ASCOM.IP9212_v2.Properties.Settings.Default.CheckCacheTimeout;
             this.myToolTip.SetToolTip(this.txtCacheConnect, resources.GetString("txtCacheConnect.ToolTip"));
@@ -216,37 +205,31 @@ namespace ASCOM.IP9212_v2
             // 
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.myToolTip.SetToolTip(this.label3, resources.GetString("label3.ToolTip"));
             // 
             // label5
             // 
             resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
-            this.myToolTip.SetToolTip(this.label5, resources.GetString("label5.ToolTip"));
             // 
             // label4
             // 
             resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
-            this.myToolTip.SetToolTip(this.label4, resources.GetString("label4.ToolTip"));
             // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.myToolTip.SetToolTip(this.label2, resources.GetString("label2.ToolTip"));
             // 
             // groupBox2
             // 
-            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Controls.Add(this.dataGridOutputSwitch);
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
-            this.myToolTip.SetToolTip(this.groupBox2, resources.GetString("groupBox2.ToolTip"));
             // 
             // dataGridOutputSwitch
             // 
-            resources.ApplyResources(this.dataGridOutputSwitch, "dataGridOutputSwitch");
             this.dataGridOutputSwitch.AllowUserToAddRows = false;
             this.dataGridOutputSwitch.AllowUserToDeleteRows = false;
             this.dataGridOutputSwitch.AllowUserToResizeRows = false;
@@ -255,6 +238,7 @@ namespace ASCOM.IP9212_v2
             this.SwitchId,
             this.SwitchName,
             this.SwitchDescription});
+            resources.ApplyResources(this.dataGridOutputSwitch, "dataGridOutputSwitch");
             this.dataGridOutputSwitch.Name = "dataGridOutputSwitch";
             this.dataGridOutputSwitch.RowHeadersVisible = false;
             this.dataGridOutputSwitch.ShowCellToolTips = false;
@@ -281,7 +265,6 @@ namespace ASCOM.IP9212_v2
             // 
             // groupBox1
             // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.ipaddr);
@@ -290,9 +273,9 @@ namespace ASCOM.IP9212_v2
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.pass);
             this.groupBox1.Controls.Add(this.port);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
-            this.myToolTip.SetToolTip(this.groupBox1, resources.GetString("groupBox1.ToolTip"));
             // 
             // ipaddr
             // 
@@ -324,15 +307,13 @@ namespace ASCOM.IP9212_v2
             // 
             // groupBox4
             // 
-            resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Controls.Add(this.dataGridInputSwitch);
+            resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
-            this.myToolTip.SetToolTip(this.groupBox4, resources.GetString("groupBox4.ToolTip"));
             // 
             // dataGridInputSwitch
             // 
-            resources.ApplyResources(this.dataGridInputSwitch, "dataGridInputSwitch");
             this.dataGridInputSwitch.AllowUserToAddRows = false;
             this.dataGridInputSwitch.AllowUserToDeleteRows = false;
             this.dataGridInputSwitch.AllowUserToResizeRows = false;
@@ -341,6 +322,7 @@ namespace ASCOM.IP9212_v2
             this.InputSwitchId,
             this.InputSwitchName,
             this.InputSwitchDescription});
+            resources.ApplyResources(this.dataGridInputSwitch, "dataGridInputSwitch");
             this.dataGridInputSwitch.Name = "dataGridInputSwitch";
             this.dataGridInputSwitch.RowHeadersVisible = false;
             this.dataGridInputSwitch.ShowCellToolTips = false;
@@ -394,21 +376,19 @@ namespace ASCOM.IP9212_v2
             this.picAstromania.Image = global::ASCOM.IP9212_v2.Properties.Resources.logo_48_blue;
             this.picAstromania.Name = "picAstromania";
             this.picAstromania.TabStop = false;
-            this.myToolTip.SetToolTip(this.picAstromania, resources.GetString("picAstromania.ToolTip"));
             this.picAstromania.Click += new System.EventHandler(this.BrowseToAstromania);
             this.picAstromania.DoubleClick += new System.EventHandler(this.BrowseToAstromania);
             // 
             // groupBox5
             // 
-            resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Controls.Add(this.lblVersion);
             this.groupBox5.Controls.Add(this.linkAviosys);
             this.groupBox5.Controls.Add(this.linkAstromania);
             this.groupBox5.Controls.Add(this.picAstromania);
             this.groupBox5.Controls.Add(this.picASCOM);
+            resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
-            this.myToolTip.SetToolTip(this.groupBox5, resources.GetString("groupBox5.ToolTip"));
             // 
             // SetupDialogForm
             // 
@@ -426,7 +406,6 @@ namespace ASCOM.IP9212_v2
             this.MinimizeBox = false;
             this.Name = "SetupDialogForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.myToolTip.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.Load += new System.EventHandler(this.SetupDialogForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picASCOM)).EndInit();
             this.groupBox3.ResumeLayout(false);
