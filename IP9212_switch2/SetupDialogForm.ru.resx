@@ -131,7 +131,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 13</value>
+    <value>42, 17</value>
   </data>
   <data name="label9.Text" xml:space="preserve">
     <value>Язык</value>
@@ -142,11 +142,14 @@
   <data name="label8.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="label11.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label6.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 13</value>
+    <value>230, 17</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
     <value>Кэширования значений датчиков</value>
@@ -154,8 +157,17 @@
   <data name="label7.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 17</value>
+  </data>
+  <data name="label10.Text" xml:space="preserve">
+    <value>Таймаут соединения</value>
+  </data>
+  <data name="label10.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 13</value>
+    <value>233, 17</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Кэширование наличия соедиения</value>
@@ -176,7 +188,7 @@
 Некоторые программы проверяют наличие соединение с устройством каждую секунду, что вызывает абсолютно ненужную нагрузку на устройство. Причем в некоторых случаях, это даже приводит к зависанию устройства. Поэтому какое-то небольшое значение рекомендуется все таки указывать.</value>
   </data>
   <data name="chkTrace.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 17</value>
+    <value>111, 21</value>
   </data>
   <data name="chkTrace.Text" xml:space="preserve">
     <value>Лог отладки</value>
@@ -196,7 +208,7 @@
     <value />
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 13</value>
+    <value>57, 17</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>Пароль</value>
@@ -205,7 +217,7 @@
     <value />
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 13</value>
+    <value>47, 17</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>Логин</value>
@@ -214,7 +226,7 @@
     <value />
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 13</value>
+    <value>63, 17</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>IP адрес</value>
@@ -286,20 +298,8 @@ OFF: 500 Ом ~ ∞
   <data name="groupBox4.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="linkLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 13</value>
-  </data>
-  <data name="linkLabel1.Text" xml:space="preserve">
-    <value>Драйвер: Astromania</value>
-  </data>
-  <data name="linkLabel1.ToolTip" xml:space="preserve">
-    <value>Драйвер написан Емченко Борисом</value>
-  </data>
-  <data name="linkLabel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 13</value>
-  </data>
-  <data name="linkLabel2.Text" xml:space="preserve">
-    <value>Устройство: Aviosys</value>
+  <data name="picAstromania.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="groupBox5.Text" xml:space="preserve">
     <value>О драйвере</value>
