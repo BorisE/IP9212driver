@@ -18,7 +18,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <ApplicationIcon>ASCOM.ico</ApplicationIcon>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>ASCOMDriverTemplate.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>BorisKey.snk</AssemblyOriginatorKeyFile>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -141,6 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ChangeLog.txt" />
+    <None Include="BorisKey.snk" />
     <None Include="Resources\logo_48_blue.png" />
     <None Include="Resources\logo_256_blue.png" />
     <None Include="Resources\logo_512_blue.png" />

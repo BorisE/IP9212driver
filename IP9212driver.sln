@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IP9212_switch2", "IP9212_switch2\IP9212_switch2.csproj", "{64308775-BD4A-469C-BCAB-3ED830B811AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_Form", "TestForm\Test_Form.csproj", "{8E8D406C-1838-4914-867D-AB602D0EAF3E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSwitch_Form", "TestForm\TestSwitch_Form.csproj", "{8E8D406C-1838-4914-867D-AB602D0EAF3E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{64308775-BD4A-469C-BCAB-3ED830B811AF} = {64308775-BD4A-469C-BCAB-3ED830B811AF}
 	EndProjectSection
